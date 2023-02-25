@@ -1,0 +1,32 @@
+/*! \mainpage Welcome to RaTweening by Rasofia Games
+ *
+ * \section intro_sec Introduction
+ * \subsection ratweening_intro What is RaTweening
+ * RaTweening is a <a href="https://unity.com"><b>Unity</b></a> Package created by <a href="http://rasofiagames.com"><b>Rasofia Games</b></a> which allows for <a href="./class_ra_tweening_1_1_ra_tween_util_extensions.html"><b>code</b></a> and <a href="./class_ra_tweening_1_1_ra_tweener_component.html"><b>code-less</b></a>  tweening. So that programmers and artists alike gain full artistic control within their game to make them shine in polish in the simplest way possible. \n
+ * We found it important that the <a href="./class_ra_tweening_1_1_ra_tweener_component.html"><b>code-less</b></a>  tweening experience would provide the same level of control as the <a href="./class_ra_tweening_1_1_ra_tween_util_extensions.html"><b>code</b></a> tweener. We made this possible by designing RaTweening from the ground up keeping both the <a href="./class_ra_tweening_1_1_ra_tween_util_extensions.html"><b>code</b></a> as <a href="./class_ra_tweening_1_1_ra_tweener_component.html"><b>code-less</b></a>  tweener synced with each other.
+ * \subsection download Download
+ * The <a href="https://unity.com"><b>Unity</b></a> Asset can be downloaded from here: <a href="https://assetstore.unity.com/publishers/73309"><b>Download Now</b></a>
+ * \section install_sec Usage
+ *
+ * \subsection step1 Redirect
+ * For the documentation for the <a href="./class_ra_tweening_1_1_ra_tween_util_extensions.html"><b>code</b></a> API, we would like to redirect you to <a href="./class_ra_tweening_1_1_ra_tween_util_extensions.html"><b>RaTweenUtilExtensions</b></a> documentation. This contains the documentation for all the tweening extension methods. \n
+ * For the documentation for the <a href="./class_ra_tweening_1_1_ra_tweener_component.html"><b>code-less</b></a> API, we would like to redirect you to <a href="./class_ra_tweening_1_1_ra_tweener_component.html"><b>RaTweenerComponent</b></a> documentation. This contains the documentation for the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"><b>Unity Component</b></a> used to make <a href="./class_ra_tweening_1_1_ra_tweener_component.html"><b>code-less</b></a> tweens. \n
+ * For the use of Sequences, we would like to redirect you to the <a href="./class_ra_tweening_1_1_ra_tween_sequence.html"><b>RaTweenSequence</b></a> documentation. This contains the info your need to know how to create a Sequence of tweens through code. \n
+ * To create a tween where you can define the setter logics of the tween yourself in code. (for when you try to do custom logics or the tween does not have a clear target), we would like to redirect you to the <a href="./class_ra_tweening_1_1_ra_tween_lambda.html"><b>RaTweenLambda</b></a> documentation. This class contains all Lambda Methods.
+ *
+ * \subsection showcase Showcase
+ * <center><h2><em>Endless Tweening Options</em></h2></center>
+ * \image html EndlessTweeningOptionsV2.png width=50%
+ * <center><h2><em>Value And References</em></h2></center>
+ * \image html ValuesAndReferencesV2.png width=50%
+ * \n <center><em><h2>Easings</h2></em></center>
+ * \image html EasingsV2.png width=50%
+ * \n <center><em><h2>Sequences</h2></em></center>
+ * \image html TweenSequencesV2.png width=50%
+ * \n <center><em><h2>Modifiers</h2></em></center>
+ * \image html ModifiersV2.png width=50%
+ * \n <center><em><h2>Sprite Sequences</h2></em></center>
+ * \image html SpriteSequencesV2.png width=50%
+ * \n <center><em><h2>Events</h2></em></center>
+ * \image html EventsV2.png width=50%
+ */
