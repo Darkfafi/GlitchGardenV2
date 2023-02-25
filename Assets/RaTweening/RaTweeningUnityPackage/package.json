@@ -1,0 +1,23 @@
+{
+  "name": "rasofiagames.ratweening",
+  "displayName": "RaTweening",
+  "version": "1.0.1",
+  "unity": "2019.4",
+  "description": "A simple tool to Package for Editor and Code Tweening functionalities",
+  "keywords": [
+    "Tweening",
+    "Editor",
+    "System",
+    "Animations",
+    "Easings",
+    "Polish",
+    "Moving",
+    "Scaling",
+    "Lerping"
+  ],
+  "author": {
+    "name": "Rasofia Games"
+  },
+  "type": "tool",
+  "documentationUrl": "https://ratweening.rasofiagames.com"
+}
