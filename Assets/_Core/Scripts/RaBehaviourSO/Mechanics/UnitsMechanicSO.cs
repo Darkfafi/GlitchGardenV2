@@ -37,7 +37,9 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			// Has Element
 			gridModelSO.Grid.TryGetElement(position, out GameGridElement element) &&
 			// Has Unit Spot for Owner
-			TryGetElementUnitSpot(coreData.Owner, element, out unitSpot) &&
+			element.TryGetElementUnitSpot(coreData.Owner, out unitSpot) &&
+			// Is Buildable Spot
+			unitSpot.SpotData.IsBuildable &&
 			// Does not contain a Unit on Owner Spot
 			unitSpot.Unit == null
 		)
@@ -60,7 +62,7 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			unitSpot.SetPreview(null);
 			unitSpot.SetUnit(unit);
 
-			unit.transform.position = unitSpot.GetUnitLocation();
+			unit.SetState(Unit.State.Spawn);
 			return true;
 		}
 		return false;
@@ -82,8 +84,8 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			gridModelSO.Grid.TryGetElement(unit.Position, out GameGridElement oldElement) &&
 			gridModelSO.Grid.TryGetElement(newPosition, out GameGridElement newElement) &&
 			// Can find appropriate Unit Spots on Old & New Element
-			TryGetElementUnitSpot(unit.Owner, oldElement, out oldSpot) &&
-			TryGetElementUnitSpot(unit.Owner, newElement, out newSpot) &&
+			oldElement.TryGetElementUnitSpot(unit.Owner, out oldSpot) &&
+			newElement.TryGetElementUnitSpot(unit.Owner, out newSpot) &&
 			// Has No Unit on new spot
 			newSpot.Unit != null)
 		{
@@ -133,7 +135,7 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			// Has Element
 			gridModelSO.Grid.TryGetElement(unit.Position, out GameGridElement element) &&
 			// Has Unit Spot for Owner
-			TryGetElementUnitSpot(unit.Owner, element, out unitSpot) &&
+			element.TryGetElementUnitSpot(unit.Owner, out unitSpot) &&
 			// Spot Contains Unit
 			unitSpot.Unit == unit
 		)
@@ -153,31 +155,6 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			unitSpot.SetUnit(null);
 			return true;
 		}
-		return false;
-	}
-
-	#endregion
-
-	#region Utils
-
-	private bool TryGetElementUnitSpot(Player player, GameGridElement element, out ElementUnitSpot elementUnitSpot)
-	{
-		if(TryGetDependency(out PlayersModelSO playersModelSO))
-		{
-			if(player == playersModelSO.HomePlayer)
-			{
-				elementUnitSpot = element.HomeUnitSpot;
-				return true;
-			}
-
-			if(player == playersModelSO.AwayPlayer)
-			{
-				elementUnitSpot = element.AwayUnitSpot;
-				return true;
-			}
-		}
-
-		elementUnitSpot = default;
 		return false;
 	}
 

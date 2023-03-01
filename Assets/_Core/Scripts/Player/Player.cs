@@ -1,8 +1,9 @@
 using RaDataHolder;
 
-public class Player : RaMonoDataHolderBase<PlayerModel>
+public class Player : RaMonoDataHolderBase<Player.CoreData>
 {
-	public PlayerModel Model => Data;
+	public Type PlayerType => Data.Type;
+	public PlayerModel Model => Data.PlayerModel;
 
 	protected override void OnSetData()
 	{
@@ -12,5 +13,17 @@ public class Player : RaMonoDataHolderBase<PlayerModel>
 	protected override void OnClearData()
 	{
 
+	}
+
+	public enum Type
+	{
+		Home, 
+		Away
+	}
+
+	public struct CoreData
+	{
+		public PlayerModel PlayerModel;
+		public Type Type;
 	}
 }

@@ -428,6 +428,9 @@ MonoBehaviour:
   _buildableContainer: {fileID: 8403666071345224981}
   _previewContainer: {fileID: 5539120741844072330}
   _previewRenderer: {fileID: 2848137726060562137}
+  _playerType: 0
+  _playersModelSO: {fileID: 11400000, guid: b817ece70c8f42b46b1c12daae6d1d77, type: 2}
+  _unitsMechanicSO: {fileID: 11400000, guid: 9079a870995816642987bc243d6f1475, type: 2}
 --- !u!61 &1340165988782496365
 BoxCollider2D:
   m_ObjectHideFlags: 0

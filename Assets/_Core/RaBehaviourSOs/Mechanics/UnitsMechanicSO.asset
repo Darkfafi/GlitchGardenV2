@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: UnitsMechanicSO
   m_EditorClassIdentifier: 
   _dependencies:
-  - {fileID: 11400000, guid: b817ece70c8f42b46b1c12daae6d1d77, type: 2}
   - {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}

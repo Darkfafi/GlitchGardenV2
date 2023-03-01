@@ -29,4 +29,16 @@ public class PlayersModelSO : ModelSOBase
 		AwayPlayer = null;
 		HomePlayer = null;
 	}
+
+	public Player GetPlayer(Player.Type playerType)
+	{
+		switch(playerType)
+		{
+			case Player.Type.Home:
+				return HomePlayer;
+			case Player.Type.Away:
+				return AwayPlayer;
+		}
+		return default;
+	}
 }

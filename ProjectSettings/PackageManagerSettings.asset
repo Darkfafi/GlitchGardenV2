@@ -24,20 +24,28 @@ MonoBehaviour:
     m_Scopes: []
     m_IsDefault: 1
     m_Capabilities: 7
-  m_UserSelectedRegistryName: 
+  - m_Id: scoped:Rasofia Games
+    m_Name: Rasofia Games
+    m_Url: http://34.83.210.29:4873
+    m_Scopes:
+    - rasofiagames
+    m_IsDefault: 0
+    m_Capabilities: 0
+  m_UserSelectedRegistryName: Rasofia Games
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_ErrorMessage: 
     m_Original:
-      m_Id: 
-      m_Name: 
-      m_Url: 
-      m_Scopes: []
+      m_Id: scoped:Rasofia Games
+      m_Name: Rasofia Games
+      m_Url: http://34.83.210.29:4873
+      m_Scopes:
+      - rasofiagames
       m_IsDefault: 0
       m_Capabilities: 0
     m_Modified: 0
-    m_Name: 
-    m_Url: 
+    m_Name: Rasofia Games
+    m_Url: http://34.83.210.29:4873
     m_Scopes:
-    - 
+    - rasofiagames
     m_SelectedScopeIndex: 0
