@@ -28,6 +28,43 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 		return _elements.TryGetValue(position, out element);
 	}
 
+	public ElementUnitSpot GetUnitSpot(Unit unit)
+	{
+		if(TryGetUnitSpot(unit, out ElementUnitSpot spot))
+		{
+			return spot;
+		}
+
+		return null;
+	}
+
+	public ElementUnitSpot GetUnitSpot(Vector2Int position, Player owner)
+	{
+		if(TryGetUnitSpot(position, owner, out ElementUnitSpot spot))
+		{
+			return spot;
+		}
+
+		return null;
+	}
+
+	public bool TryGetUnitSpot(Vector2Int position, Player owner, out ElementUnitSpot spot)
+	{
+		spot = default;
+		return TryGetElement(position, out GameGridElement element) && element.TryGetElementUnitSpot(owner, out spot);
+	}
+
+	public bool TryGetUnitSpot(Unit unit, out ElementUnitSpot spot)
+	{
+		spot = default;
+		return TryGetElement(unit.Position, out GameGridElement element) && element.TryGetElementUnitSpot(unit.Owner, out spot);
+	}
+
+	public void Resolve()
+	{
+		ForEach((pos, element) => element.Resolve());
+	}
+
 	protected override void OnSetData()
 	{
 		ForEach((position, element) =>

@@ -43,8 +43,8 @@ public class Game : MonoBehaviour
 	protected void Awake()
 	{
 		// Setting Participants
-		HomePlayer.SetData(_homePlayerModel);
-		AwayPlayer.SetData(_awayPlayerModel);
+		HomePlayer.SetData(new Player.CoreData() { PlayerModel = _homePlayerModel, Type = Player.Type.Home });
+		AwayPlayer.SetData(new Player.CoreData() { PlayerModel = _awayPlayerModel, Type = Player.Type.Away });
 
 		// Settings Game Board
 		Grid.SetData(_gridData);
@@ -53,6 +53,17 @@ public class Game : MonoBehaviour
 		_mechanicsController.Initialize();
 
 		GameUI.SetData(this);
+	}
+
+	protected void Start()
+	{
+		Grid.Resolve();
+	}
+
+	protected void OnDestroy()
+	{
+		_mechanicsController.Deinitialize();
+		_modelsController.Deinitialize();
 	}
 }
 
