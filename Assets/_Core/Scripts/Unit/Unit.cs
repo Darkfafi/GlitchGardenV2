@@ -52,6 +52,11 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 		_statesContainer.name = $"States ({state})";
 	}
 
+	protected override void OnSetDataResolved()
+	{
+		SetState(State.Spawn);
+	}
+
 	public void SetPosition(Vector2Int position)
 	{
 		Position = position;

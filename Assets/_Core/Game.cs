@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RaDataHolder;
+using UnityEngine;
 
 public class Game : MonoBehaviour
 {
@@ -42,28 +43,45 @@ public class Game : MonoBehaviour
 
 	protected void Awake()
 	{
-		// Setting Participants
-		HomePlayer.SetData(new Player.CoreData() { PlayerModel = _homePlayerModel, Type = Player.Type.Home });
-		AwayPlayer.SetData(new Player.CoreData() { PlayerModel = _awayPlayerModel, Type = Player.Type.Away });
+		IRaDataSetResolver[] gameBoard = new IRaDataSetResolver[]
+		{
+			// Setting Participants
+			HomePlayer.SetData(new Player.CoreData() { PlayerModel = _homePlayerModel, Type = Player.Type.Home }, false),
+			AwayPlayer.SetData(new Player.CoreData() { PlayerModel = _awayPlayerModel, Type = Player.Type.Away }, false),
 
-		// Settings Game Board
-		Grid.SetData(_gridData);
+			// Settings Game Board
+			Grid.SetData(_gridData, false),
+		};
 
+		// Model Accessor
 		_modelsController.Initialize();
+
+		// Mechanics
 		_mechanicsController.Initialize();
 
-		GameUI.SetData(this);
-	}
+		// Resolve Game Board
+		gameBoard.ResolveAll();
 
-	protected void Start()
-	{
-		Grid.Resolve();
+		// UI
+		GameUI.SetData(this, true);
 	}
 
 	protected void OnDestroy()
 	{
 		_mechanicsController.Deinitialize();
 		_modelsController.Deinitialize();
+
+		IRaDataClearResolver[] gameBoard = new IRaDataClearResolver[]
+		{
+			// Clearing Game Board
+			Grid.ClearData(),
+
+			// Clearing Participants
+			AwayPlayer.ClearData(),
+			HomePlayer.ClearData()
+		};
+
+		gameBoard.ResolveAll();
 	}
 }
 

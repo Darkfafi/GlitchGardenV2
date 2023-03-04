@@ -60,7 +60,7 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 		return TryGetElement(unit.Position, out GameGridElement element) && element.TryGetElementUnitSpot(unit.Owner, out spot);
 	}
 
-	public void Resolve()
+	protected override void OnSetDataResolved()
 	{
 		ForEach((pos, element) => element.Resolve());
 	}
@@ -81,7 +81,7 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 				{
 					IsBuildable = position.x >= (GridData.Size.x - Data.AwayBuildableColumns),
 				}
-			});
+			}, false);
 
 			_elements[element.Position] = element;
 			element.transform.localPosition = new Vector3(position.x, position.y, 0);

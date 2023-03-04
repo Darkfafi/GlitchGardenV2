@@ -54,10 +54,14 @@ namespace UI
 			UnitHUDEntryUIElement itemView = Instantiate(_entryPrefab, _container);
 
 			_unitHUDEntryMap[item] = itemView;
-			itemView.SetData(item);
-			itemView.DragStartedEvent += OnDragStartedEvent;
-			itemView.DraggingEvent += OnDraggingEvent;
-			itemView.DragEndedEvent += OnDragEndedEvent;
+
+			var resolver = itemView.SetData(item, false);
+			{
+				itemView.DragStartedEvent += OnDragStartedEvent;
+				itemView.DraggingEvent += OnDraggingEvent;
+				itemView.DragEndedEvent += OnDragEndedEvent;
+			}
+			resolver.Resolve();
 		}
 
 		private void RemoveEntry(UnitConfig item)
@@ -79,7 +83,7 @@ namespace UI
 			_gridHighlightRenderer.TweenColorA(0.4f, 0.25f)
 				.SetGroup(_gridHighlightRenderer);
 
-			_draggingUnitElement.SetData(view.Config);
+			_draggingUnitElement.SetData(view.Config, true);
 		}
 
 		private void OnDraggingEvent(UnitHUDEntryUIElement view)
