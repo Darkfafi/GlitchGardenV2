@@ -54,8 +54,6 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 	[SerializeField]
 	private UnitsMechanicSO _unitsMechanicSO = null;
 
-	private bool _isResolved = false;
-
 	protected override void OnSetData()
 	{
 		ID = $"Tile ({Data.Position.x},{Data.Position.y})";
@@ -68,15 +66,12 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 		name = ID;
 	}
 
-	public void Resolve()
+	protected override void OnSetDataResolved()
 	{
-		if(_isResolved)
-		{
-			return;
-		}
+		base.OnSetDataResolved();
 
-		_isResolved = true;
 		TryGetElementUnitSpot(_playersModelSO.GetPlayer(_playerType), out ElementUnitSpot spot);
+		
 		spot.PreviewChangedEvent += OnPreviewChangedEvent;
 		spot.UnitChangedEvent += OnUnitChangedEvent;
 
@@ -99,7 +94,6 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 		}
 
 		OnPreviewChangedEvent(null);
-		_isResolved = false;
 	}
 
 	public bool TryGetElementUnitSpot(Player player, out ElementUnitSpot elementUnitSpot)

@@ -56,13 +56,13 @@ public class UnitsMechanicSO : GameMechanicSOBase
 		if(CanCreateUnit(coreData, position, out ElementUnitSpot unitSpot))
 		{
 			Unit unit = Instantiate(coreData.Config.UnitPrefab);
-			unit.SetData(coreData);
+			unit.SetData(coreData, false);
 			unit.SetPosition(position);
 
 			unitSpot.SetPreview(null);
 			unitSpot.SetUnit(unit);
 
-			unit.SetState(Unit.State.Spawn);
+			unit.Resolve();
 			return true;
 		}
 		return false;

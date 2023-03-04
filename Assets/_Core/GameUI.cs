@@ -12,12 +12,17 @@ public class GameUI : RaMonoDataHolderBase<Game>
 
 	protected override void OnSetData()
 	{
-		UnitsHUD.SetData(Data.HomePlayer);
+		UnitsHUD.SetData(Data.HomePlayer, false);
 	}
 
 	protected override void OnClearData()
 	{
 		UnitsHUD.ClearData();
+	}
+
+	protected override void OnSetDataResolved()
+	{
+		((IRaDataSetResolver)UnitsHUD).Resolve();
 	}
 }
 
