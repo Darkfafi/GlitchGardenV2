@@ -56,6 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 78165461734779495}
   - component: {fileID: 5972766715265170850}
+  - component: {fileID: 2659431728166790187}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -89,6 +90,20 @@ SortingGroup:
   m_SortingLayerID: 1406524319
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &2659431728166790187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78165461734779492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5642a59981a13744c8d9c9d5b1c11221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VisualsContainer: {fileID: 78165461734779495}
+  UnitRenderer: {fileID: 78165462496174326}
 --- !u!1 &78165462138937359
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea21084cb44ee5d47a3ba2786a922ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 78165462496174326}
   _statesContainer: {fileID: 5825863179559668517}
+  UnitVisuals: {fileID: 2659431728166790187}
 --- !u!1 &78165462496174324
 GameObject:
   m_ObjectHideFlags: 0

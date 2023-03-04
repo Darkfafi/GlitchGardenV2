@@ -6,10 +6,10 @@ using RaFSM;
 public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 {
 	[SerializeField]
-	private SpriteRenderer _renderer = null;
-
-	[SerializeField]
 	private Transform _statesContainer = null;
+
+	[field: SerializeField]
+	public UnitVisuals UnitVisuals = null;
 
 	public CoreData UnitData => Data;
 
@@ -33,17 +33,14 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 	protected override void OnSetData()
 	{
 		Owner = Data.Owner;
-
-		_renderer.sprite = Data.Config.Icon;
-		
 		Health = new Health(Data.Config.HealthPoints);
-
 		_fsm = new RaGOFiniteStateMachine(this, RaGOFiniteStateMachine.GetGOStates(_statesContainer));
+		UnitVisuals.SetData(this, false);
 	}
 
 	protected override void OnClearData()
 	{
-
+		UnitVisuals.ClearData();
 	}
 
 	public void SetState(State state)
@@ -54,6 +51,7 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 
 	protected override void OnSetDataResolved()
 	{
+		UnitVisuals.Resolve();
 		SetState(State.Spawn);
 	}
 
