@@ -57,11 +57,12 @@ public class UnitsMechanicSO : GameMechanicSOBase
 		{
 			Unit unit = Instantiate(coreData.Config.UnitPrefab);
 			unit.SetData(coreData, false);
-			unit.SetPosition(position);
+			{
+				unit.SetPosition(position);
 
-			unitSpot.SetPreview(null);
-			unitSpot.SetUnit(unit);
-
+				unitSpot.SetPreview(null);
+				unitSpot.SetUnit(unit);
+			}
 			unit.Resolve();
 			return true;
 		}
