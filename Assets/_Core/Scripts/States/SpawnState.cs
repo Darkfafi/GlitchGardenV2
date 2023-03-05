@@ -25,6 +25,10 @@ public class SpawnState : RaGOStateBase<Unit>
 				{
 					Dependency.transform.position = unitSpot.GetUnitLocation();
 					UnitVisuals.VisualsContainer.gameObject.SetActive(true);
+				})
+				.OnComplete(() => 
+				{
+					Dependency.SetState(Unit.State.Behaviour);
 				});
 		}
 	}
