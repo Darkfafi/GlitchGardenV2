@@ -13,6 +13,9 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 	[field: SerializeField]
 	public UnitVisuals UnitVisuals = null;
 
+	[SerializeField]
+	private StateNameMarker _marker = null;
+
 	public CoreData UnitData => Data;
 
 	public Player Owner
@@ -36,7 +39,10 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 	{
 		Owner = Data.Owner;
 		Health = new Health(Data.Config.HealthPoints);
-		_fsm = new RaGOFiniteStateMachine(this, RaGOFiniteStateMachine.GetGOStates(_statesContainer));
+
+		RaGOStateBase[] states = RaGOFiniteStateMachine.GetGOStates(_statesContainer);
+		_fsm = new RaGOFiniteStateMachine(this, states);
+		
 		UnitVisuals.SetData(this, false);
 	}
 
