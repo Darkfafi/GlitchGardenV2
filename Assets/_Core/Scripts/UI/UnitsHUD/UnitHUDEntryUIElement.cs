@@ -1,8 +1,8 @@
-﻿using System;
+﻿using RaDataHolder;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using RaDataHolder;
 
 namespace UI
 {
@@ -18,16 +18,26 @@ namespace UI
 		[SerializeField]
 		private RaTweening.RaTweenerComponent _isGrabbedAnimation = null;
 
+		[SerializeField]
+		private CurrencyValueUIElement _costDisplay = null;
+
 		public UnitConfig Config => Data;
 
 		protected override void OnSetData()
 		{
 			SetGrabbed(false);
 			_iconImage.sprite = Data.Icon;
+			_costDisplay.SetData(Data, false);
+		}
+
+		protected override void OnSetDataResolved()
+		{
+			_costDisplay.Resolve();
 		}
 
 		protected override void OnClearData()
 		{
+			_costDisplay.ClearData();
 			_iconImage.sprite = null;
 		}
 

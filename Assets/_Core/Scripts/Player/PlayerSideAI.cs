@@ -8,9 +8,6 @@ public class PlayerSideAI : RaMonoDataHolderBase<PlayerSide>
 	[SerializeField]
 	private UnitsMechanicSO _unitsMechanicSO = null;
 
-	[SerializeField]
-	private GridModelSO _gridModelSO = null;
-
 	public CurrencyConfig ResourceCurrency => Data.ResourceGenerator.AmountToGenerate.Currency;
 	private UnitConfig _nextToSpawn = null;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Configs/UnitConfig", fileName = "UnitConfig")]
-public class UnitConfig : ScriptableObject
+public class UnitConfig : ScriptableObject, IHaveCurrencyValue
 {
 	[field: SerializeField]
 	public Unit UnitPrefab
@@ -38,4 +38,6 @@ public class UnitConfig : ScriptableObject
 	{
 		get; private set;
 	}
+
+	CurrencyValue IHaveCurrencyValue.CurrencyValue => Cost;
 }

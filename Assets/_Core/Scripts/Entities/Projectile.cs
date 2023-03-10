@@ -9,9 +9,6 @@ public class Projectile : MonoBehaviour
 	private Transform _orientationContainer = null;
 
 	[SerializeField]
-	private Transform _visualContainer = null;
-
-	[SerializeField]
 	private Rigidbody2D _rigidBody = null;
 
 	private Player _owner = null;
