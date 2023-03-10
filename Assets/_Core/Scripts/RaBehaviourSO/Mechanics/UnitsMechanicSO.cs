@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Behaviours/Mechanics/UnitsMechanicSO")]
@@ -24,12 +25,28 @@ public class UnitsMechanicSO : GameMechanicSOBase
 
 	#region Creation
 
-	public MechanicResponse CanCreateUnit(Unit.CoreData coreData, Vector2Int position)
+	public List<Vector2Int> GetCreateUnitPositions(Unit.CoreData coreData, bool includeCost = true)
 	{
-		return CanCreateUnit(coreData, position, out _);
+		List<Vector2Int> spawns = new List<Vector2Int>();
+		if(TryGetDependency(out GridModelSO gridModel))
+		{
+			gridModel.Grid.ForEach((pos, element) => 
+			{
+				if(CanCreateUnit(coreData, pos, includeCost).IsSuccess)
+				{
+					spawns.Add(pos);
+				}
+			});
+		}
+		return spawns;
 	}
 
-	public MechanicResponse CanCreateUnit(Unit.CoreData coreData, Vector2Int position, out ElementUnitSpot unitSpot)
+	public MechanicResponse CanCreateUnit(Unit.CoreData coreData, Vector2Int position, bool includeCost = true)
+	{
+		return CanCreateUnit(coreData, position, out _, includeCost);
+	}
+
+	public MechanicResponse CanCreateUnit(Unit.CoreData coreData, Vector2Int position, out ElementUnitSpot unitSpot, bool includeCost = true)
 	{
 		unitSpot = default;
 		if(!TryGetDependency(out GridModelSO gridModel))
@@ -57,9 +74,40 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			return MechanicResponse.CreateFailedResponse($"UnitSpot {unitSpot} contains Unit {unitSpot.Unit}", (nameof(unitSpot), unitSpot));
 		}
 
-		if(coreData.Config != null && !coreData.Owner.Wallet.CanSpend(coreData.Config.Cost, out var notEnoughCurrencyData))
+		if(coreData.Config != null)
 		{
-			return MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.Config.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
+			if(includeCost)
+			{
+				if(!coreData.Owner.Wallet.CanSpend(coreData.Config.Cost, out var notEnoughCurrencyData))
+				{
+					return MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.Config.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
+				}
+			}
+
+			if(coreData.Config.FirstColumnUnit)
+			{
+				bool valid = true;
+				switch(coreData.Owner.PlayerType)
+				{
+					case Player.Type.Home:
+						if(position.x != 0)
+						{
+							valid = false;
+						}
+						break;
+					case Player.Type.Away:
+						if(position.x != gridModel.Grid.GridData.Size.x - 1)
+						{
+							valid = false;
+						}
+						break;
+				}
+
+				if(!valid)
+				{
+					return MechanicResponse.CreateFailedResponse($"Unit {coreData.Config} requires to be placed on the first column of the owner {coreData.Owner}. Which is not {position}");
+				}
+			}
 		}
 
 		return MechanicResponse.CreateSuccessResponse();

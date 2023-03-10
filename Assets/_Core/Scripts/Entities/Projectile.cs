@@ -6,6 +6,9 @@ public class Projectile : MonoBehaviour
 	private float _speed = 5;
 
 	[SerializeField]
+	private Transform _orientationContainer = null;
+
+	[SerializeField]
 	private Transform _visualContainer = null;
 
 	[SerializeField]
@@ -24,10 +27,7 @@ public class Projectile : MonoBehaviour
 		_isFired = true;
 		_owner = owner;
 
-		// Direction
-		Vector3 scale = _visualContainer.transform.localScale;
-		scale.x = ApplyOwnerScale(scale.x);
-		_visualContainer.transform.localScale = scale;
+		_orientationContainer.localScale = owner.GetOrientation(_orientationContainer.localScale);
 	}
 
 	protected void Update()
@@ -35,17 +35,8 @@ public class Projectile : MonoBehaviour
 		if(_isFired)
 		{
 			Vector2 pos = _rigidBody.position;
-			pos.x += ApplyOwnerScale(Time.deltaTime * _speed);
+			pos.x += _owner.GetOrientation(Time.deltaTime * _speed);
 			_rigidBody.MovePosition(pos);
 		}
-	}
-
-	private float ApplyOwnerScale(float value)
-	{
-		if(_owner.PlayerType == Player.Type.Away)
-		{
-			value *= -1;
-		}
-		return value;
 	}
 }

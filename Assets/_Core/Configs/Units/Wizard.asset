@@ -19,3 +19,4 @@ MonoBehaviour:
   <Cost>k__BackingField:
     <Currency>k__BackingField: {fileID: 11400000, guid: efb0da8fcea8def41add063852cccffd, type: 2}
     <Amount>k__BackingField: 5
+  <FirstColumnUnit>k__BackingField: 0
