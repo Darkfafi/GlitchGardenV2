@@ -10,6 +10,8 @@ namespace UI
 	{
 		[Header("Display Requirements")]
 		[SerializeField]
+		private GridModelSO _gridModelSO = null;
+		[SerializeField]
 		private UnitHUDEntryUIElement _entryPrefab = null;
 
 		[SerializeField]
@@ -18,9 +20,6 @@ namespace UI
 		[Header("Feature Requirements")]
 		[SerializeField]
 		private DraggingUnitElement _draggingUnitElement;
-
-		[SerializeField]
-		private SpriteRenderer _gridHighlightRenderer = null;
 
 		private Dictionary<UnitConfig, UnitHUDEntryUIElement> _unitHUDEntryMap = new Dictionary<UnitConfig, UnitHUDEntryUIElement>();
 
@@ -78,12 +77,8 @@ namespace UI
 		private void OnDragStartedEvent(UnitHUDEntryUIElement view)
 		{
 			view.SetGrabbed(true);
-
-			RaTweenBase.StopGroup(_gridHighlightRenderer);
-			_gridHighlightRenderer.TweenColorA(0.4f, 0.25f)
-				.SetGroup(_gridHighlightRenderer);
-
 			_draggingUnitElement.SetData(view.Config, true);
+			_gridModelSO.Grid.ShowUnitBuildabilityGrid(view.Config);
 		}
 
 		private void OnDraggingEvent(UnitHUDEntryUIElement view)
@@ -96,9 +91,7 @@ namespace UI
 
 		private void OnDragEndedEvent(UnitHUDEntryUIElement view)
 		{
-			RaTweenBase.StopGroup(_gridHighlightRenderer);
-			_gridHighlightRenderer.TweenColorA(0f, 0.25f)
-				.SetGroup(_gridHighlightRenderer);
+			_gridModelSO.Grid.ClearUnitBuildabilityGrid();
 
 			_draggingUnitElement.TryCreateDraggingUnit();
 			_draggingUnitElement.ClearData();

@@ -54,6 +54,8 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 	[SerializeField]
 	private UnitsMechanicSO _unitsMechanicSO = null;
 
+	private UnitConfig _unitBuildabilityPreview = null;
+
 	protected override void OnSetData()
 	{
 		ID = $"Tile ({Data.Position.x},{Data.Position.y})";
@@ -96,6 +98,12 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 		OnPreviewChangedEvent(null);
 	}
 
+	public void SetUnitBuildabilityPreview(UnitConfig config)
+	{
+		_unitBuildabilityPreview = config;
+		RefreshBuildability();
+	}
+
 	public bool TryGetElementUnitSpot(Player player, out ElementUnitSpot elementUnitSpot)
 	{
 		switch(player.PlayerType)
@@ -135,7 +143,12 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 	{
 		if(_unitsMechanicSO.IsInitialized)
 		{
-			bool isBuildable = _unitsMechanicSO.CanCreateUnit(new Unit.CoreData() { Owner = _playersModelSO.GetPlayer(_playerType) }, Position).IsSuccess;
+			bool isBuildable = _unitsMechanicSO.CanCreateUnit(
+				new Unit.CoreData() { 
+					Owner = _playersModelSO.GetPlayer(_playerType), 
+					Config = _unitBuildabilityPreview 
+				}, Position, includeCost: false).IsSuccess;
+
 			_notBuildableContainer.SetActive(!isBuildable);
 			_buildableContainer.SetActive(isBuildable);
 		}
