@@ -67,8 +67,12 @@ namespace UI
 				float currentDistance = Vector3.Distance(element.transform.position, transform.position);
 				if(currentDistance < itemDistance)
 				{
-					var response = _unitsMechanic.CanCreateUnit(new Unit.CoreData { Owner = _playersModelSO.GetPlayer(Player.Type.Home), Config = Data }, element.Position);
-					if(response.IsSuccess && response.Locator.TryGetValue(out ElementUnitSpot currentItem))
+					var response = _unitsMechanic.CanCreateUnit(
+						new Unit.CoreData { Owner = _playersModelSO.GetPlayer(Player.Type.Home), Config = Data }, 
+						element.Position, 
+						out ElementUnitSpot currentItem);
+
+					if(response.IsSuccess)
 					{
 						closestItem = currentItem;
 						itemDistance = currentDistance;
