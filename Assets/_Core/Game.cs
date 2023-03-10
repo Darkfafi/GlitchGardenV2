@@ -27,6 +27,12 @@ public class Game : MonoBehaviour
 		get; private set;
 	}
 
+	[field: SerializeField]
+	public PlayerSideAI AwayPlayerSideAI
+	{
+		get; private set;
+	}
+
 	[Header("Settings")]
 	[SerializeField]
 	private PlayerModel _homePlayerModel = null;
@@ -51,6 +57,9 @@ public class Game : MonoBehaviour
 
 			// Settings Game Board
 			Grid.SetData(_gridData, false),
+
+			// AI Setup
+			AwayPlayerSideAI.SetData(AwayPlayerSide, false),
 		};
 
 		// Model Accessor

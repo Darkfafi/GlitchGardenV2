@@ -269,6 +269,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &267910788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 267910789}
+  - component: {fileID: 267910790}
+  m_Layer: 0
+  m_Name: Away - AI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &267910789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267910788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1958020277}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &267910790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267910788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ebede59e7f72441b3755dfeee23d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitsMechanicSO: {fileID: 11400000, guid: 9079a870995816642987bc243d6f1475, type: 2}
+  _gridModelSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
 --- !u!4 &349909223 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6830546824990556897, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
@@ -8405,11 +8450,13 @@ MonoBehaviour:
   <Grid>k__BackingField: {fileID: 1661390561}
   <HomePlayerSide>k__BackingField: {fileID: 788337951}
   <AwayPlayerSide>k__BackingField: {fileID: 931944520}
+  <AwayPlayerSideAI>k__BackingField: {fileID: 267910790}
   _homePlayerModel:
     <Units>k__BackingField:
     - {fileID: 11400000, guid: 5e53fa65f104e7b42aa4250bf1ed2b50, type: 2}
   _awayPlayerModel:
-    <Units>k__BackingField: []
+    <Units>k__BackingField:
+    - {fileID: 11400000, guid: 5e53fa65f104e7b42aa4250bf1ed2b50, type: 2}
   _gridData:
     Size: {x: 18, y: 7}
     HomeBuildableColumns: 13

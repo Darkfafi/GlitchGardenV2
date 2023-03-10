@@ -32,4 +32,10 @@ public class UnitConfig : ScriptableObject
 	{
 		get; private set;
 	}
+
+	[field: SerializeField]
+	public bool FirstColumnUnit
+	{
+		get; private set;
+	}
 }
