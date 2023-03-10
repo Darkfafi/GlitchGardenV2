@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace UI
 {
-	public class DraggingUnitElement : RaMonoDataHolderBase<UnitConfig>
+	public class DraggingUnitElement : RaMonoDataHolderBase<DraggingUnitElement.CoreData>
 	{
 		[SerializeField]
 		private UnitsMechanicSO _unitsMechanic = null;
-
-		[SerializeField]
-		private PlayersModelSO _playersModelSO = null;
 
 		[SerializeField]
 		private SpriteRenderer _iconRenderer = null;
@@ -18,13 +15,8 @@ namespace UI
 		[SerializeField]
 		private TrailRenderer _trailRenderer = null;
 
-		[SerializeField]
-		private Player.Type _playerType = Player.Type.Home;
-
 		private List<GameGridElement> _gridElements = new List<GameGridElement>();
 		private ElementUnitSpot _previewTarget = null;
-
-		public Player Player => _playersModelSO.GetPlayer(_playerType);
 
 		public bool TryGetPlacementTarget(out ElementUnitSpot target)
 		{
@@ -35,15 +27,15 @@ namespace UI
 		protected override void OnSetData()
 		{
 			gameObject.SetActive(true);
-			_iconRenderer.sprite = Data.Icon;
-			SetTrailColor(Data.Color);
+			_iconRenderer.sprite = Data.UnitConfig.Icon;
+			SetTrailColor(Data.UnitConfig.Color);
 
-			Player.Wallet.ValueChangedEvent += OnWalletChangedEvent;
+			Data.Player.Wallet.ValueChangedEvent += OnWalletChangedEvent;
 		}
 
 		protected override void OnClearData()
 		{
-			Player.Wallet.ValueChangedEvent -= OnWalletChangedEvent;
+			Data.Player.Wallet.ValueChangedEvent -= OnWalletChangedEvent;
 
 			gameObject.SetActive(false);
 			_iconRenderer.sprite = null;
@@ -54,14 +46,14 @@ namespace UI
 
 		public void Setup()
 		{
-			OnClearData();
+			gameObject.SetActive(false);
 		}
 
 		public bool TryCreateDraggingUnit()
 		{
 			if(TryGetPlacementTarget(out ElementUnitSpot spot))
 			{
-				return _unitsMechanic.CreateUnit(new Unit.CoreData() { Owner = Player, Config = Data }, spot.Element.Position).IsSuccess;
+				return _unitsMechanic.CreateUnit(new Unit.CoreData() { Owner = Data.Player, Config = Data.UnitConfig }, spot.Element.Position).IsSuccess;
 			}
 			return false;
 		}
@@ -77,7 +69,7 @@ namespace UI
 				if(currentDistance < itemDistance)
 				{
 					var response = _unitsMechanic.CanCreateUnit(
-						new Unit.CoreData { Owner = Player, Config = Data }, 
+						new Unit.CoreData { Owner = Data.Player, Config = Data.UnitConfig }, 
 						element.Position, 
 						out ElementUnitSpot currentItem);
 
@@ -100,7 +92,7 @@ namespace UI
 
 				if(_previewTarget != null)
 				{
-					_previewTarget.SetPreview(Data);
+					_previewTarget.SetPreview(Data.UnitConfig);
 				}
 			}
 		}
@@ -138,10 +130,17 @@ namespace UI
 
 		private void OnWalletChangedEvent(CurrencyConfig currency, int newValue, int oldValue)
 		{
-			if(currency == Data.Cost.Currency)
+			if(currency == Data.UnitConfig.Cost.Currency)
 			{
 				RefreshPreviewTarget();
 			}
+		}
+
+		[System.Serializable]
+		public struct CoreData
+		{
+			public UnitConfig UnitConfig;
+			public Player Player;
 		}
 	}
 }
