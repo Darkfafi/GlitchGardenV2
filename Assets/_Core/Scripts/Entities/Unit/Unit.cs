@@ -1,9 +1,7 @@
 ﻿using RaDataHolder;
+using RaFSM;
 using System;
 using UnityEngine;
-using RaFSM;
-using UnityEngine.Events;
-using static RaFSM.RaGOFSMState;
 
 public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 {
@@ -12,9 +10,6 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 
 	[field: SerializeField]
 	public UnitVisuals UnitVisuals = null;
-
-	[SerializeField]
-	private StateNameMarker _marker = null;
 
 	public CoreData UnitData => Data;
 

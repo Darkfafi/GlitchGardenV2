@@ -4,6 +4,12 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
 	[field: SerializeField]
+	public GameUI GameUI
+	{
+		get; private set;
+	}
+
+	[field: SerializeField]
 	public GameGrid Grid
 	{
 		get; private set;
@@ -16,13 +22,19 @@ public class Game : MonoBehaviour
 	}
 
 	[field: SerializeField]
+	public CurrencyGenerator HomeResourceGenertor
+	{
+		get; private set;
+	}
+
+	[field: SerializeField]
 	public Player AwayPlayer
 	{
 		get; private set;
 	}
 
 	[field: SerializeField]
-	public GameUI GameUI
+	public CurrencyGenerator AwayResourceGenertor
 	{
 		get; private set;
 	}
@@ -51,6 +63,9 @@ public class Game : MonoBehaviour
 
 			// Settings Game Board
 			Grid.SetData(_gridData, false),
+
+			HomeResourceGenertor.SetData(HomePlayer.Wallet, false),
+			AwayResourceGenertor.SetData(AwayPlayer.Wallet, false),
 		};
 
 		// Model Accessor
@@ -74,11 +89,13 @@ public class Game : MonoBehaviour
 		IRaDataClearResolver[] gameBoard = new IRaDataClearResolver[]
 		{
 			// Clearing Game Board
-			Grid.ClearData(),
+			AwayResourceGenertor.ClearData(false),
+			HomeResourceGenertor.ClearData(false),
+			Grid.ClearData(false),
 
 			// Clearing Participants
-			AwayPlayer.ClearData(),
-			HomePlayer.ClearData()
+			AwayPlayer.ClearData(false),
+			HomePlayer.ClearData(false)
 		};
 
 		gameBoard.ResolveAll();

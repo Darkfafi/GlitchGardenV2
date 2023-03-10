@@ -24,49 +24,66 @@ public class UnitsMechanicSO : GameMechanicSOBase
 
 	#region Creation
 
-	public bool CanCreateUnit(Unit.CoreData coreData, Vector2Int position)
+	public MechanicResponse CanCreateUnit(Unit.CoreData coreData, Vector2Int position)
 	{
-		return CanCreateUnit(coreData, position, out _);
-	}
-
-	public bool CanCreateUnit(Unit.CoreData coreData, Vector2Int position, out ElementUnitSpot unitSpot)
-	{
-		if
-		(
-			TryGetDependency(out GridModelSO gridModelSO) &&
-			// Has Element
-			gridModelSO.Grid.TryGetElement(position, out GameGridElement element) &&
-			// Has Unit Spot for Owner
-			element.TryGetElementUnitSpot(coreData.Owner, out unitSpot) &&
-			// Is Buildable Spot
-			unitSpot.SpotData.IsBuildable &&
-			// Does not contain a Unit on Owner Spot
-			unitSpot.Unit == null
-		)
+		if(!TryGetDependency(out GridModelSO gridModel))
 		{
-			return true;
+			return MechanicResponse.CreateFailedResponse("No GridModel Found", null);
 		}
 
-		unitSpot = default;
-		return false;
+		if(!gridModel.Grid.TryGetElement(position, out GameGridElement element))
+		{
+			return MechanicResponse.CreateFailedResponse($"No Element found at {position}", null);
+		}
+
+		if(!element.TryGetElementUnitSpot(coreData.Owner, out var unitSpot))
+		{
+			return MechanicResponse.CreateFailedResponse($"No UnitSpot found for {coreData.Owner} on {element}", null);
+		}
+
+		if(!unitSpot.SpotData.IsBuildable)
+		{
+			return MechanicResponse.CreateFailedResponse($"UnitSpot {unitSpot} is not Buildable", (nameof(unitSpot), unitSpot));
+		}
+
+		if(unitSpot.Unit != null)
+		{
+			return MechanicResponse.CreateFailedResponse($"UnitSpot {unitSpot} contains Unit {unitSpot.Unit}", (nameof(unitSpot), unitSpot));
+		}
+
+		if(coreData.Config != null && !coreData.Owner.Wallet.CanSpend(coreData.Config.Cost, out var notEnoughCurrencyData))
+		{
+			return MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.Config.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
+		}
+
+		return MechanicResponse.CreateSuccessResponse((nameof(unitSpot), unitSpot));
 	}
 
-	public bool CreateUnit(Unit.CoreData coreData, Vector2Int position)
+	public MechanicResponse CreateUnit(Unit.CoreData coreData, Vector2Int position)
 	{
-		if(CanCreateUnit(coreData, position, out ElementUnitSpot unitSpot))
+		MechanicResponse response = CanCreateUnit(coreData, position);
+		if(response.IsSuccess && response.Locator.TryGetValue(out ElementUnitSpot unitSpot))
 		{
-			Unit unit = Instantiate(coreData.Config.UnitPrefab);
-			unit.SetData(coreData, false);
+			if(coreData.Owner.Wallet.Spend(coreData.Config.Cost, out var notEnoughCurrencyData))
 			{
-				unit.SetPosition(position);
+				Unit unit = Instantiate(coreData.Config.UnitPrefab);
+				unit.SetData(coreData, false);
+				{
+					unit.SetPosition(position);
 
-				unitSpot.SetPreview(null);
-				unitSpot.SetUnit(unit);
+					unitSpot.SetPreview(null);
+					unitSpot.SetUnit(unit);
+				}
+				unit.Resolve();
+				response = MechanicResponse.CreateSuccessResponse((nameof(unitSpot), unitSpot), (nameof(unit), unit)); 
 			}
-			unit.Resolve();
-			return true;
+			else
+			{
+				response = MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.Config.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
+			}
 		}
-		return false;
+
+		return response;
 	}
 
 	#endregion

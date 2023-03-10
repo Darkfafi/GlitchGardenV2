@@ -26,4 +26,10 @@ public class UnitConfig : ScriptableObject
 	{
 		get; private set;
 	}
+
+	[field: SerializeField]
+	public CurrencyValue Cost
+	{
+		get; private set;
+	}
 }
