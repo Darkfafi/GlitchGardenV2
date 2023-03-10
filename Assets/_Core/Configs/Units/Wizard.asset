@@ -16,3 +16,6 @@ MonoBehaviour:
   <HealthPoints>k__BackingField: 10
   <Color>k__BackingField: {r: 0.65882355, g: 0.3372549, b: 0.68235296, a: 1}
   <Icon>k__BackingField: {fileID: 21300000, guid: 57387ea2cb067da4d8acb02120f6a0ca, type: 3}
+  <Cost>k__BackingField:
+    <Currency>k__BackingField: {fileID: 11400000, guid: efb0da8fcea8def41add063852cccffd, type: 2}
+    <Amount>k__BackingField: 5

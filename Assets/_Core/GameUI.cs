@@ -1,6 +1,6 @@
 ﻿using RaDataHolder;
-using UnityEngine;
 using UI;
+using UnityEngine;
 
 public class GameUI : RaMonoDataHolderBase<Game>
 {
@@ -10,19 +10,28 @@ public class GameUI : RaMonoDataHolderBase<Game>
 		get; private set;
 	}
 
+	[field: SerializeField]
+	public WalletCurrencyUIElement ResourcesHUD
+	{
+		get; private set;
+	}
+
 	protected override void OnSetData()
 	{
 		UnitsHUD.SetData(Data.HomePlayer, false);
+		ResourcesHUD.SetData(Data.HomePlayer.Wallet, false);
 	}
 
 	protected override void OnClearData()
 	{
+		ResourcesHUD.ClearData();
 		UnitsHUD.ClearData();
 	}
 
 	protected override void OnSetDataResolved()
 	{
-		((IRaDataSetResolver)UnitsHUD).Resolve();
+		UnitsHUD.Resolve();
+		ResourcesHUD.Resolve();
 	}
 }
 

@@ -135,7 +135,7 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 	{
 		if(_unitsMechanicSO.IsInitialized)
 		{
-			bool isBuildable = _unitsMechanicSO.CanCreateUnit(new Unit.CoreData() { Owner = _playersModelSO.GetPlayer(_playerType) }, Position);
+			bool isBuildable = _unitsMechanicSO.CanCreateUnit(new Unit.CoreData() { Owner = _playersModelSO.GetPlayer(_playerType) }, Position).IsSuccess;
 			_notBuildableContainer.SetActive(!isBuildable);
 			_buildableContainer.SetActive(isBuildable);
 		}
