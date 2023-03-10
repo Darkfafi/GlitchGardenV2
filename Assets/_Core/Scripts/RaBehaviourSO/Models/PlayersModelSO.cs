@@ -3,20 +3,20 @@
 [CreateAssetMenu(menuName = "Behaviours/Models/PlayersModelSO")]
 public class PlayersModelSO : ModelSOBase
 {
-	public Player HomePlayer
+	public PlayerSide HomePlayerSide
 	{
 		get; private set;
 	}
 
-	public Player AwayPlayer
+	public PlayerSide AwayPlayerSide
 	{
 		get; private set;
 	}
 
 	protected override void OnSetup()
 	{
-		HomePlayer = Game.HomePlayer;
-		AwayPlayer = Game.AwayPlayer;
+		HomePlayerSide = Game.HomePlayerSide;
+		AwayPlayerSide = Game.AwayPlayerSide;
 	}
 
 	protected override void OnStart()
@@ -26,18 +26,24 @@ public class PlayersModelSO : ModelSOBase
 
 	protected override void OnEnd()
 	{
-		AwayPlayer = null;
-		HomePlayer = null;
+		AwayPlayerSide = null;
+		HomePlayerSide = null;
 	}
 
 	public Player GetPlayer(Player.Type playerType)
 	{
+		return GetPlayerSide(playerType).Player;
+	}
+
+
+	public PlayerSide GetPlayerSide(Player.Type playerType)
+	{
 		switch(playerType)
 		{
 			case Player.Type.Home:
-				return HomePlayer;
+				return HomePlayerSide;
 			case Player.Type.Away:
-				return AwayPlayer;
+				return AwayPlayerSide;
 		}
 		return default;
 	}

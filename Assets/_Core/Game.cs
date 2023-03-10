@@ -16,25 +16,13 @@ public class Game : MonoBehaviour
 	}
 
 	[field: SerializeField]
-	public Player HomePlayer
+	public PlayerSide HomePlayerSide
 	{
 		get; private set;
 	}
 
 	[field: SerializeField]
-	public CurrencyGenerator HomeResourceGenertor
-	{
-		get; private set;
-	}
-
-	[field: SerializeField]
-	public Player AwayPlayer
-	{
-		get; private set;
-	}
-
-	[field: SerializeField]
-	public CurrencyGenerator AwayResourceGenertor
+	public PlayerSide AwayPlayerSide
 	{
 		get; private set;
 	}
@@ -58,14 +46,11 @@ public class Game : MonoBehaviour
 		IRaDataSetResolver[] gameBoard = new IRaDataSetResolver[]
 		{
 			// Setting Participants
-			HomePlayer.SetData(new Player.CoreData() { PlayerModel = _homePlayerModel, Type = Player.Type.Home }, false),
-			AwayPlayer.SetData(new Player.CoreData() { PlayerModel = _awayPlayerModel, Type = Player.Type.Away }, false),
+			HomePlayerSide.SetData(_homePlayerModel, false),
+			AwayPlayerSide.SetData(_awayPlayerModel, false),
 
 			// Settings Game Board
 			Grid.SetData(_gridData, false),
-
-			HomeResourceGenertor.SetData(HomePlayer.Wallet, false),
-			AwayResourceGenertor.SetData(AwayPlayer.Wallet, false),
 		};
 
 		// Model Accessor
@@ -89,13 +74,11 @@ public class Game : MonoBehaviour
 		IRaDataClearResolver[] gameBoard = new IRaDataClearResolver[]
 		{
 			// Clearing Game Board
-			AwayResourceGenertor.ClearData(false),
-			HomeResourceGenertor.ClearData(false),
 			Grid.ClearData(false),
 
 			// Clearing Participants
-			AwayPlayer.ClearData(false),
-			HomePlayer.ClearData(false)
+			AwayPlayerSide.ClearData(false),
+			HomePlayerSide.ClearData(false)
 		};
 
 		gameBoard.ResolveAll();

@@ -18,8 +18,8 @@ public class GameUI : RaMonoDataHolderBase<Game>
 
 	protected override void OnSetData()
 	{
-		UnitsHUD.SetData(Data.HomePlayer, false);
-		ResourcesHUD.SetData(Data.HomePlayer.Wallet, false);
+		UnitsHUD.SetData(Data.HomePlayerSide.Player, false);
+		ResourcesHUD.SetData(Data.HomePlayerSide.Player.Wallet, false);
 	}
 
 	protected override void OnClearData()

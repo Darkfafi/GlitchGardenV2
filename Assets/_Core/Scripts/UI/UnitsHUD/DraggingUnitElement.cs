@@ -52,7 +52,7 @@ namespace UI
 		{
 			if(TryGetPlacementTarget(out ElementUnitSpot spot))
 			{
-				return _unitsMechanic.CreateUnit(new Unit.CoreData() { Owner = _playersModelSO.HomePlayer, Config = Data }, spot.Element.Position).IsSuccess;
+				return _unitsMechanic.CreateUnit(new Unit.CoreData() { Owner = _playersModelSO.GetPlayer(Player.Type.Home), Config = Data }, spot.Element.Position).IsSuccess;
 			}
 			return false;
 		}
@@ -67,7 +67,7 @@ namespace UI
 				float currentDistance = Vector3.Distance(element.transform.position, transform.position);
 				if(currentDistance < itemDistance)
 				{
-					var response = _unitsMechanic.CanCreateUnit(new Unit.CoreData { Owner = _playersModelSO.HomePlayer, Config = Data }, element.Position);
+					var response = _unitsMechanic.CanCreateUnit(new Unit.CoreData { Owner = _playersModelSO.GetPlayer(Player.Type.Home), Config = Data }, element.Position);
 					if(response.IsSuccess && response.Locator.TryGetValue(out ElementUnitSpot currentItem))
 					{
 						closestItem = currentItem;
