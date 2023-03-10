@@ -766,6 +766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Away - ResourceGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 3091440503961985649, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
+      propertyPath: <SideType>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5155128142428911217, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
       propertyPath: m_Name
       value: 'Away - Player '
@@ -820,28 +824,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
---- !u!114 &621858694 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5896296297337243083, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
-  m_PrefabInstance: {fileID: 621858693}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b5ccde8026102f44b9914a71153473f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &621858695 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5983638984326283020, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
-  m_PrefabInstance: {fileID: 621858693}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d780745deedc19b4b9145f524031b48b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &682076639
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +951,17 @@ Transform:
   m_Father: {fileID: 895756550}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &788337951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3091440503961985649, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
+  m_PrefabInstance: {fileID: 1419957065}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6222e054e74f05f459db980d1830fea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &846879950
 GameObject:
   m_ObjectHideFlags: 0
@@ -7985,6 +7978,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &931944520 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3091440503961985649, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
+  m_PrefabInstance: {fileID: 621858693}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6222e054e74f05f459db980d1830fea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1023984106
 GameObject:
   m_ObjectHideFlags: 0
@@ -8368,28 +8372,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
---- !u!114 &1419957066 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5896296297337243083, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
-  m_PrefabInstance: {fileID: 1419957065}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b5ccde8026102f44b9914a71153473f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1419957067 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5983638984326283020, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
-  m_PrefabInstance: {fileID: 1419957065}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d780745deedc19b4b9145f524031b48b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1499551649
 GameObject:
   m_ObjectHideFlags: 0
@@ -8421,10 +8403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GameUI>k__BackingField: {fileID: 142985692}
   <Grid>k__BackingField: {fileID: 1661390561}
-  <HomePlayer>k__BackingField: {fileID: 1419957066}
-  <HomeResourceGenertor>k__BackingField: {fileID: 1419957067}
-  <AwayPlayer>k__BackingField: {fileID: 621858694}
-  <AwayResourceGenertor>k__BackingField: {fileID: 621858695}
+  <HomePlayerSide>k__BackingField: {fileID: 788337951}
+  <AwayPlayerSide>k__BackingField: {fileID: 931944520}
   _homePlayerModel:
     <Units>k__BackingField:
     - {fileID: 11400000, guid: 5e53fa65f104e7b42aa4250bf1ed2b50, type: 2}
