@@ -3,7 +3,7 @@ using RaCollection;
 using System;
 
 [Serializable]
-public struct CurrencyValue : IRaCollectionElement
+public struct CurrencyValue : IRaCollectionElement, IHaveCurrencyValue
 {
 	public string Id => Currency.Id;
 
@@ -18,6 +18,8 @@ public struct CurrencyValue : IRaCollectionElement
 	{
 		get; private set;
 	}
+
+	CurrencyValue IHaveCurrencyValue.CurrencyValue => this;
 
 	public CurrencyValue(CurrencyConfig config, int amount)
 	{
@@ -52,5 +54,13 @@ public struct CurrencyValue : IRaCollectionElement
 	public bool HasAmount(int amount)
 	{
 		return Amount >= amount;
+	}
+}
+
+public interface IHaveCurrencyValue
+{
+	public CurrencyValue CurrencyValue
+	{
+		get;
 	}
 }
