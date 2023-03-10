@@ -920,10 +920,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c6140cc40ef5b44b77136c73925396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gridModelSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
   _entryPrefab: {fileID: 8759131990056567123, guid: d41bc37646ef9fe4eb386d9c6b94756f, type: 3}
   _container: {fileID: 1787784679}
   _draggingUnitElement: {fileID: 1726081330}
-  _gridHighlightRenderer: {fileID: 1178956679}
 --- !u!114 &682076642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8557,6 +8557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8403666071115956691, guid: d9c0f1eac137a0d45aa966027e224755, type: 3}
+  _gridHighlightRenderer: {fileID: 1178956679}
 --- !u!4 &1661390562
 Transform:
   m_ObjectHideFlags: 0

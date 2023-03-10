@@ -1,4 +1,5 @@
 ﻿using RaDataHolder;
+using RaTweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,28 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 	[SerializeField]
 	private GameGridElement _prefab = null;
 
+	[SerializeField]
+	private SpriteRenderer _gridHighlightRenderer = null;
+
 	private Dictionary<Vector2Int, GameGridElement> _elements = new Dictionary<Vector2Int, GameGridElement>();
+
+	public void ShowUnitBuildabilityGrid(UnitConfig config)
+	{
+		RaTweenBase.StopGroup(_gridHighlightRenderer);
+		_gridHighlightRenderer.TweenColorA(0.4f, 0.25f)
+			.SetGroup(_gridHighlightRenderer);
+
+		ForEach((pos, element) => element.SetUnitBuildabilityPreview(config));
+	}
+
+	public void ClearUnitBuildabilityGrid()
+	{
+		RaTweenBase.StopGroup(_gridHighlightRenderer);
+		_gridHighlightRenderer.TweenColorA(0f, 0.25f)
+			.SetGroup(_gridHighlightRenderer);
+
+		ForEach((pos, element) => element.SetUnitBuildabilityPreview(null));
+	}
 
 	public GameGridElement GetElement(Vector2Int position)
 	{
@@ -90,6 +112,8 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 
 	protected override void OnClearData()
 	{
+		ClearUnitBuildabilityGrid();
+
 		ForEach((position, element) =>
 		{
 			if(element != null)
