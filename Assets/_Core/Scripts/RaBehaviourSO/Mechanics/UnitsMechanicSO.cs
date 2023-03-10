@@ -26,6 +26,12 @@ public class UnitsMechanicSO : GameMechanicSOBase
 
 	public MechanicResponse CanCreateUnit(Unit.CoreData coreData, Vector2Int position)
 	{
+		return CanCreateUnit(coreData, position, out _);
+	}
+
+	public MechanicResponse CanCreateUnit(Unit.CoreData coreData, Vector2Int position, out ElementUnitSpot unitSpot)
+	{
+		unitSpot = default;
 		if(!TryGetDependency(out GridModelSO gridModel))
 		{
 			return MechanicResponse.CreateFailedResponse("No GridModel Found", null);
@@ -36,7 +42,7 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			return MechanicResponse.CreateFailedResponse($"No Element found at {position}", null);
 		}
 
-		if(!element.TryGetElementUnitSpot(coreData.Owner, out var unitSpot))
+		if(!element.TryGetElementUnitSpot(coreData.Owner, out unitSpot))
 		{
 			return MechanicResponse.CreateFailedResponse($"No UnitSpot found for {coreData.Owner} on {element}", null);
 		}
@@ -56,13 +62,13 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			return MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.Config.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
 		}
 
-		return MechanicResponse.CreateSuccessResponse((nameof(unitSpot), unitSpot));
+		return MechanicResponse.CreateSuccessResponse();
 	}
 
 	public MechanicResponse CreateUnit(Unit.CoreData coreData, Vector2Int position)
 	{
-		MechanicResponse response = CanCreateUnit(coreData, position);
-		if(response.IsSuccess && response.Locator.TryGetValue(out ElementUnitSpot unitSpot))
+		MechanicResponse response = CanCreateUnit(coreData, position, out ElementUnitSpot unitSpot);
+		if(response.IsSuccess)
 		{
 			if(coreData.Owner.Wallet.Spend(coreData.Config.Cost, out var notEnoughCurrencyData))
 			{
