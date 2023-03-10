@@ -76,7 +76,7 @@ namespace UI
 		private void OnDragStartedEvent(UnitHUDEntryUIElement view)
 		{
 			view.SetGrabbed(true);
-			_draggingUnitElement.SetData(view.Config, true);
+			_draggingUnitElement.SetData(new DraggingUnitElement.CoreData { Player = Data, UnitConfig = view.Config }, true);
 			_gridModelSO.Grid.ShowUnitBuildabilityGrid(view.Config);
 		}
 
