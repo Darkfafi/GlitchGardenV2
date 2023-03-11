@@ -27,9 +27,9 @@ public class Player : RaMonoDataHolderBase<Player.CoreData>
 		return value;
 	}
 
-	public Vector2 GetOrientation(Vector2 value)
+	public Vector2Int GetOrientation(Vector2Int value)
 	{
-		value.x = GetOrientation(value.x);
+		value.x = (int)GetOrientation(value.x);
 		return value;
 	}
 

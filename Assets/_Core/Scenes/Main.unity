@@ -8455,7 +8455,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5e53fa65f104e7b42aa4250bf1ed2b50, type: 2}
   _awayPlayerModel:
     <Units>k__BackingField:
-    - {fileID: 11400000, guid: 5e53fa65f104e7b42aa4250bf1ed2b50, type: 2}
+    - {fileID: 11400000, guid: e99992f3816c2a44fbb50b16ba9a0689, type: 2}
   _gridData:
     Size: {x: 18, y: 7}
     HomeBuildableColumns: 13
@@ -8781,10 +8781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitsMechanic: {fileID: 11400000, guid: 9079a870995816642987bc243d6f1475, type: 2}
-  _playersModelSO: {fileID: 11400000, guid: b817ece70c8f42b46b1c12daae6d1d77, type: 2}
   _iconRenderer: {fileID: 361294908}
   _trailRenderer: {fileID: 443946810}
-  _playerType: 0
 --- !u!4 &1726081331
 Transform:
   m_ObjectHideFlags: 0

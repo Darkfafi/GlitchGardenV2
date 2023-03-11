@@ -51,7 +51,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _states: []
-  _wrapFSM: 0
+  _wrapFSM: 1
   _autoFillStates: 1
   _goFSMStateEvents:
     SetStateEvent:

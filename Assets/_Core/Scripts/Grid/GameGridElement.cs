@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 {
+	public event Action DirtyEvent;
+
 	public string ID
 	{
 		get; private set;
@@ -66,6 +68,8 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 		AwayUnitSpot = new ElementUnitSpot(this, UnitSpotLocation, Data.AwaySpotData);
 
 		name = ID;
+
+		_previewContainer.SetActive(false);
 	}
 
 	protected override void OnSetDataResolved()
@@ -73,12 +77,14 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 		base.OnSetDataResolved();
 
 		TryGetElementUnitSpot(_playersModelSO.GetPlayer(_playerType), out ElementUnitSpot spot);
-		
-		spot.PreviewChangedEvent += OnPreviewChangedEvent;
-		spot.UnitChangedEvent += OnUnitChangedEvent;
 
-		OnPreviewChangedEvent(HomeUnitSpot);
-		RefreshBuildability();
+		HomeUnitSpot.PreviewChangedEvent += OnPreviewChangedEvent;
+		HomeUnitSpot.UnitChangedEvent += OnUnitChangedEvent;
+
+		AwayUnitSpot.PreviewChangedEvent += OnPreviewChangedEvent;
+		AwayUnitSpot.UnitChangedEvent += OnUnitChangedEvent;
+
+		MarkDirty();
 	}
 
 	protected override void OnClearData()
@@ -95,18 +101,35 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 			AwayUnitSpot = null;
 		}
 
-		OnPreviewChangedEvent(null);
+		_previewContainer.SetActive(false);
+	}
+
+	protected override void OnDispose()
+	{
+		DirtyEvent = null;
 	}
 
 	public void SetUnitBuildabilityPreview(UnitConfig config)
 	{
 		_unitBuildabilityPreview = config;
-		RefreshBuildability();
+		MarkDirty();
+	}
+
+	public bool IsOccupied(out Unit homeUnit, out Unit awayUnit)
+	{
+		homeUnit = HomeUnitSpot.Unit;
+		awayUnit = AwayUnitSpot.Unit;
+		return homeUnit != null || awayUnit != null;
 	}
 
 	public bool TryGetElementUnitSpot(Player player, out ElementUnitSpot elementUnitSpot)
 	{
-		switch(player.PlayerType)
+		return TryGetElementUnitSpot(player.PlayerType, out elementUnitSpot);
+	}
+
+	public bool TryGetElementUnitSpot(Player.Type playerType, out ElementUnitSpot elementUnitSpot)
+	{
+		switch(playerType)
 		{
 			case Player.Type.Home:
 				elementUnitSpot = HomeUnitSpot;
@@ -122,21 +145,24 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 
 	private void OnUnitChangedEvent(ElementUnitSpot spot)
 	{
-		RefreshBuildability();
+		MarkDirty();
 	}
 
 	private void OnPreviewChangedEvent(ElementUnitSpot unitSpot)
 	{
-		if(unitSpot != null && unitSpot.Preview != null)
+		if(TryGetElementUnitSpot(_playerType, out ElementUnitSpot focussedSpot) && focussedSpot == unitSpot)
 		{
-			_previewContainer.SetActive(true);
-			_previewRenderer.sprite = unitSpot.Preview.Icon;
+			if(unitSpot != null && unitSpot.Preview != null)
+			{
+				_previewContainer.SetActive(true);
+				_previewRenderer.sprite = unitSpot.Preview.Icon;
+			}
+			else
+			{
+				_previewContainer.SetActive(false);
+			}
 		}
-		else
-		{
-			_previewContainer.SetActive(false);
-		}
-		RefreshBuildability();
+		MarkDirty();
 	}
 
 	private void RefreshBuildability()
@@ -152,6 +178,12 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 			_notBuildableContainer.SetActive(!isBuildable);
 			_buildableContainer.SetActive(isBuildable);
 		}
+	}
+
+	private void MarkDirty()
+	{
+		RefreshBuildability();
+		DirtyEvent?.Invoke();
 	}
 
 	[Serializable]
