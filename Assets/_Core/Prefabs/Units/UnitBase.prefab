@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b4c930f7b7eac44b3a6da172a6be5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coreEvents:
+  CoreEvents:
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -53,7 +53,7 @@ MonoBehaviour:
   _states: []
   _wrapFSM: 1
   _autoFillStates: 1
-  _goFSMStateEvents:
+  GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d9ca50f85c2804392c0fd7e25c5ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nameMark: ' <---'
+  _nameMark: '| <-'
 --- !u!1 &2740903329943906669
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ce1f90d828bfe4d81366a88af9939e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coreEvents:
+  CoreEvents:
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b4c930f7b7eac44b3a6da172a6be5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coreEvents:
+  CoreEvents:
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -474,7 +474,7 @@ MonoBehaviour:
   _states: []
   _wrapFSM: 0
   _autoFillStates: 1
-  _goFSMStateEvents:
+  GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
         m_Calls: []

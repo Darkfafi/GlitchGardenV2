@@ -7,6 +7,12 @@ public class ChargeState : RaGOStateBase
 	[SerializeField]
 	private float _duration = 1f;
 
+	[SerializeField]
+	private bool _useRange = false;
+
+	[SerializeField]
+	private Vector2 _rangeDuration = Vector2Int.one;
+
 	public UnityEvent ChangedEvent;
 
 	public float Time
@@ -26,6 +32,11 @@ public class ChargeState : RaGOStateBase
 	protected override void OnEnter()
 	{
 		Time = 0f;
+
+		if(_useRange)
+		{
+			_duration = Random.Range(_rangeDuration.x, _rangeDuration.y);
+		}
 	}
 
 	protected void Update()

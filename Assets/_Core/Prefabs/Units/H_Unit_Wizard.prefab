@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77bd5c9379dfd9649b75075ebec14d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coreEvents:
+  CoreEvents:
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls:
@@ -106,6 +106,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   _duration: 1
+  _useRange: 1
+  _rangeDuration: {x: 0.9, y: 1.1}
   ChangedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -367,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1899a0db9a6f04e9cc584b73e4e11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coreEvents:
+  CoreEvents:
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls:
@@ -535,7 +537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 78165462138937359, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
       propertyPath: m_Name
-      value: Unit_Wizard
+      value: H_Unit_Wizard
       objectReference: {fileID: 0}
     - target: {fileID: 78165462496174326, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
       propertyPath: m_Sprite
@@ -601,6 +603,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3511911822384010273, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
 --- !u!4 &1376318713658577281 stripped
@@ -634,21 +640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b4c930f7b7eac44b3a6da172a6be5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8526769892631679719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376318713255336939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0860dafe5dd79f40aef867c6f894159, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 2682051113515410954}
-  _eventChannels:
-  - {fileID: 3767454468155047027}
 --- !u!95 &2682051113515410954
 Animator:
   serializedVersion: 3
@@ -668,3 +659,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8526769892631679719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376318713255336939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0860dafe5dd79f40aef867c6f894159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventChannels:
+  - {fileID: 3767454468155047027}
