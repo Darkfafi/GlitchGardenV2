@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 {
+	public event Action DirtyEvent;
+
 	public delegate void LoopHandler(Vector2Int position, GameGridElement element);
 
 	public CoreData GridData => Data;
@@ -84,7 +86,13 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 
 	protected override void OnSetDataResolved()
 	{
-		ForEach((pos, element) => element.Resolve());
+		ForEach((pos, element) =>
+		{
+			element.Resolve();
+			element.DirtyEvent += MarkDirty;
+		});
+
+		MarkDirty();
 	}
 
 	protected override void OnSetData()
@@ -118,6 +126,7 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 		{
 			if(element != null)
 			{
+				element.DirtyEvent -= MarkDirty;
 				Destroy(element.gameObject);
 			}
 		});
@@ -134,6 +143,11 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 				action(position, element);
 			}
 		}
+	}
+
+	private void MarkDirty()
+	{
+		DirtyEvent?.Invoke();
 	}
 
 	[Serializable]

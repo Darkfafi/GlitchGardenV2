@@ -64,14 +64,14 @@ public class UnitsMechanicSO : GameMechanicSOBase
 			return MechanicResponse.CreateFailedResponse($"No UnitSpot found for {coreData.Owner} on {element}", null);
 		}
 
+		if(element.IsOccupied(out Unit homeUnit, out Unit awayUnit))
+		{
+			return MechanicResponse.CreateFailedResponse($"Element {element} contains Unit. Home Unit: {homeUnit} or Away Unit: {awayUnit}", (nameof(element), element), (nameof(homeUnit), homeUnit), (nameof(awayUnit), awayUnit));
+		}
+
 		if(!unitSpot.SpotData.IsBuildable)
 		{
 			return MechanicResponse.CreateFailedResponse($"UnitSpot {unitSpot} is not Buildable", (nameof(unitSpot), unitSpot));
-		}
-
-		if(unitSpot.Unit != null)
-		{
-			return MechanicResponse.CreateFailedResponse($"UnitSpot {unitSpot} contains Unit {unitSpot.Unit}", (nameof(unitSpot), unitSpot));
 		}
 
 		if(coreData.Config != null)
@@ -143,37 +143,56 @@ public class UnitsMechanicSO : GameMechanicSOBase
 	#endregion
 
 	#region Movement
-	public bool CanMoveUnit(Unit unit, Vector2Int newPosition)
+	public MechanicResponse CanMoveUnit(Unit unit, Vector2Int newPosition)
 	{
 		return CanMoveUnit(unit, newPosition, out _, out _);
 	}
 
-	public bool CanMoveUnit(Unit unit, Vector2Int newPosition, out ElementUnitSpot oldSpot, out ElementUnitSpot newSpot)
+	public MechanicResponse CanMoveUnit(Unit unit, Vector2Int newPosition, out ElementUnitSpot oldSpot, out ElementUnitSpot newSpot)
 	{
-		if(
-			TryGetDependency(out GridModelSO gridModelSO) &&
-			// Has Old & New Element on Grid
-			gridModelSO.Grid.TryGetElement(unit.Position, out GameGridElement oldElement) &&
-			gridModelSO.Grid.TryGetElement(newPosition, out GameGridElement newElement) &&
-			// Can find appropriate Unit Spots on Old & New Element
-			oldElement.TryGetElementUnitSpot(unit.Owner, out oldSpot) &&
-			newElement.TryGetElementUnitSpot(unit.Owner, out newSpot) &&
-			// Has No Unit on new spot
-			newSpot.Unit != null)
-		{
-			return true;
-		}
-
 		oldSpot = default;
 		newSpot = default;
-		return false;
+
+		if(!TryGetDependency(out GridModelSO gridModel))
+		{
+			return MechanicResponse.CreateFailedResponse("No GridModel Found", null);
+		}
+
+		if(!gridModel.Grid.TryGetElement(unit.Position, out GameGridElement oldElement))
+		{
+			return MechanicResponse.CreateFailedResponse($"No Element found at {unit.Position}", null);
+		}
+
+		if(!gridModel.Grid.TryGetElement(newPosition, out GameGridElement element))
+		{
+			return MechanicResponse.CreateFailedResponse($"No Element found at {newPosition}", null);
+		}
+
+		if(!oldElement.TryGetElementUnitSpot(unit.Owner, out oldSpot))
+		{
+			return MechanicResponse.CreateFailedResponse($"No Element found at {newPosition}", null);
+		}
+
+		if(!element.TryGetElementUnitSpot(unit.Owner, out newSpot))
+		{
+			return MechanicResponse.CreateFailedResponse($"No Element found at {newPosition}", null);
+		}
+
+		if(element.IsOccupied(out Unit homeUnit, out Unit awayUnit))
+		{
+			return MechanicResponse.CreateFailedResponse($"Element {element} contains Unit. Home Unit: {homeUnit} or Away Unit: {awayUnit}", (nameof(element), element), (nameof(homeUnit), homeUnit), (nameof(awayUnit), awayUnit));
+		}
+
+		return MechanicResponse.CreateSuccessResponse();
 	}
 
-	public bool MoveUnit(Unit unit, Vector2Int newPosition)
+	public MechanicResponse MoveUnit(Unit unit, Vector2Int newPosition)
 	{
-		if(CanMoveUnit(unit, newPosition,
+		MechanicResponse response = CanMoveUnit(unit, newPosition,
 			out ElementUnitSpot oldSpot,
-			out ElementUnitSpot newSpot))
+			out ElementUnitSpot newSpot);
+
+		if(response.IsSuccess)
 		{
 			unit.SetPosition(newPosition);
 			
@@ -185,9 +204,9 @@ public class UnitsMechanicSO : GameMechanicSOBase
 
 			unit.transform.position = newSpot.GetUnitLocation();
 
-			return true;
+			return MechanicResponse.CreateSuccessResponse((nameof(oldSpot), oldSpot), (nameof(newSpot), newSpot), (nameof(unit), unit));
 		}
-		return false;
+		return response;
 	}
 
 	#endregion

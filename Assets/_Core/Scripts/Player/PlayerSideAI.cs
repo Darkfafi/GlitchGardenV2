@@ -77,8 +77,8 @@ public class PlayerSideAI : RaMonoDataHolderBase<PlayerSide>
 	private void SetNextToSpawn()
 	{
 		int budget = GetBudget();
-		List<UnitConfig> spawnableUnits = Data.Player.Model.Units.GetItems(x => x.Cost.HasAmount(budget));
-		_nextToSpawn = spawnableUnits.Count > 0 ? spawnableUnits[UnityEngine.Random.Range(0, spawnableUnits.Count)] : null;
+		List<UnitConfig> spawnableUnits = Data.Player.Model.Units.GetItems(x => budget >= x.Cost.Amount);
+		_nextToSpawn = spawnableUnits.Count > 0 ? spawnableUnits[Random.Range(0, spawnableUnits.Count)] : null;
 	}
 
 	private int GetBudget()

@@ -40,6 +40,11 @@ namespace UI
 			{
 				RemoveEntry(keys[i]);
 			}
+
+			if(_gridModelSO.Grid != null)
+			{
+				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
+			}
 		}
 
 		private void CreateEntry(UnitConfig item)
@@ -75,6 +80,7 @@ namespace UI
 
 		private void OnDragStartedEvent(UnitHUDEntryUIElement view)
 		{
+			_gridModelSO.Grid.DirtyEvent += OnGridDirtyEvent;
 			view.SetGrabbed(true);
 			_draggingUnitElement.SetData(new DraggingUnitElement.CoreData { Player = Data, UnitConfig = view.Config }, true);
 			_gridModelSO.Grid.ShowUnitBuildabilityGrid(view.Config);
@@ -90,12 +96,21 @@ namespace UI
 
 		private void OnDragEndedEvent(UnitHUDEntryUIElement view)
 		{
+			_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
 			_gridModelSO.Grid.ClearUnitBuildabilityGrid();
 
 			_draggingUnitElement.TryCreateDraggingUnit();
 			_draggingUnitElement.ClearData();
 
 			view.SetGrabbed(false);
+		}
+
+		private void OnGridDirtyEvent()
+		{
+			if(_draggingUnitElement != null)
+			{
+				_draggingUnitElement.RefreshPreviewTarget();
+			}
 		}
 	}
 }
