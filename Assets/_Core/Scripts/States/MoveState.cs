@@ -1,18 +1,15 @@
 using RaFSM;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MoveState : RaGOStateBase<Unit>
 {
 	[Header("Events")]
-	public UnityEvent MoveEvent;
+	public StateSwitcherBase.SwitcherUnityEvent MoveEvent;
 	[Header("Events")]
-	public UnityEvent FailedMoveEvent;
+	public StateSwitcherBase.SwitcherUnityEvent FailedMoveEvent;
 
 	[Header("Dependencies")]
-	[SerializeField]
-	private GridModelSO _gridModelSO = null;
 	[SerializeField]
 	private UnitsMechanicSO _unitMechanicSO = null;
 
@@ -49,13 +46,11 @@ public class MoveState : RaGOStateBase<Unit>
 		
 		while(!_unitMechanicSO.MoveUnit(Dependency, newPos).IsSuccess)
 		{
-			FailedMoveEvent?.Invoke();
+			FailedMoveEvent?.Invoke(this);
 			yield return new WaitForSeconds(1f);
 		}
 		_moveRoutine = null;
 
-		MoveEvent?.Invoke();
+		MoveEvent?.Invoke(this);
 	}
 }
-
-// When I try to move, I can't 

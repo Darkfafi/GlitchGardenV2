@@ -14,11 +14,17 @@ public class StateNameMarker : MonoBehaviour
 
 	public void SetName(RaGOStateBase state)
 	{
-		state.name += _nameMark;
+		if(state != null)
+		{
+			state.name += _nameMark;
+		}
 	}
 
 	public void ClearName(RaGOStateBase state)
 	{
-		state.name = state.name.Replace(_nameMark, "");
+		if(state != null)
+		{
+			state.name = state.name.Replace(_nameMark, "");
+		}
 	}
 }
