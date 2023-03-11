@@ -37,7 +37,7 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 
 		RaGOStateBase[] states = RaGOFiniteStateMachine.GetGOStates(_statesContainer);
 		_fsm = new RaGOFiniteStateMachine(this, states);
-		
+
 		UnitVisuals.SetData(this, false);
 	}
 
@@ -46,16 +46,17 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 		UnitVisuals.ClearData();
 	}
 
+	protected override void OnSetDataResolved()
+	{
+		UnitVisuals.Resolve();
+
+		SetState(State.Spawn);
+	}
+
 	public void SetState(State state)
 	{
 		_fsm.SwitchState((int)state);
 		_statesContainer.name = $"States ({state})";
-	}
-
-	protected override void OnSetDataResolved()
-	{
-		UnitVisuals.Resolve();
-		SetState(State.Spawn);
 	}
 
 	public void SetPosition(Vector2Int position)

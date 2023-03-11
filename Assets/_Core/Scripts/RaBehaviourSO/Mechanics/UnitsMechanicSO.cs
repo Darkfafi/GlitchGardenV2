@@ -186,11 +186,11 @@ public class UnitsMechanicSO : GameMechanicSOBase
 		return MechanicResponse.CreateSuccessResponse();
 	}
 
-	public MechanicResponse MoveUnit(Unit unit, Vector2Int newPosition)
+	public MechanicResponse MoveUnit(Unit unit, Vector2Int newPosition, out ElementUnitSpot newSpot)
 	{
 		MechanicResponse response = CanMoveUnit(unit, newPosition,
 			out ElementUnitSpot oldSpot,
-			out ElementUnitSpot newSpot);
+			out newSpot);
 
 		if(response.IsSuccess)
 		{
@@ -201,8 +201,6 @@ public class UnitsMechanicSO : GameMechanicSOBase
 
 			newSpot.SetPreview(null);
 			newSpot.SetUnit(unit);
-
-			unit.transform.position = newSpot.GetUnitLocation();
 
 			return MechanicResponse.CreateSuccessResponse((nameof(oldSpot), oldSpot), (nameof(newSpot), newSpot), (nameof(unit), unit));
 		}

@@ -167,17 +167,24 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 
 	private void RefreshBuildability()
 	{
-		if(_unitsMechanicSO.IsInitialized)
+		bool isBuildable = false;
+		
+		if(_unitsMechanicSO.IsInitialized && _unitBuildabilityPreview)
 		{
-			bool isBuildable = _unitsMechanicSO.CanCreateUnit(
-				new Unit.CoreData() { 
-					Owner = _playersModelSO.GetPlayer(_playerType), 
-					Config = _unitBuildabilityPreview 
+			isBuildable = _unitsMechanicSO.CanCreateUnit(
+				new Unit.CoreData()
+				{
+					Owner = _playersModelSO.GetPlayer(_playerType),
+					Config = _unitBuildabilityPreview
 				}, Position, includeCost: false).IsSuccess;
-
-			_notBuildableContainer.SetActive(!isBuildable);
-			_buildableContainer.SetActive(isBuildable);
 		}
+		else if(TryGetElementUnitSpot(_playerType, out var unitSpot))
+		{
+			isBuildable = unitSpot.SpotData.IsBuildable;
+		}
+
+		_notBuildableContainer.SetActive(!isBuildable);
+		_buildableContainer.SetActive(isBuildable);
 	}
 
 	private void MarkDirty()
