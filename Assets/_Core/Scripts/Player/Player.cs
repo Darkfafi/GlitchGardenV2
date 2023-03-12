@@ -42,6 +42,24 @@ public class Player : RaMonoDataHolderBase<Player.CoreData>
 		return value;
 	}
 
+	public Type GetOppositePlayerType()
+	{
+		return GetOppositePlayerType(PlayerType);
+	}
+
+	public static Type GetOppositePlayerType(Type type)
+	{
+		switch(type)
+		{
+			case Type.Home:
+				return Type.Away;
+			case Type.Away:
+				return Type.Home;
+			default:
+				return default;
+		}
+	}
+
 	public enum Type
 	{
 		Home, 

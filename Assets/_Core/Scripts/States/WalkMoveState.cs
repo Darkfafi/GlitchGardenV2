@@ -6,10 +6,10 @@ using UnityEngine;
 public class WalkMoveState : RaGOStateBase<Unit>
 {
 	[Header("Events")]
-	public StateSwitcherBase.SwitcherUnityEvent AppliedMoveEvent;
-	public StateSwitcherBase.SwitcherUnityEvent StartedMoveVisualEvent;
-	public StateSwitcherBase.SwitcherUnityEvent CompletedMoveVisualEvent;
-	public StateSwitcherBase.SwitcherUnityEvent FailedMoveEvent;
+	public StateEvent AppliedMoveEvent;
+	public StateEvent StartedMoveVisualEvent;
+	public StateEvent CompletedMoveVisualEvent;
+	public StateEvent FailedMoveEvent;
 
 	[Header("Options")]
 	[SerializeField]

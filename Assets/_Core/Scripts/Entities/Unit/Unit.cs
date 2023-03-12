@@ -53,6 +53,11 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 		SetState(State.Spawn);
 	}
 
+	public bool GetAlignment(Player.Type playerType)
+	{
+		return Owner != null && Owner.PlayerType == playerType;
+	}
+
 	public void SetState(State state)
 	{
 		_fsm.SwitchState((int)state);
