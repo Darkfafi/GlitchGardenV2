@@ -979,14 +979,14 @@ AnimationClip:
   m_Events:
   - time: 0.53333336
     functionName: FireEvent
-    data: ShootState/FireEvent
+    data: AttackEvents/FireEvent
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.0833334
     functionName: FireEvent
-    data: ShootState/EndEvent
+    data: AttackEvents/EndEvent
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

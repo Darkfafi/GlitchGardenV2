@@ -28,4 +28,9 @@ public abstract class StateSwitcherBase : RaMonoDataHolderBase<RaGOStateBase>
 	}
 
 	protected abstract bool CheckCondition(RaGOStateBase state);
+
+	public void FSM_GoToNextState(RaGOStateBase state)
+	{
+		state.GetDependency<IRaFSMState>().GoToNextState();
+	}
 }

@@ -37,7 +37,7 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 
 	public bool HasMaxResourcesEnabled => ResourcesRemaining >= 0;
 
-	public bool HasResourcesRemaining => !HasMaxResourcesEnabled || _amountToGenerate.HasAmount(ResourcesRemaining);
+	public bool HasResourcesRemaining => !HasMaxResourcesEnabled || ResourcesRemaining >= _amountToGenerate.Amount;
 
 	protected override void OnSetData()
 	{
@@ -64,7 +64,11 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 			{
 				Timer = 0f;
 				Data.Earn(_amountToGenerate);
-				ResourcesRemaining = Mathf.Max(ResourcesRemaining - _amountToGenerate.Amount, 0);
+				
+				if(HasMaxResourcesEnabled)
+				{
+					ResourcesRemaining = Mathf.Max(ResourcesRemaining - _amountToGenerate.Amount, 0);
+				}
 			}
 		}
 	}

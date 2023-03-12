@@ -50,6 +50,7 @@ MonoBehaviour:
     ExitStateEvent:
       m_PersistentCalls:
         m_Calls: []
+  _stateEnterNameSuffix: ' [CURRENT]'
   _states: []
   _wrapFSM: 1
   _autoFillStates: 1
@@ -59,19 +60,10 @@ MonoBehaviour:
         m_Calls: []
     SwitchedStateEvent:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4354688198600964374}
-          m_TargetAssemblyTypeName: StateNameMarker, Assembly-CSharp
-          m_MethodName: SetName
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
+    LastStateExitEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &78165461734779492
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +261,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5825863179559668517}
-  - component: {fileID: 4354688198600964374}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -294,19 +285,6 @@ Transform:
   m_Father: {fileID: 78165462138937358}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4354688198600964374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2635614553364382166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0d9ca50f85c2804392c0fd7e25c5ce9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nameMark: '| <-'
 --- !u!1 &2740903329943906669
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +366,7 @@ MonoBehaviour:
     ExitStateEvent:
       m_PersistentCalls:
         m_Calls: []
+  _stateEnterNameSuffix: ' [CURRENT]'
   _searchHierarchyForDependencies: 1
   _gridModelSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
 --- !u!1 &6395675484520977204
@@ -471,6 +450,7 @@ MonoBehaviour:
     ExitStateEvent:
       m_PersistentCalls:
         m_Calls: []
+  _stateEnterNameSuffix: ' [CURRENT]'
   _states: []
   _wrapFSM: 0
   _autoFillStates: 1
@@ -479,5 +459,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     SwitchedStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    LastStateExitEvent:
       m_PersistentCalls:
         m_Calls: []
