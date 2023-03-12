@@ -1,11 +1,11 @@
 using RaDataHolder;
 using RaFSM;
-using UnityEngine.Events;
+using static RaFSM.RaGOStateBase;
 
 public abstract class StateSwitcherBase : RaMonoDataHolderBase<RaGOStateBase>
 {
-	public UnityEvent SwitcherTrueEvent;
-	public UnityEvent SwitcherFalseEvent;
+	public StateEvent SwitcherTrueEvent;
+	public StateEvent SwitcherFalseEvent;
 
 	protected override void OnSetData()
 	{
@@ -19,19 +19,13 @@ public abstract class StateSwitcherBase : RaMonoDataHolderBase<RaGOStateBase>
 	{
 		if(CheckCondition(state))
 		{
-			SwitcherTrueEvent.Invoke();
+			SwitcherTrueEvent.Invoke(state);
 		}
 		else
 		{
-			SwitcherFalseEvent.Invoke();
+			SwitcherFalseEvent.Invoke(state);
 		}
 	}
 
 	protected abstract bool CheckCondition(RaGOStateBase state);
-
-	[System.Serializable]
-	public class SwitcherUnityEvent : UnityEvent<RaGOStateBase>
-	{
-	
-	}
 }

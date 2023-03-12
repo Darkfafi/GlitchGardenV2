@@ -115,6 +115,24 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 		MarkDirty();
 	}
 
+	public bool TryGetUnit(Player.Type playerType, out Unit unit)
+	{
+		if(HomeUnitSpot.Unit != null && HomeUnitSpot.Unit.GetAlignment(playerType))
+		{
+			unit = HomeUnitSpot.Unit;
+			return true;
+		}
+
+		if(AwayUnitSpot.Unit != null && AwayUnitSpot.Unit.GetAlignment(playerType))
+		{
+			unit = AwayUnitSpot.Unit;
+			return true;
+		}
+
+		unit = default;
+		return false;
+	}
+
 	public bool IsOccupied(out Unit homeUnit, out Unit awayUnit)
 	{
 		homeUnit = HomeUnitSpot.Unit;

@@ -17,29 +17,19 @@ public class UnitDetectionSwitcher : StateSwitcherBase
 
 		bool condition = false;
 
-		if(_gridModelSO.Grid.TryGetElement(pos, out GameGridElement targetElement) && 
-			targetElement.IsOccupied(out Unit homeUnit, out Unit awayUnit))
+		if(_gridModelSO.Grid.TryGetElement(pos, out GameGridElement targetElement))
 		{
 			if(_detectionType.HasFlag(UnitOwnerDetectionType.Same))
 			{
-				condition |= homeUnit != null && homeUnit.Owner == unit.Owner;
-				condition |= awayUnit != null && awayUnit.Owner == unit.Owner;
+				condition |= targetElement.TryGetUnit(unit.Owner.PlayerType, out _);
 			}
 
 			if(_detectionType.HasFlag(UnitOwnerDetectionType.Opposite))
 			{
-				condition |= homeUnit != null && homeUnit.Owner != unit.Owner;
-				condition |= awayUnit != null && awayUnit.Owner != unit.Owner;
+				condition |= targetElement.TryGetUnit(unit.Owner.GetOppositePlayerType(), out _);
 			}
 		}
 
 		return condition;
-	}
-
-	[System.Flags]
-	public enum UnitOwnerDetectionType
-	{
-		Same = 1,
-		Opposite = 2
 	}
 }
