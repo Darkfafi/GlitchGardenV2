@@ -17,8 +17,12 @@ public class Projectile : MonoBehaviour
 	[SerializeField]
 	private ProjectileEffectBase _effect = null;
 
+	[SerializeField]
+	private float _destroyAfterUnitsTraveled = 30f;
+
 	private Player _owner = null;
 	private bool _isFired = false;
+	private float _totalDistanceTravelled = 0f;
 
 	public void Fire(Player owner)
 	{
@@ -38,8 +42,15 @@ public class Projectile : MonoBehaviour
 		if(_isFired)
 		{
 			Vector2 pos = _rigidBody.position;
-			pos.x += _owner.GetOrientation(Time.deltaTime * _speed);
+			float distanceToTravel = Time.deltaTime * _speed;
+			pos.x += _owner.GetOrientation(distanceToTravel);
+			_totalDistanceTravelled += distanceToTravel;
 			_rigidBody.MovePosition(pos);
+
+			if(_totalDistanceTravelled >= _destroyAfterUnitsTraveled)
+			{
+				Destroy(gameObject);
+			}
 		}
 	}
 
