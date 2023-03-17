@@ -174,7 +174,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1528319099220368132}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7809476035825883871
 MonoBehaviour:
@@ -595,8 +595,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8173977966358003750}
   - {fileID: 911688198331806892}
+  - {fileID: 8173977966358003750}
   m_Father: {fileID: 5738804772202433827}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -622,8 +622,8 @@ MonoBehaviour:
   CoreEditorOptions:
     CurrentStateSuffix: ' [CURRENT]'
   _states:
-  - {fileID: 9119187529398178986}
   - {fileID: 7809476035825883871}
+  - {fileID: 9119187529398178986}
   _wrapFSM: 1
   _autoFillStates: 1
   GoFSMStateEvents:
@@ -677,7 +677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1528319099220368132}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9119187529398178986
 MonoBehaviour:
@@ -1003,7 +1003,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3248195856468393403, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3511911822384010273, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389155628897954337, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
@@ -1022,7 +1030,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1331860300738828296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30b4c930f7b7eac44b3a6da172a6be5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 67636fb094026094383ebc259b09e87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &5738804772202433827 stripped

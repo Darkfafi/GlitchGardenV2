@@ -240,11 +240,16 @@ public class UnitsMechanicSO : GameMechanicSOBase
 	{
 		if(CanDestroyUnit(unit, out ElementUnitSpot unitSpot))
 		{
-			Destroy(unit);
+			Destroy(unit.gameObject);
 			unitSpot.SetUnit(null);
 			return true;
 		}
 		return false;
+	}
+
+	public void External_DestroyUnit(Unit unit)
+	{
+		DestroyUnit(unit);
 	}
 
 	#endregion
