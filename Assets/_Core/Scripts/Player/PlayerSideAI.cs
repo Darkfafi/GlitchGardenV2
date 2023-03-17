@@ -46,7 +46,7 @@ public class PlayerSideAI : RaMonoDataHolderBase<PlayerSide>
 
 		if(_nextToSpawn != null)
 		{
-			if(!_nextToSpawn.Cost.HasAmount(Data.Player.Wallet.GetAmount(ResourceCurrency)))
+			if(!Data.Player.Wallet.CanSpend(_nextToSpawn.Cost, out _))
 			{
 				return false;
 			}
