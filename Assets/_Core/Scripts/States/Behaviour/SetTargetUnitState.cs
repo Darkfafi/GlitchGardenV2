@@ -44,13 +44,15 @@ public class SetTargetUnitState : RaGOStateBase<Unit, TargetUnitData>
 			if(_gridModelSO.Grid.TryGetElement(targetPos, out GameGridElement targetElement))
 			{
 				if(_detectionType.HasFlag(UnitOwnerDetectionType.Same) && 
-					targetElement.TryGetUnit(DependencyA.Owner.PlayerType, out unitToSet))
+					targetElement.TryGetUnit(DependencyA.Owner.PlayerType, out unitToSet) && 
+					unitToSet.IsActiveUnit)
 				{
 					break;
 				}
 
 				if(_detectionType.HasFlag(UnitOwnerDetectionType.Opposite) && 
-					targetElement.TryGetUnit(DependencyA.Owner.GetOppositePlayerType(), out unitToSet))
+					targetElement.TryGetUnit(DependencyA.Owner.GetOppositePlayerType(), out unitToSet) &&
+					unitToSet.IsActiveUnit)
 				{
 					break;
 				}

@@ -11,6 +11,9 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 	[field: SerializeField]
 	public UnitVisuals UnitVisuals = null;
 
+	[field: SerializeField]
+	public Collider2D Collider = null;
+
 	public CoreData UnitData => Data;
 
 	public Player Owner
@@ -28,7 +31,14 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 		get; private set;
 	}
 
+	public bool IsActiveUnit => Health.HP > 0 && _fsm.CurrentStateIndex == (int)State.Behaviour;
+
 	private RaGOFiniteStateMachine _fsm;
+
+	protected override void OnInitialization()
+	{
+		Collider.enabled = false;
+	}
 
 	protected override void OnSetData()
 	{
@@ -37,19 +47,25 @@ public class Unit : RaMonoDataHolderBase<Unit.CoreData>
 
 		RaGOStateBase[] states = RaGOFiniteStateMachine.GetGOStates(_statesContainer);
 		_fsm = new RaGOFiniteStateMachine(this, states);
-
 		UnitVisuals.SetData(this, false);
 	}
 
 	protected override void OnClearData()
 	{
 		UnitVisuals.ClearData();
+
+		if(_fsm != null)
+		{
+			_fsm.Dispose();
+			_fsm = null;
+		}
+
+		Collider.enabled = false;
 	}
 
 	protected override void OnSetDataResolved()
 	{
 		UnitVisuals.Resolve();
-
 		SetState(State.Spawn);
 	}
 

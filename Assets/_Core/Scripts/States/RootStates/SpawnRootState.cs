@@ -2,7 +2,7 @@ using RaFSM;
 using RaTweening;
 using UnityEngine;
 
-public class SpawnState : RaGOStateBase<Unit>
+public class SpawnRootState : RaGOStateBase<Unit>
 {
 	[SerializeField]
 	private GridModelSO _gridModelSO = null;

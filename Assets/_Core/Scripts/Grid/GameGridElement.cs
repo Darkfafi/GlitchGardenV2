@@ -104,7 +104,7 @@ public class GameGridElement : RaMonoDataHolderBase<GameGridElement.CoreData>
 		_previewContainer.SetActive(false);
 	}
 
-	protected override void OnDispose()
+	protected override void OnDeinitialization()
 	{
 		DirtyEvent = null;
 	}

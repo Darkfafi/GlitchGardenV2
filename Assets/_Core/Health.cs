@@ -2,7 +2,7 @@
 
 public class Health
 {
-	public delegate void HPHandler(Health hp, int delta);
+	public delegate void HPHandler(Health health, int delta);
 	public event HPHandler HealedEvent;
 	public event HPHandler DamagedEvent;
 	public event HPHandler HealthChangedEvent;
@@ -16,6 +16,10 @@ public class Health
 	{
 		get; private set;
 	}
+
+	public bool IsAlive => HP > 0;
+
+	public float NormalizedHealth => MaxHP > 0f ? Mathf.Clamp01((float)HP / MaxHP) : 0f;
 
 	public Health(int amount)
 	{
