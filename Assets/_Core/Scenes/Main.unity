@@ -8453,6 +8453,7 @@ MonoBehaviour:
   _homePlayerModel:
     <Units>k__BackingField:
     - {fileID: 11400000, guid: 5e53fa65f104e7b42aa4250bf1ed2b50, type: 2}
+    - {fileID: 11400000, guid: e99992f3816c2a44fbb50b16ba9a0689, type: 2}
   _awayPlayerModel:
     <Units>k__BackingField:
     - {fileID: 11400000, guid: e99992f3816c2a44fbb50b16ba9a0689, type: 2}
@@ -11309,23 +11310,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1787784678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 10
+    m_Right: 10
+    m_Top: 5
+    m_Bottom: 5
   m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 10, y: 10}
+  m_Constraint: 0
+  m_ConstraintCount: 1
 --- !u!4 &1958020277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6830546824990556897, guid: 8c9ea0d544f9afd409aafcfbcaf1b6ab, type: 3}
