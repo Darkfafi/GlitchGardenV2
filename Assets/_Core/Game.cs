@@ -1,5 +1,6 @@
 ﻿using RaDataHolder;
 using UnityEngine;
+using RaFSM;
 
 public class Game : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class Game : MonoBehaviour
 		get; private set;
 	}
 
+	[SerializeField]
+	private Transform _statesContainer = null;
+
 	[Header("Settings")]
 	[SerializeField]
 	private PlayerModel _homePlayerModel = null;
@@ -46,6 +50,8 @@ public class Game : MonoBehaviour
 	private ModelsSOController _modelsController;
 	[SerializeField]
 	private GameMechanicsSOController _mechanicsController;
+
+	private RaGOFiniteStateMachine _fsm = null;
 
 	protected void Awake()
 	{
@@ -73,10 +79,31 @@ public class Game : MonoBehaviour
 
 		// UI
 		GameUI.SetData(this, true);
+
+		// Finite State Machine
+		_fsm = new RaGOFiniteStateMachine(this, RaGOFiniteStateMachine.GetGOStates(_statesContainer));
+	}
+
+	protected void Start()
+	{
+		// Start
+		_fsm.SwitchState(0);
+	}
+
+	protected void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			_fsm.GoToNextState(false);
+		}
 	}
 
 	protected void OnDestroy()
 	{
+		GameUI.ClearData();
+
+		_fsm.Dispose();
+
 		_mechanicsController.Deinitialize();
 		_modelsController.Deinitialize();
 

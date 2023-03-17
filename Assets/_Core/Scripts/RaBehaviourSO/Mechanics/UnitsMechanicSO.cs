@@ -8,7 +8,7 @@ public class UnitsMechanicSO : GameMechanicSOBase
 
 	protected override void OnSetup()
 	{
-
+		base.OnSetup();
 	}
 
 	protected override void OnStart()
@@ -27,6 +27,11 @@ public class UnitsMechanicSO : GameMechanicSOBase
 
 	public List<Vector2Int> GetCreateUnitPositions(Unit.CoreData coreData, bool includeCost = true)
 	{
+		if(!IsEnabled)
+		{
+			return new List<Vector2Int>();
+		}
+
 		List<Vector2Int> spawns = new List<Vector2Int>();
 		if(TryGetDependency(out GridModelSO gridModel))
 		{
@@ -49,6 +54,12 @@ public class UnitsMechanicSO : GameMechanicSOBase
 	public MechanicResponse CanCreateUnit(Unit.CoreData coreData, Vector2Int position, out ElementUnitSpot unitSpot, bool includeCost = true)
 	{
 		unitSpot = default;
+
+		if(!IsEnabled)
+		{
+			return MechanicResponse.CreateFailedResponse("Mechanic Disabled", null);
+		}
+
 		if(!TryGetDependency(out GridModelSO gridModel))
 		{
 			return MechanicResponse.CreateFailedResponse("No GridModel Found", null);
@@ -153,6 +164,11 @@ public class UnitsMechanicSO : GameMechanicSOBase
 		oldSpot = default;
 		newSpot = default;
 
+		if(!IsEnabled)
+		{
+			return MechanicResponse.CreateFailedResponse("Mechanic Disabled", null);
+		}
+
 		if(!TryGetDependency(out GridModelSO gridModel))
 		{
 			return MechanicResponse.CreateFailedResponse("No GridModel Found", null);
@@ -220,6 +236,7 @@ public class UnitsMechanicSO : GameMechanicSOBase
 	{
 		if
 		(
+			IsEnabled &&
 			TryGetDependency(out GridModelSO gridModelSO) &&
 			// Has Element
 			gridModelSO.Grid.TryGetElement(unit.Position, out GameGridElement element) &&

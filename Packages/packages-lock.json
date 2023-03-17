@@ -78,6 +78,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "rasofiagames.raflagstracker": {
+      "version": "file:RaFlagsTracker_UnityPackage",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "rasofiagames.rafsm": {
       "version": "file:RaFSM_UnityPackage",
       "depth": 0,

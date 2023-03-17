@@ -1,4 +1,6 @@
-﻿public class GameMechanicsSOController : BehavioursSOControllerBase<GameMechanicSOBase>
+﻿using UnityEngine;
+
+public class GameMechanicsSOController : BehavioursSOControllerBase<GameMechanicSOBase>
 {
 	protected override void OnInit(GameMechanicSOBase behaviourSO)
 	{

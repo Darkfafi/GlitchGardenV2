@@ -1,11 +1,11 @@
-﻿using RaDataHolder;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using RaTweening;
 
 namespace UI
 {
-	public class UnitsHUD : RaMonoDataHolderBase<Player>
+	public class UnitsHUD : UsableViewBase<Player>
 	{
 		[Header("Display Requirements")]
 		[SerializeField]
@@ -14,7 +14,10 @@ namespace UI
 		private UnitHUDEntryUIElement _entryPrefab = null;
 
 		[SerializeField]
-		private RectTransform _container = null;
+		private RectTransform _content = null;
+
+		[SerializeField]
+		private RectTransform _optionsContainer = null;
 
 		[Header("Feature Requirements")]
 		[SerializeField]
@@ -22,7 +25,14 @@ namespace UI
 
 		private Dictionary<UnitConfig, UnitHUDEntryUIElement> _unitHUDEntryMap = new Dictionary<UnitConfig, UnitHUDEntryUIElement>();
 
-		protected override void OnSetData()
+		protected override void OnInitialization()
+		{
+			base.OnInitialization();
+			_content.gameObject.SetActive(false);
+			_content.anchoredPosition = Vector2.down * _content.rect.height;
+		}
+
+		protected override void OnStartUsing()
 		{
 			_draggingUnitElement.Setup();
 
@@ -31,20 +41,31 @@ namespace UI
 				var unitConfig = Data.Model.Units[i];
 				CreateEntry(unitConfig);
 			}
+
+			_content.TweenAnchorPosY(0f, 1.5f)
+				.SetEasing(RaEasingType.OutBack)
+				.OnStart(() => { _content.gameObject.SetActive(true); });
 		}
 
-		protected override void OnClearData()
+		protected override void OnStopUsing()
 		{
-			UnitConfig[] keys = _unitHUDEntryMap.Keys.ToArray();
-			for(int i = keys.Length - 1; i >= 0; i--)
-			{
-				RemoveEntry(keys[i]);
-			}
+			_content.TweenAnchorPosY(-_content.rect.height, 1f)
+				.SetEasing(RaEasingType.InBack)
+				.OnEnd(() => 
+				{
+					UnitConfig[] keys = _unitHUDEntryMap.Keys.ToArray();
+					for(int i = keys.Length - 1; i >= 0; i--)
+					{
+						RemoveEntry(keys[i]);
+					}
 
-			if(_gridModelSO.Grid != null)
-			{
-				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
-			}
+					if(_gridModelSO.Grid != null)
+					{
+						_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
+					}
+
+					_content.gameObject.SetActive(false);
+				});
 		}
 
 		private void CreateEntry(UnitConfig item)
@@ -54,7 +75,7 @@ namespace UI
 				return;
 			}
 
-			UnitHUDEntryUIElement itemView = Instantiate(_entryPrefab, _container);
+			UnitHUDEntryUIElement itemView = Instantiate(_entryPrefab, _optionsContainer);
 
 			_unitHUDEntryMap[item] = itemView;
 
@@ -75,41 +96,56 @@ namespace UI
 				itemView.DraggingEvent -= OnDraggingEvent;
 				itemView.DragEndedEvent -= OnDragEndedEvent;
 				itemView.ClearData();
+
+				Destroy(itemView.gameObject);
+				_unitHUDEntryMap.Remove(item);
 			}
 		}
 
 		private void OnDragStartedEvent(UnitHUDEntryUIElement view)
 		{
-			_gridModelSO.Grid.DirtyEvent += OnGridDirtyEvent;
-			view.SetGrabbed(true);
-			_draggingUnitElement.SetData(new DraggingUnitElement.CoreData { Player = Data, UnitConfig = view.Config }, true);
-			_gridModelSO.Grid.ShowUnitBuildabilityGrid(view.Config);
+			if(IsInUse)
+			{
+				_gridModelSO.Grid.DirtyEvent += OnGridDirtyEvent;
+				view.SetGrabbed(true);
+				_draggingUnitElement.SetData(new DraggingUnitElement.CoreData { Player = Data, UnitConfig = view.Config }, true);
+				_gridModelSO.Grid.ShowUnitBuildabilityGrid(view.Config);
+			}
 		}
 
 		private void OnDraggingEvent(UnitHUDEntryUIElement view)
 		{
-			Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			newPos.z = _draggingUnitElement.transform.position.z;
-			_draggingUnitElement.transform.position = newPos;
-			_draggingUnitElement.RefreshPreviewTarget();
+			if(IsInUse)
+			{
+				Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				newPos.z = _draggingUnitElement.transform.position.z;
+				_draggingUnitElement.transform.position = newPos;
+				_draggingUnitElement.RefreshPreviewTarget();
+			}
 		}
 
 		private void OnDragEndedEvent(UnitHUDEntryUIElement view)
 		{
-			_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
-			_gridModelSO.Grid.ClearUnitBuildabilityGrid();
+			if(IsInUse)
+			{
+				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
+				_gridModelSO.Grid.ClearUnitBuildabilityGrid();
 
-			_draggingUnitElement.TryCreateDraggingUnit();
-			_draggingUnitElement.ClearData();
+				_draggingUnitElement.TryCreateDraggingUnit();
+				_draggingUnitElement.ClearData();
 
-			view.SetGrabbed(false);
+				view.SetGrabbed(false);
+			}
 		}
 
 		private void OnGridDirtyEvent()
 		{
-			if(_draggingUnitElement != null)
+			if(IsInUse)
 			{
-				_draggingUnitElement.RefreshPreviewTarget();
+				if(_draggingUnitElement != null)
+				{
+					_draggingUnitElement.RefreshPreviewTarget();
+				}
 			}
 		}
 	}

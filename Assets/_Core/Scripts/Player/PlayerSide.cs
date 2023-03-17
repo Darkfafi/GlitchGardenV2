@@ -1,6 +1,7 @@
 ﻿using RaDataHolder;
 using UnityEngine;
 using static Player;
+using RaFlags;
 
 public class PlayerSide : RaMonoDataHolderBase<PlayerModel>
 {
@@ -22,8 +23,15 @@ public class PlayerSide : RaMonoDataHolderBase<PlayerModel>
 		get; private set;
 	}
 
+	public RaFlagsTracker InGameFlags
+	{
+		get; private set;
+	}
+
 	protected override void OnSetData()
 	{
+		InGameFlags = new RaFlagsTracker();
+
 		Player.SetData(new CoreData() { PlayerModel = Data, Type = SideType }, false);
 		ResourceGenerator.SetData(Player.Wallet, false);
 	}
@@ -38,5 +46,8 @@ public class PlayerSide : RaMonoDataHolderBase<PlayerModel>
 	{
 		ResourceGenerator.ClearData();
 		Player.ClearData();
+
+		InGameFlags.Dispose();
+		InGameFlags = null;
 	}
 }
