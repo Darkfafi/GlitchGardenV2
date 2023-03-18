@@ -112,6 +112,19 @@ public class Game : MonoBehaviour, IRaFSMState
 		gameBoard.ResolveAll();
 	}
 
+	public PlayerSide GetPlayerSide(Player.Type playerType)
+	{
+		switch(playerType)
+		{
+			case Player.Type.Home:
+				return HomePlayerSide;
+			case Player.Type.Away:
+				return AwayPlayerSide;
+		}
+		return default;
+
+	}
+
 	public void GoToNextState()
 	{
 		if(_fsm != null)

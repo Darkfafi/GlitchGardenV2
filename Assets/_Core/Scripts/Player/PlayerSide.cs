@@ -1,7 +1,8 @@
-﻿using RaDataHolder;
+﻿using RaCollection;
+using RaDataHolder;
+using RaFlags;
 using UnityEngine;
 using static Player;
-using RaFlags;
 
 public class PlayerSide : RaMonoDataHolderBase<PlayerModel>
 {
@@ -23,6 +24,11 @@ public class PlayerSide : RaMonoDataHolderBase<PlayerModel>
 		get; private set;
 	}
 
+	public Health Health
+	{
+		get; private set;
+	}
+
 	public RaFlagsTracker InGameFlags
 	{
 		get; private set;
@@ -34,6 +40,15 @@ public class PlayerSide : RaMonoDataHolderBase<PlayerModel>
 
 		Player.SetData(new CoreData() { PlayerModel = Data, Type = SideType }, false);
 		ResourceGenerator.SetData(Player.Wallet, false);
+
+		if(Player.Model.HP > 0)
+		{
+			Health = new Health(Player.Model.HP);
+		}
+		else
+		{
+			Health = null;
+		}
 	}
 
 	protected override void OnSetDataResolved()
@@ -47,7 +62,18 @@ public class PlayerSide : RaMonoDataHolderBase<PlayerModel>
 		ResourceGenerator.ClearData();
 		Player.ClearData();
 
-		InGameFlags.Dispose();
-		InGameFlags = null;
+		if(InGameFlags != null)
+		{
+			InGameFlags.Dispose();
+			InGameFlags = null;
+		}
+
+		Health = null;
+	}
+
+	public bool HasResourcesForUnits()
+	{
+		int budget = ResourceGenerator.GetBudget();
+		return Player.Model.Units.GetItems(x => budget >= x.Cost.Amount).Count > 0;
 	}
 }

@@ -45,12 +45,18 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 		ResourcesRemaining = _maxResounceAmount;
 	}
 
-	protected override void OnSetDataResolved()
+	protected override void OnClearData()
 	{
+		_isRunning = false;
+	}
+
+	public void Run()
+	{
+		Timer = 0f;
 		_isRunning = true;
 	}
 
-	protected override void OnClearData()
+	public void Stop()
 	{
 		_isRunning = false;
 	}
@@ -71,5 +77,21 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 				}
 			}
 		}
+	}
+
+	public int GetBudget()
+	{
+		int budget = Data.GetAmount(AmountToGenerate.Currency);
+
+		if(HasMaxResourcesEnabled)
+		{
+			budget += ResourcesRemaining;
+		}
+		else
+		{
+			budget = int.MaxValue;
+		}
+
+		return budget;
 	}
 }

@@ -1,13 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
+using RaCollection;
 
 [CreateAssetMenu(menuName = "Behaviours/Mechanics/UnitsMechanicSO")]
 public class UnitsMechanicSO : GameMechanicSOBase
 {
+	private RaCollection<Unit> _units;
+
+	public IReadOnlyRaCollection<Unit> Units => _units;
+
 	#region Core
 
 	protected override void OnSetup()
 	{
+		_units = new RaCollection<Unit>();
 		base.OnSetup();
 	}
 
@@ -139,7 +145,10 @@ public class UnitsMechanicSO : GameMechanicSOBase
 					unitSpot.SetPreview(null);
 					unitSpot.SetUnit(unit);
 				}
+
+				_units.Add(unit);
 				unit.Resolve();
+				
 				response = MechanicResponse.CreateSuccessResponse((nameof(unitSpot), unitSpot), (nameof(unit), unit)); 
 			}
 			else
@@ -257,6 +266,7 @@ public class UnitsMechanicSO : GameMechanicSOBase
 	{
 		if(CanDestroyUnit(unit, out ElementUnitSpot unitSpot))
 		{
+			_units.Remove(unit);
 			Destroy(unit.gameObject);
 			unitSpot.SetUnit(null);
 			return true;

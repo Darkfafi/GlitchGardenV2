@@ -1,5 +1,6 @@
 using RaCollection;
 using RaDataHolder;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class PlayerSideAI : RaMonoDataHolderBase<PlayerSide>
 
 	public CurrencyConfig ResourceCurrency => Data.ResourceGenerator.AmountToGenerate.Currency;
 	private UnitConfig _nextToSpawn = null;
+	private Coroutine _routine = null;
 
 	protected override void OnSetData()
 	{
@@ -18,82 +20,63 @@ public class PlayerSideAI : RaMonoDataHolderBase<PlayerSide>
 
 	protected override void OnSetDataResolved()
 	{
-		Data.Player.Wallet.ValueChangedEvent += OnWalletValueChangedEvent;
-		TrySpawnNextUnit();
+		_routine = StartCoroutine(SpawnRoutine());
 	}
 
 	protected override void OnClearData()
 	{
-		Data.Player.Wallet.ValueChangedEvent -= OnWalletValueChangedEvent;
+		if(_routine != null)
+		{
+			StopCoroutine(_routine);
+			_routine = null;
+		}
 	}
 
-	private void OnWalletValueChangedEvent(CurrencyConfig currency, int newValue, int oldValue)
+	private IEnumerator SpawnRoutine()
 	{
-		if(currency != ResourceCurrency)
+		while(HasData)
 		{
-			return;
-		}
+			yield return new WaitForSeconds(1f);
 
-		TrySpawnNextUnit();
-	}
-
-	private bool TrySpawnNextUnit()
-	{
-		if(_nextToSpawn == null)
-		{
-			SetNextToSpawn();
-		}
-
-		if(_nextToSpawn != null)
-		{
-			if(!Data.Player.Wallet.CanSpend(_nextToSpawn.Cost, out _))
+			if(_nextToSpawn == null)
 			{
-				return false;
+				SetNextToSpawn();
 			}
 
-			Unit.CoreData data = new Unit.CoreData() { Owner = Data.Player, Config = _nextToSpawn };
-			var spawns = _unitsMechanicSO.GetCreateUnitPositions(data);
-
-			if(spawns.Count > 0)
+			if(_nextToSpawn != null)
 			{
-				UnitConfig unitToSpawn = _nextToSpawn;
-				_nextToSpawn = null;
+				if(!Data.Player.Wallet.CanSpend(_nextToSpawn.Cost, out _))
+				{
+					continue;
+				}
 
-				if(_unitsMechanicSO.CreateUnit(data, spawns[Random.Range(0, spawns.Count)]).IsSuccess)
+				Unit.CoreData data = new Unit.CoreData() { Owner = Data.Player, Config = _nextToSpawn };
+				var spawns = _unitsMechanicSO.GetCreateUnitPositions(data);
+
+				if(spawns.Count > 0)
 				{
-					SetNextToSpawn();
-					return true;
-				}
-				else
-				{
-					_nextToSpawn = unitToSpawn;
-				}
-			};
+					UnitConfig unitToSpawn = _nextToSpawn;
+					_nextToSpawn = null;
+
+					if(_unitsMechanicSO.CreateUnit(data, spawns[Random.Range(0, spawns.Count)]).IsSuccess)
+					{
+						_nextToSpawn = null;
+						yield return new WaitForSeconds(1f);
+					}
+					else
+					{
+						_nextToSpawn = unitToSpawn;
+					}
+				};
+			}
 		}
-
-		return false;
+		_routine = null;
 	}
 
 	private void SetNextToSpawn()
 	{
-		int budget = GetBudget();
+		int budget = Data.ResourceGenerator.GetBudget();
 		List<UnitConfig> spawnableUnits = Data.Player.Model.Units.GetItems(x => budget >= x.Cost.Amount);
 		_nextToSpawn = spawnableUnits.Count > 0 ? spawnableUnits[Random.Range(0, spawnableUnits.Count)] : null;
-	}
-
-	private int GetBudget()
-	{
-		int budget = Data.Player.Wallet.GetAmount(Data.ResourceGenerator.AmountToGenerate.Currency);
-
-		if(Data.ResourceGenerator.HasMaxResourcesEnabled)
-		{
-			budget += Data.ResourceGenerator.ResourcesRemaining;
-		}
-		else
-		{
-			budget = int.MaxValue;
-		}
-
-		return budget;
 	}
 }

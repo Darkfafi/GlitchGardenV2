@@ -1,7 +1,8 @@
 using RaFlags;
 using RaFSM;
-using UnityEngine;
 using UI;
+using UnityEngine;
+using RaCollection;
 
 public class GameplayState : RaGOFSMState<Game>
 {
@@ -12,7 +13,18 @@ public class GameplayState : RaGOFSMState<Game>
 	}
 
 	[SerializeField]
+	private InGameConditionBase[] _ingameConditions = null;
+
+	[SerializeField]
 	private GameplayUIGroup _gameplayUIGroup = null;
+
+#if UNITY_EDITOR
+	protected override void OnValidate()
+	{
+		base.OnValidate();
+		_ingameConditions = transform.GetComponentsInChildren<InGameConditionBase>();
+	}
+#endif
 
 	protected override void OnPreSwitch()
 	{
@@ -27,17 +39,40 @@ public class GameplayState : RaGOFSMState<Game>
 	protected override void OnEnter()
 	{
 		base.OnEnter();
+
+		// Run Generators
+		Dependency.HomePlayerSide.ResourceGenerator.Run();
+		Dependency.AwayPlayerSide.ResourceGenerator.Run();
+
+		// Run InGameFlag Condtions
+		_ingameConditions.ForEach((item, index) => { item.SetData(Dependency); });
+
+		// Listen to InGameFlags changed
 		Dependency.HomePlayerSide.InGameFlags.IsEmptyChangedEvent += OnHomeInGameFlagsStateChangedEvent;
 		Dependency.AwayPlayerSide.InGameFlags.IsEmptyChangedEvent += OnAwayInGameFlagsStateChangedEvent;
+
+		// Run Check
+		OnHomeInGameFlagsStateChangedEvent(Dependency.HomePlayerSide.InGameFlags.IsEmpty(), Dependency.HomePlayerSide.InGameFlags);
+		OnAwayInGameFlagsStateChangedEvent(Dependency.AwayPlayerSide.InGameFlags.IsEmpty(), Dependency.AwayPlayerSide.InGameFlags);
 	}
 
 	protected override void OnExit(bool isSwitch)
 	{
-		Dependency.HomePlayerSide.InGameFlags.IsEmptyChangedEvent -= OnHomeInGameFlagsStateChangedEvent;
 		Dependency.AwayPlayerSide.InGameFlags.IsEmptyChangedEvent -= OnAwayInGameFlagsStateChangedEvent;
+		Dependency.HomePlayerSide.InGameFlags.IsEmptyChangedEvent -= OnHomeInGameFlagsStateChangedEvent;
 
-		_gameplayUIGroup.Users.Unregister(this);
+		_ingameConditions.ForEachReverse((item, index) => { item.ClearData(); });
+
+		Dependency.AwayPlayerSide.ResourceGenerator.Stop();
+		Dependency.HomePlayerSide.ResourceGenerator.Stop();
+
+		if(_gameplayUIGroup.Users != null)
+		{
+			_gameplayUIGroup.Users.Unregister(this);
+		}
+
 		UnitsMechanicSO.IsEnabledFlags.Unregister(this);
+		
 		base.OnExit(isSwitch);
 	}
 
@@ -46,6 +81,7 @@ public class GameplayState : RaGOFSMState<Game>
 		if(isEmpty)
 		{
 			// Lost
+			Debug.Log("Lost!");
 		}
 	}
 
@@ -54,6 +90,7 @@ public class GameplayState : RaGOFSMState<Game>
 		if(isEmpty)
 		{
 			// Won
+			Debug.Log("Won!");
 		}
 	}
 }
