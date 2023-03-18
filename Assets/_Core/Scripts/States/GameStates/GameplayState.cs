@@ -1,11 +1,14 @@
+using RaCollection;
 using RaFlags;
 using RaFSM;
 using UI;
 using UnityEngine;
-using RaCollection;
 
 public class GameplayState : RaGOFSMState<Game>
 {
+	public StateEvent WinEvent;
+	public StateEvent LoseEvent;
+
 	[field: SerializeField]
 	public UnitsMechanicSO UnitsMechanicSO
 	{
@@ -28,7 +31,7 @@ public class GameplayState : RaGOFSMState<Game>
 
 	protected override void OnPreSwitch()
 	{
-		// About to Enter, Register itself as user of various features / elements
+		// About to Enter, Register itself as user
 		if(!IsCurrentState)
 		{
 			UnitsMechanicSO.IsEnabledFlags.Register(this);
@@ -81,7 +84,7 @@ public class GameplayState : RaGOFSMState<Game>
 		if(isEmpty)
 		{
 			// Lost
-			Debug.Log("Lost!");
+			LoseEvent.Invoke(this);
 		}
 	}
 
@@ -90,7 +93,7 @@ public class GameplayState : RaGOFSMState<Game>
 		if(isEmpty)
 		{
 			// Won
-			Debug.Log("Won!");
+			WinEvent.Invoke(this);
 		}
 	}
 }

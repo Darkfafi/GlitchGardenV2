@@ -35,7 +35,7 @@ public class Game : MonoBehaviour, IRaFSMState
 	}
 
 	[SerializeField]
-	private Transform _statesContainer = null;
+	private RaGOFSMState _gameFSM = null;
 
 	[Header("Settings")]
 	[SerializeField]
@@ -81,7 +81,7 @@ public class Game : MonoBehaviour, IRaFSMState
 		GameUI.SetData(this, true);
 
 		// Finite State Machine
-		_fsm = new RaGOFiniteStateMachine(this, RaGOFiniteStateMachine.GetGOStates(_statesContainer));
+		_fsm = new RaGOFiniteStateMachine(this, new RaGOStateBase[] { _gameFSM });
 	}
 
 	protected void Start()

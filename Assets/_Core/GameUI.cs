@@ -10,6 +10,18 @@ public class GameUI : RaMonoDataHolderBase<Game>
 		get; private set;
 	}
 
+	[field: SerializeField]
+	public GenericUIGroup WinUIGroup
+	{
+		get; private set;
+	}
+
+	[field: SerializeField]
+	public GenericUIGroup LoseUIGroup
+	{
+		get; private set;
+	}
+
 	protected override void OnSetData()
 	{
 		GameplayUIGroup.UnitsHUD.SetData(Data.HomePlayerSide.Player, false);
