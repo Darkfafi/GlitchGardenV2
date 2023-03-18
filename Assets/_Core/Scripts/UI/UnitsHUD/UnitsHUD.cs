@@ -1,38 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using RaDataHolder;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using RaTweening;
 
 namespace UI
 {
-	public class UnitsHUD : UsableViewBase<Player>
+	public class UnitsHUD : RaMonoDataHolderBase<Player>
 	{
-		[Header("Display Requirements")]
+		[Header("Models")]
 		[SerializeField]
 		private GridModelSO _gridModelSO = null;
+
+		[Header("Requirements")]
 		[SerializeField]
 		private UnitHUDEntryUIElement _entryPrefab = null;
-
 		[SerializeField]
 		private RectTransform _content = null;
-
 		[SerializeField]
 		private RectTransform _optionsContainer = null;
 
-		[Header("Feature Requirements")]
+		[Header("External")]
 		[SerializeField]
 		private DraggingUnitElement _draggingUnitElement;
 
 		private Dictionary<UnitConfig, UnitHUDEntryUIElement> _unitHUDEntryMap = new Dictionary<UnitConfig, UnitHUDEntryUIElement>();
 
-		protected override void OnInitialization()
-		{
-			base.OnInitialization();
-			_content.gameObject.SetActive(false);
-			_content.anchoredPosition = Vector2.down * _content.rect.height;
-		}
-
-		protected override void OnStartUsing()
+		protected override void OnSetData()
 		{
 			_draggingUnitElement.Setup();
 
@@ -41,31 +34,20 @@ namespace UI
 				var unitConfig = Data.Model.Units[i];
 				CreateEntry(unitConfig);
 			}
-
-			_content.TweenAnchorPosY(0f, 1.5f)
-				.SetEasing(RaEasingType.OutBack)
-				.OnStart(() => { _content.gameObject.SetActive(true); });
 		}
 
-		protected override void OnStopUsing()
+		protected override void OnClearData()
 		{
-			_content.TweenAnchorPosY(-_content.rect.height, 1f)
-				.SetEasing(RaEasingType.InBack)
-				.OnEnd(() => 
-				{
-					UnitConfig[] keys = _unitHUDEntryMap.Keys.ToArray();
-					for(int i = keys.Length - 1; i >= 0; i--)
-					{
-						RemoveEntry(keys[i]);
-					}
+			UnitConfig[] keys = _unitHUDEntryMap.Keys.ToArray();
+			for(int i = keys.Length - 1; i >= 0; i--)
+			{
+				RemoveEntry(keys[i]);
+			}
 
-					if(_gridModelSO.Grid != null)
-					{
-						_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
-					}
-
-					_content.gameObject.SetActive(false);
-				});
+			if(_gridModelSO.Grid != null)
+			{
+				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
+			}
 		}
 
 		private void CreateEntry(UnitConfig item)
@@ -104,7 +86,7 @@ namespace UI
 
 		private void OnDragStartedEvent(UnitHUDEntryUIElement view)
 		{
-			if(IsInUse)
+			if(HasData)
 			{
 				_gridModelSO.Grid.DirtyEvent += OnGridDirtyEvent;
 				view.SetGrabbed(true);
@@ -115,7 +97,7 @@ namespace UI
 
 		private void OnDraggingEvent(UnitHUDEntryUIElement view)
 		{
-			if(IsInUse)
+			if(HasData)
 			{
 				Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				newPos.z = _draggingUnitElement.transform.position.z;
@@ -126,7 +108,7 @@ namespace UI
 
 		private void OnDragEndedEvent(UnitHUDEntryUIElement view)
 		{
-			if(IsInUse)
+			if(HasData)
 			{
 				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
 				_gridModelSO.Grid.ClearUnitBuildabilityGrid();
@@ -140,7 +122,7 @@ namespace UI
 
 		private void OnGridDirtyEvent()
 		{
-			if(IsInUse)
+			if(HasData)
 			{
 				if(_draggingUnitElement != null)
 				{

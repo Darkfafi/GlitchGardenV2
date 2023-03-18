@@ -5,50 +5,26 @@ using UnityEngine;
 public class GameUI : RaMonoDataHolderBase<Game>
 {
 	[field: SerializeField]
-	public UnitsHUD UnitsHUD
-	{
-		get; private set;
-	}
-
-	[field: SerializeField]
-	public WalletCurrencyUIElement ResourcesHUD
+	public GameplayUIGroup GameplayUIGroup
 	{
 		get; private set;
 	}
 
 	protected override void OnSetData()
 	{
-		UnitsHUD.SetData(Data.HomePlayerSide.Player, false);
-		ResourcesHUD.SetData(Data.HomePlayerSide.Player.Wallet, false);
+		GameplayUIGroup.UnitsHUD.SetData(Data.HomePlayerSide.Player, false);
+		GameplayUIGroup.ResourcesHUD.SetData(Data.HomePlayerSide.Player.Wallet, false);
 	}
 
 	protected override void OnClearData()
 	{
-		ResourcesHUD.ClearData();
-		UnitsHUD.ClearData();
+		GameplayUIGroup.ResourcesHUD.ClearData();
+		GameplayUIGroup.UnitsHUD.ClearData();
 	}
 
 	protected override void OnSetDataResolved()
 	{
-		UnitsHUD.Resolve();
-		ResourcesHUD.Resolve();
+		GameplayUIGroup.UnitsHUD.Resolve();
+		GameplayUIGroup.ResourcesHUD.Resolve();
 	}
 }
-
-// Home Player
-/*
- * Has Resources to pay for units
- * Gains Resources over time
- * Can place units from its list on the Buildable Tiles assigned to him
- * Has assigned column to protect from enemy units
- */
-
-// Away Player
-/*
- * Has Resources to pay for units
- * Gains Resources over time
- * Can place units from its list on the Buildable Tiles assigned to him
-	* Will place units on first row, except for spiders and cacti
- * Wishes to push enemy units to assined row of Home Player
- * IDEA for future: Units have a home & away behaviour depending on their owner  
- */
