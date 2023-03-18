@@ -22,6 +22,20 @@ public abstract class UsableElementBase : MonoBehaviour
 	protected abstract void OnUseStarted();
 	protected abstract void OnUseEnded();
 
+	public void RegisterUser(object user, out bool switchedToInUse)
+	{
+		bool isEmpty = Users.IsEmpty();
+		Users.Register(user);
+		switchedToInUse = isEmpty != Users.IsEmpty();
+	}
+
+	public void UnregisterUser(object user, out bool switchedToUnused)
+	{
+		bool isEmpty = Users.IsEmpty();
+		Users.Unregister(user);
+		switchedToUnused = isEmpty != Users.IsEmpty();
+	}
+
 	private void OnChangedInUse(bool isEmpty, RaFlagsTracker tracker)
 	{
 		if(isEmpty)

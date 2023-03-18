@@ -2,7 +2,7 @@
 using UnityEngine;
 using RaFSM;
 
-public class Game : MonoBehaviour
+public class Game : MonoBehaviour, IRaFSMState
 {
 	[field: SerializeField]
 	public GameUI GameUI
@@ -90,14 +90,6 @@ public class Game : MonoBehaviour
 		_fsm.SwitchState(0);
 	}
 
-	protected void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			_fsm.GoToNextState(false);
-		}
-	}
-
 	protected void OnDestroy()
 	{
 		GameUI.ClearData();
@@ -119,22 +111,12 @@ public class Game : MonoBehaviour
 
 		gameBoard.ResolveAll();
 	}
+
+	public void GoToNextState()
+	{
+		if(_fsm != null)
+		{
+			_fsm.GoToNextState(false);
+		}
+	}
 }
-
-// Home Player
-/*
- * Has Resources to pay for units
- * Gains Resources over time
- * Can place units from its list on the Buildable Tiles assigned to him
- * Has assigned column to protect from enemy units
- */
-
-// Away Player
-/*
- * Has Resources to pay for units
- * Gains Resources over time
- * Can place units from its list on the Buildable Tiles assigned to him
-	* Will place units on first row, except for spiders and cacti
- * Wishes to push enemy units to assined row of Home Player
- * IDEA for future: Units have a home & away behaviour depending on their owner  
- */

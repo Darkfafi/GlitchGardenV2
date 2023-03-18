@@ -15,8 +15,6 @@ namespace UI
 		[SerializeField]
 		private UnitHUDEntryUIElement _entryPrefab = null;
 		[SerializeField]
-		private RectTransform _content = null;
-		[SerializeField]
 		private RectTransform _optionsContainer = null;
 
 		[Header("External")]

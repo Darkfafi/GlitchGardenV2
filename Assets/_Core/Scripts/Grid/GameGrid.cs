@@ -20,6 +20,8 @@ public class GameGrid : RaMonoDataHolderBase<GameGrid.CoreData>
 
 	private Dictionary<Vector2Int, GameGridElement> _elements = new Dictionary<Vector2Int, GameGridElement>();
 
+	public SpriteRenderer GridHighlightRenderer => _gridHighlightRenderer;
+
 	public void ShowUnitBuildabilityGrid(UnitConfig config)
 	{
 		RaTweenBase.StopGroup(_gridHighlightRenderer);
