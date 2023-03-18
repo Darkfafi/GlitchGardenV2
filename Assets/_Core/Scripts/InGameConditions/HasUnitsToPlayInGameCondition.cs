@@ -1,24 +1,33 @@
-﻿public class HasUnitsToPlayInGameCondition : InGameConditionBase
+﻿using System.Collections;
+using UnityEngine;
+
+public class HasUnitsToPlayInGameCondition : InGameConditionBase
 {
+	private Coroutine _checkRoutine = null;
+
 	protected override void OnStartRunning()
 	{
-		PlayerSide.Player.Wallet.ValueChangedEvent += OnWalletValueChangedEvent;
+		_checkRoutine = StartCoroutine(CheckConditionRoutine());
 	}
 
 	protected override void OnStopRunning()
 	{
-		PlayerSide.Player.Wallet.ValueChangedEvent -= OnWalletValueChangedEvent;
+		if(_checkRoutine != null)
+		{
+			StopCoroutine(_checkRoutine);
+			_checkRoutine = null;
+		}
 	}
 
 	protected override bool CheckCondition() => PlayerSide.HasResourcesForUnits();
 
-	private void OnWalletValueChangedEvent(CurrencyConfig currency, int newValue, int oldValue)
+	private IEnumerator CheckConditionRoutine()
 	{
-		if(PlayerSide.ResourceGenerator.AmountToGenerate.Currency != currency)
+		while(HasData)
 		{
-			return;
+			SetInGame(CheckCondition());
+			yield return new WaitForSeconds(1f);
 		}
-
-		SetInGame(CheckCondition());
+		_checkRoutine = null;
 	}
 }

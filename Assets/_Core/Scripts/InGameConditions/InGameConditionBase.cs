@@ -14,11 +14,11 @@ public abstract class InGameConditionBase : RaMonoDataHolderBase<Game>
 
 	protected override void OnSetData()
 	{
-		OnStartRunning();
 	}
 
 	protected override void OnSetDataResolved()
 	{
+		OnStartRunning();
 		SetInGame(CheckCondition());
 	}
 
