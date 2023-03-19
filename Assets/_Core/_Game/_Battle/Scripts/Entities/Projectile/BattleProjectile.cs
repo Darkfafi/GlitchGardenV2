@@ -39,12 +39,12 @@ namespace Game.Battle
 			_orientationContainer.localScale = owner.GetOrientation(_orientationContainer.localScale);
 		}
 
-		protected void Update()
+		protected void FixedUpdate()
 		{
 			if(_isFired)
 			{
 				Vector2 pos = _rigidBody.position;
-				float distanceToTravel = Time.deltaTime * _speed;
+				float distanceToTravel = Time.fixedDeltaTime * _speed;
 				pos.x += _owner.GetOrientation(distanceToTravel);
 				_totalDistanceTravelled += distanceToTravel;
 				_rigidBody.MovePosition(pos);
