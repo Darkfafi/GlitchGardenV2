@@ -37,7 +37,7 @@ namespace Game.Battle
 			if(!IsCurrentState)
 			{
 				UnitsMechanicSO.IsEnabledFlags.Register(this);
-				_gameplayUIGroup.Users.Register(this);
+				_gameplayUIGroup.RegisterUser(this);
 			}
 		}
 
@@ -71,10 +71,7 @@ namespace Game.Battle
 			Dependency.AwayPlayerSide.ResourceGenerator.Stop();
 			Dependency.HomePlayerSide.ResourceGenerator.Stop();
 
-			if(_gameplayUIGroup.Users != null)
-			{
-				_gameplayUIGroup.Users.Unregister(this);
-			}
+			_gameplayUIGroup.UnregisterUser(this);
 
 			UnitsMechanicSO.IsEnabledFlags.Unregister(this);
 

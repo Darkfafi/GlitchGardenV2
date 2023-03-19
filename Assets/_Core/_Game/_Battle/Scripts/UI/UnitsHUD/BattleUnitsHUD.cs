@@ -23,6 +23,23 @@ namespace Game.Battle.UI
 
 		private Dictionary<UnitConfig, BattleUnitHUDEntryUIElement> _unitHUDEntryMap = new Dictionary<UnitConfig, BattleUnitHUDEntryUIElement>();
 
+		private BattleUnitHUDEntryUIElement _currentDraggingHUDEntry = null;
+
+		public bool IsInteractable
+		{
+			get; private set;
+		}
+
+		public void SetInteractable(bool isInteractable)
+		{
+			IsInteractable = isInteractable && HasData;
+
+			if(!isInteractable)
+			{
+				ReleaseDraggingUnit(false);
+			}
+		}
+
 		protected override void OnSetData()
 		{
 			_draggingUnitElement.Setup();
@@ -46,6 +63,8 @@ namespace Game.Battle.UI
 			{
 				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
 			}
+
+			SetInteractable(false);
 		}
 
 		private void CreateEntry(UnitConfig item)
@@ -84,8 +103,14 @@ namespace Game.Battle.UI
 
 		private void OnDragStartedEvent(BattleUnitHUDEntryUIElement view)
 		{
-			if(HasData)
+			if(_currentDraggingHUDEntry != null)
 			{
+				return;
+			}
+
+			if(IsInteractable)
+			{
+				_currentDraggingHUDEntry = view;
 				_gridModelSO.Grid.DirtyEvent += OnGridDirtyEvent;
 				view.SetGrabbed(true);
 				_draggingUnitElement.SetData(new DraggingBattleUnitElement.CoreData { Player = Data, UnitConfig = view.Config }, true);
@@ -95,7 +120,12 @@ namespace Game.Battle.UI
 
 		private void OnDraggingEvent(BattleUnitHUDEntryUIElement view)
 		{
-			if(HasData)
+			if(view != _currentDraggingHUDEntry)
+			{
+				return;
+			}
+
+			if(IsInteractable)
 			{
 				Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				newPos.z = _draggingUnitElement.transform.position.z;
@@ -106,15 +136,33 @@ namespace Game.Battle.UI
 
 		private void OnDragEndedEvent(BattleUnitHUDEntryUIElement view)
 		{
-			if(HasData)
+			if(view != _currentDraggingHUDEntry)
+			{
+				return;
+			}
+
+			if(IsInteractable)
+			{
+				ReleaseDraggingUnit(true);
+			}
+		}
+
+		private void ReleaseDraggingUnit(bool placeUnit)
+		{
+			if(_currentDraggingHUDEntry != null)
 			{
 				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
 				_gridModelSO.Grid.ClearUnitBuildabilityGrid();
 
-				_draggingUnitElement.TryCreateDraggingUnit();
+				if(placeUnit)
+				{
+					_draggingUnitElement.TryCreateDraggingUnit();
+				}
+
 				_draggingUnitElement.ClearData();
 
-				view.SetGrabbed(false);
+				_currentDraggingHUDEntry.SetGrabbed(false);
+				_currentDraggingHUDEntry = null;
 			}
 		}
 

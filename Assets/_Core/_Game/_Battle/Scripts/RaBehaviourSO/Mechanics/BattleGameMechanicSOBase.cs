@@ -1,11 +1,14 @@
 using RaBehaviourSO;
 using UnityEngine;
 using RaFlags;
+using System;
 
 namespace Game.Battle
 {
 	public abstract class BattleGameMechanicSOBase : RaBehaviourSOBase
 	{
+		public event Action<bool> EnabledStateChangedEvent;
+
 		public RaFlagsTracker IsEnabledFlags
 		{
 			get; private set;
@@ -15,7 +18,7 @@ namespace Game.Battle
 
 		protected override void OnSetup()
 		{
-			IsEnabledFlags = new RaFlagsTracker();
+			IsEnabledFlags = new RaFlagsTracker(OnEnabledStateChanged);
 		}
 
 		protected override void OnDispose()
@@ -39,6 +42,11 @@ namespace Game.Battle
 			}
 			message = default;
 			return true;
+		}
+
+		private void OnEnabledStateChanged(bool isEmpty, RaFlagsTracker tracker)
+		{
+			EnabledStateChangedEvent?.Invoke(IsEnabled);
 		}
 	}
 }

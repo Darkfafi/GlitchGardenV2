@@ -1,7 +1,7 @@
-﻿using RaDataHolder;
-using Game.Battle.UI;
-using UnityEngine;
+﻿using Game.Battle.UI;
+using RaDataHolder;
 using UI;
+using UnityEngine;
 
 namespace Game.Battle
 {
@@ -27,20 +27,17 @@ namespace Game.Battle
 
 		protected override void OnSetData()
 		{
-			GameplayUIGroup.UnitsHUD.SetData(Data.HomePlayerSide.Player, false);
-			GameplayUIGroup.ResourcesHUD.SetData(Data.HomePlayerSide.Player.Wallet, false);
+			GameplayUIGroup.SetData(Data.HomePlayerSide.Player);
 		}
 
 		protected override void OnClearData()
 		{
-			GameplayUIGroup.ResourcesHUD.ClearData();
-			GameplayUIGroup.UnitsHUD.ClearData();
+			GameplayUIGroup.ClearData();
 		}
 
 		protected override void OnSetDataResolved()
 		{
-			GameplayUIGroup.UnitsHUD.Resolve();
-			GameplayUIGroup.ResourcesHUD.Resolve();
+			GameplayUIGroup.ResolveData();
 		}
 	}
 }

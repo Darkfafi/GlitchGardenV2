@@ -14,7 +14,7 @@ namespace Game.Battle
 			// About to Enter, Register itself as user
 			if(!IsCurrentState)
 			{
-				Dependency.GameUI.LoseUIGroup.Users.Register(this);
+				Dependency.GameUI.LoseUIGroup.RegisterUser(this);
 			}
 		}
 
@@ -25,7 +25,7 @@ namespace Game.Battle
 
 		protected override void OnExit(bool isSwitch)
 		{
-			Dependency.GameUI.LoseUIGroup.Users.Unregister(this);
+			Dependency.GameUI.LoseUIGroup.UnregisterUser(this);
 		}
 
 		protected override void OnDeinit()
