@@ -1,6 +1,7 @@
 ﻿using RaDataHolder;
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Battle
 {
@@ -54,9 +55,12 @@ namespace Game.Battle
 		[SerializeField]
 		private BattlePlayer.Type _playerType = BattlePlayer.Type.Home;
 		[SerializeField]
-		private BattlePlayerSidesModelSO _playersModelSO = null;
-		[SerializeField]
 		private BattleUnitsMechanicSO _unitsMechanicSO = null;
+
+		[Header("References")]
+		[SerializeField]
+		[FormerlySerializedAs("_playersModelSO")]
+		private BattlePlayerSidesReferenceSO _playersReferenceSO = null;
 
 		private UnitConfig _unitBuildabilityPreview = null;
 
@@ -78,7 +82,7 @@ namespace Game.Battle
 		{
 			base.OnSetDataResolved();
 
-			TryGetElementUnitSpot(_playersModelSO.GetPlayer(_playerType), out ElementBattleUnitSpot spot);
+			TryGetElementUnitSpot(_playersReferenceSO.GetPlayer(_playerType), out ElementBattleUnitSpot spot);
 
 			HomeUnitSpot.PreviewChangedEvent += OnPreviewChangedEvent;
 			HomeUnitSpot.UnitChangedEvent += OnUnitChangedEvent;
@@ -194,7 +198,7 @@ namespace Game.Battle
 				isBuildable = _unitsMechanicSO.CanCreateUnit(
 					new BattleUnit.CoreData()
 					{
-						Owner = _playersModelSO.GetPlayer(_playerType),
+						Owner = _playersReferenceSO.GetPlayer(_playerType),
 						Config = _unitBuildabilityPreview
 					}, Position, includeCost: false).IsSuccess;
 			}

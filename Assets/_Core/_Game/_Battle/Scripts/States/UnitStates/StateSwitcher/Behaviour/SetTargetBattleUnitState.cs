@@ -1,5 +1,6 @@
 ﻿using RaFSM;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Battle
 {
@@ -14,8 +15,10 @@ namespace Game.Battle
 		[SerializeField]
 		private BattleUnitOwnerDetectionType _detectionType = BattleUnitOwnerDetectionType.Opposite;
 
+		[Header("References")]
 		[SerializeField]
-		private BattleGridModelSO _gridModelSO = null;
+		[FormerlySerializedAs("_gridModelSO")]
+		private BattleGridReferenceSO _gridReferenceSO = null;
 
 		protected override void OnInit()
 		{
@@ -43,7 +46,7 @@ namespace Game.Battle
 			for(int i = 1; i <= _range; i++)
 			{
 				Vector2Int targetPos = DependencyA.Position + DependencyA.Owner.GetOrientation(Vector2Int.right * i);
-				if(_gridModelSO.Grid.TryGetElement(targetPos, out GameGridElement targetElement))
+				if(_gridReferenceSO.Grid.TryGetElement(targetPos, out GameGridElement targetElement))
 				{
 					if(_detectionType.HasFlag(BattleUnitOwnerDetectionType.Same) &&
 						targetElement.TryGetUnit(DependencyA.Owner.PlayerType, out unitToSet) &&

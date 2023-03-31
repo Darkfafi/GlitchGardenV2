@@ -49,7 +49,7 @@ namespace Game.Battle
 
 		[Header("Controllers")]
 		[SerializeField]
-		private BattleGameModelsSOController _modelsController;
+		private BattleGameReferenceSOController _referencesController;
 		[SerializeField]
 		private BattleGameMechanicsSOController _mechanicsController;
 
@@ -71,7 +71,7 @@ namespace Game.Battle
 			};
 
 			// Model Accessor
-			_modelsController.Initialize();
+			_referencesController.Initialize();
 
 			// Mechanics
 			_mechanicsController.Initialize();
@@ -99,7 +99,7 @@ namespace Game.Battle
 			_fsm.Dispose();
 
 			_mechanicsController.Deinitialize();
-			_modelsController.Deinitialize();
+			_referencesController.Deinitialize();
 
 			IRaDataClearResolver[] gameBoard = new IRaDataClearResolver[]
 			{

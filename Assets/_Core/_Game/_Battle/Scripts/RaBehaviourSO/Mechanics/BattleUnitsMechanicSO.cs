@@ -41,9 +41,9 @@ namespace Game.Battle
 			}
 
 			List<Vector2Int> spawns = new List<Vector2Int>();
-			if(TryGetDependency(out BattleGridModelSO gridModel))
+			if(TryGetDependency(out BattleGridReferenceSO gridReference))
 			{
-				gridModel.Grid.ForEach((pos, element) =>
+				gridReference.Grid.ForEach((pos, element) =>
 				{
 					if(CanCreateUnit(coreData, pos, includeCost).IsSuccess)
 					{
@@ -68,12 +68,12 @@ namespace Game.Battle
 				return MechanicResponse.CreateFailedResponse("Mechanic Disabled", null);
 			}
 
-			if(!TryGetDependency(out BattleGridModelSO gridModel))
+			if(!TryGetDependency(out BattleGridReferenceSO gridReference))
 			{
-				return MechanicResponse.CreateFailedResponse("No GridModel Found", null);
+				return MechanicResponse.CreateFailedResponse("No Grid Reference Found", null);
 			}
 
-			if(!gridModel.Grid.TryGetElement(position, out GameGridElement element))
+			if(!gridReference.Grid.TryGetElement(position, out GameGridElement element))
 			{
 				return MechanicResponse.CreateFailedResponse($"No Element found at {position}", null);
 			}
@@ -115,7 +115,7 @@ namespace Game.Battle
 							}
 							break;
 						case BattlePlayer.Type.Away:
-							if(position.x != gridModel.Grid.GridData.Size.x - 1)
+							if(position.x != gridReference.Grid.GridData.Size.x - 1)
 							{
 								valid = false;
 							}
@@ -180,17 +180,17 @@ namespace Game.Battle
 				return MechanicResponse.CreateFailedResponse("Mechanic Disabled", null);
 			}
 
-			if(!TryGetDependency(out BattleGridModelSO gridModel))
+			if(!TryGetDependency(out BattleGridReferenceSO gridReference))
 			{
-				return MechanicResponse.CreateFailedResponse("No GridModel Found", null);
+				return MechanicResponse.CreateFailedResponse("No Grid Reference Found", null);
 			}
 
-			if(!gridModel.Grid.TryGetElement(unit.Position, out GameGridElement oldElement))
+			if(!gridReference.Grid.TryGetElement(unit.Position, out GameGridElement oldElement))
 			{
 				return MechanicResponse.CreateFailedResponse($"No Element found at {unit.Position}", null);
 			}
 
-			if(!gridModel.Grid.TryGetElement(newPosition, out GameGridElement element))
+			if(!gridReference.Grid.TryGetElement(newPosition, out GameGridElement element))
 			{
 				return MechanicResponse.CreateFailedResponse($"No Element found at {newPosition}", null);
 			}
@@ -252,12 +252,12 @@ namespace Game.Battle
 				return MechanicResponse.CreateFailedResponse("Mechanic Disabled", null);
 			}
 
-			if(!TryGetDependency(out BattleGridModelSO gridModel))
+			if(!TryGetDependency(out BattleGridReferenceSO gridReference))
 			{
-				return MechanicResponse.CreateFailedResponse("No GridModel Found", null);
+				return MechanicResponse.CreateFailedResponse("No Grid Reference Found", null);
 			}
 
-			if(!gridModel.Grid.TryGetElement(unit.Position, out GameGridElement element))
+			if(!gridReference.Grid.TryGetElement(unit.Position, out GameGridElement element))
 			{
 				return MechanicResponse.CreateFailedResponse($"No Element found at {unit.Position}", null);
 			}

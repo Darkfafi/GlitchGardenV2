@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Battle.UI
 {
 	public class BattleUnitsHUD : RaMonoDataHolderBase<BattlePlayer>
 	{
-		[Header("Models")]
+		[Header("References")]
 		[SerializeField]
-		private BattleGridModelSO _gridModelSO = null;
+		[FormerlySerializedAs("_gridModelSO")]
+		private BattleGridReferenceSO _gridReferenceSO = null;
 
 		[Header("Requirements")]
 		[SerializeField]
@@ -59,9 +61,9 @@ namespace Game.Battle.UI
 				RemoveEntry(keys[i]);
 			}
 
-			if(_gridModelSO.Grid != null)
+			if(_gridReferenceSO.Grid != null)
 			{
-				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
+				_gridReferenceSO.Grid.DirtyEvent -= OnGridDirtyEvent;
 			}
 
 			SetInteractable(false);
@@ -111,10 +113,10 @@ namespace Game.Battle.UI
 			if(IsInteractable)
 			{
 				_currentDraggingHUDEntry = view;
-				_gridModelSO.Grid.DirtyEvent += OnGridDirtyEvent;
+				_gridReferenceSO.Grid.DirtyEvent += OnGridDirtyEvent;
 				view.SetGrabbed(true);
 				_draggingUnitElement.SetData(new DraggingBattleUnitElement.CoreData { Player = Data, UnitConfig = view.Config }, true);
-				_gridModelSO.Grid.ShowUnitBuildabilityGrid(view.Config);
+				_gridReferenceSO.Grid.ShowUnitBuildabilityGrid(view.Config);
 			}
 		}
 
@@ -151,8 +153,8 @@ namespace Game.Battle.UI
 		{
 			if(_currentDraggingHUDEntry != null)
 			{
-				_gridModelSO.Grid.DirtyEvent -= OnGridDirtyEvent;
-				_gridModelSO.Grid.ClearUnitBuildabilityGrid();
+				_gridReferenceSO.Grid.DirtyEvent -= OnGridDirtyEvent;
+				_gridReferenceSO.Grid.ClearUnitBuildabilityGrid();
 
 				if(placeUnit)
 				{

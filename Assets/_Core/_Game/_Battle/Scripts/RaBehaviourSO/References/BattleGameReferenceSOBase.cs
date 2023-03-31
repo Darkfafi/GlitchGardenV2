@@ -3,7 +3,7 @@ using RaBehaviourSO;
 namespace Game.Battle
 {
 
-	public abstract class BattleGameModelSOBase : RaBehaviourSOBase
+	public abstract class BattleGameReferenceSOBase : RaBehaviourSOBase
 	{
 		protected BattleGame Game
 		{

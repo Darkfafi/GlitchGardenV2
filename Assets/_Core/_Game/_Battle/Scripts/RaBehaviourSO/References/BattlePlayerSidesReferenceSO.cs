@@ -2,8 +2,8 @@
 
 namespace Game.Battle
 {
-	[CreateAssetMenu(menuName = "Behaviours/Models/BattlePlayerSidesModelSO")]
-	public class BattlePlayerSidesModelSO : BattleGameModelSOBase
+	[CreateAssetMenu(menuName = "Behaviours/References/BattlePlayerSidesReferenceSO")]
+	public class BattlePlayerSidesReferenceSO : BattleGameReferenceSOBase
 	{
 		public BattlePlayerSide HomePlayerSide
 		{

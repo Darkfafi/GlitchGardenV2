@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 619611551}
   - component: {fileID: 619611552}
   m_Layer: 0
-  m_Name: ModelsSOController
+  m_Name: ReferencesSOController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -727,13 +727,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 619611550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e565302d83698fb4280ed0f1156705ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 606024321b6b3b740a51361cf0cbd5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _behaviours:
   - {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
   - {fileID: 11400000, guid: b817ece70c8f42b46b1c12daae6d1d77, type: 2}
-  _initializationType: 2
+  _initializationType: 0
   _game: {fileID: 1499551650}
 --- !u!1001 &621858693
 PrefabInstance:
@@ -8695,7 +8695,7 @@ MonoBehaviour:
     Size: {x: 18, y: 7}
     HomeBuildableColumns: 13
     AwayBuildableColumns: 13
-  _modelsController: {fileID: 619611552}
+  _referencesController: {fileID: 619611552}
   _mechanicsController: {fileID: 1583485010}
 --- !u!4 &1499551651
 Transform:

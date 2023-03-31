@@ -32,9 +32,9 @@ namespace Game.Battle
 
 		protected override bool CheckDependency(ScriptableObject dependency, out string message)
 		{
-			if(dependency is BattleGameModelSOBase modelSO)
+			if(dependency is BattleGameReferenceSOBase referenceSO)
 			{
-				if(!modelSO.HasSetData)
+				if(!referenceSO.HasSetData)
 				{
 					message = "Data not set!";
 					return false;

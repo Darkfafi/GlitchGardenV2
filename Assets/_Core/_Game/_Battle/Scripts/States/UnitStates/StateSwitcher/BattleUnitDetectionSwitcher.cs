@@ -1,12 +1,15 @@
 ﻿using RaFSM;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Battle
 {
 	public class BattleUnitDetectionSwitcher : StateSwitcherBase
 	{
+		[Header("References")]
 		[SerializeField]
-		private BattleGridModelSO _gridModelSO = null;
+		[FormerlySerializedAs("_gridModelSO")]
+		private BattleGridReferenceSO _gridReferenceSO = null;
 
 		[SerializeField]
 		private BattleUnitOwnerDetectionType _detectionType = BattleUnitOwnerDetectionType.Opposite;
@@ -19,7 +22,7 @@ namespace Game.Battle
 
 			bool condition = false;
 
-			if(_gridModelSO.Grid.TryGetElement(pos, out GameGridElement targetElement))
+			if(_gridReferenceSO.Grid.TryGetElement(pos, out GameGridElement targetElement))
 			{
 				if(_detectionType.HasFlag(BattleUnitOwnerDetectionType.Same))
 				{

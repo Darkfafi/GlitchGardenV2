@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46844d11a6f112b479dcbd0d176cc5e7, type: 3}
-  m_Name: BattlePlayersModelSO
+  m_Script: {fileID: 11500000, guid: bc802457708c1d042ae1e4fe35ec96ca, type: 3}
+  m_Name: BattlePlayersReferenceSO
   m_EditorClassIdentifier: 
   _dependencies: []

@@ -3,8 +3,8 @@
 namespace Game.Battle
 {
 
-	[CreateAssetMenu(menuName = "Behaviours/Models/BattleGridModelSO")]
-	public class BattleGridModelSO : BattleGameModelSOBase
+	[CreateAssetMenu(menuName = "Behaviours/References/BattleGridReferenceSO")]
+	public class BattleGridReferenceSO : BattleGameReferenceSOBase
 	{
 		public BattleGameGrid Grid
 		{
