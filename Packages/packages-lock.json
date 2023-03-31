@@ -66,11 +66,10 @@
       "url": "http://34.83.210.29:4873"
     },
     "rasofiagames.racollection": {
-      "version": "1.2.0",
+      "version": "file:RaCollection_UnityPackage",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "http://34.83.210.29:4873"
+      "source": "embedded",
+      "dependencies": {}
     },
     "rasofiagames.radataholder": {
       "version": "file:RaDataHolder_UnityPackage",

@@ -14,7 +14,7 @@ namespace Game.Battle
 		{
 			_unitsMechanicSO.Units.AddedItemEvent += OnUnitAddedEvent;
 			_unitsMechanicSO.Units.RemovedItemEvent += OnUnitRemovedEvent;
-			_unitsMechanicSO.Units.ForEachReadOnly((item, index) => OnUnitAddedEvent(item, index, null));
+			_unitsMechanicSO.Units.ForEachReadOnly((item, index) => OnUnitAddedEvent(item, index));
 		}
 
 		protected override void OnStopRunning()
@@ -26,7 +26,7 @@ namespace Game.Battle
 
 		protected override bool CheckCondition() => _unitsCounter > 0;
 
-		private void OnUnitAddedEvent(BattleUnit item, int index, RaCollection<BattleUnit> source)
+		private void OnUnitAddedEvent(BattleUnit item, int index)
 		{
 			if(item.Owner.PlayerType == PlayerSideType)
 			{
@@ -35,7 +35,7 @@ namespace Game.Battle
 			}
 		}
 
-		private void OnUnitRemovedEvent(BattleUnit item, int index, RaCollection<BattleUnit> source)
+		private void OnUnitRemovedEvent(BattleUnit item, int index)
 		{
 			if(item.Owner.PlayerType == PlayerSideType)
 			{

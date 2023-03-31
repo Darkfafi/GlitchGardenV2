@@ -8686,6 +8686,7 @@ MonoBehaviour:
     <HP>k__BackingField: 3
     <Units>k__BackingField:
     - {fileID: 11400000, guid: 5e53fa65f104e7b42aa4250bf1ed2b50, type: 2}
+    - {fileID: 11400000, guid: e99992f3816c2a44fbb50b16ba9a0689, type: 2}
   _awayPlayerModel:
     <HP>k__BackingField: 0
     <Units>k__BackingField:
