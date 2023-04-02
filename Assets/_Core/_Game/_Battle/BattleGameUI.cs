@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Battle
 {
-	public class BattleGameUI : RaMonoDataHolderBase<BattleGame>
+	public class BattleGameUI : RaMonoDataHolderBase<BattleGameSceneRoot>
 	{
 		[field: SerializeField]
 		public BattleGameplayUIGroup GameplayUIGroup

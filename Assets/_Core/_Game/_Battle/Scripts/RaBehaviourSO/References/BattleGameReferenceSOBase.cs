@@ -5,7 +5,7 @@ namespace Game.Battle
 
 	public abstract class BattleGameReferenceSOBase : RaBehaviourSOBase
 	{
-		protected BattleGame Game
+		protected BattleGameSceneRoot Game
 		{
 			get; private set;
 		}
@@ -15,7 +15,7 @@ namespace Game.Battle
 			get; private set;
 		}
 
-		public void SetData(BattleGame game)
+		public void SetData(BattleGameSceneRoot game)
 		{
 			if(IsInitialized)
 			{

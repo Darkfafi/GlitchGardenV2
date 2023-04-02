@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 9122212959950882805}
   _wrapFSM: 0
   _autoFillStates: 1
+  _excludeDisabledStates: 1
   GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
@@ -166,7 +167,7 @@ MonoBehaviour:
         m_CallState: 2
   _range: 1
   _detectionType: 2
-  _gridModelSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
+  _gridReferenceSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
 --- !u!1 &810950721507560221
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +223,7 @@ MonoBehaviour:
   _duration: 1
   _useRange: 0
   _rangeDuration: {x: 1, y: 1}
-  ChangedEvent:
+  ChargedEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6046657153156091794}
@@ -296,6 +297,7 @@ MonoBehaviour:
   - {fileID: 6175981833796081303}
   _wrapFSM: 0
   _autoFillStates: 1
+  _excludeDisabledStates: 1
   GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
@@ -373,7 +375,7 @@ MonoBehaviour:
   _duration: 0
   _useRange: 1
   _rangeDuration: {x: 0.5, y: 1}
-  ChangedEvent:
+  ChargedEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8895813464280379270}
@@ -447,6 +449,7 @@ MonoBehaviour:
   - {fileID: 6032633643457226628}
   _wrapFSM: 0
   _autoFillStates: 1
+  _excludeDisabledStates: 1
   GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
@@ -807,7 +810,7 @@ MonoBehaviour:
   _duration: 0
   _useRange: 1
   _rangeDuration: {x: 0.2, y: 2}
-  ChangedEvent:
+  ChargedEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 153218993919340062}

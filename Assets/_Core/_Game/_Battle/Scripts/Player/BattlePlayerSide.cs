@@ -43,9 +43,9 @@ namespace Game.Battle
 			Player.SetData(new CoreData() { PlayerModel = Data, Type = SideType }, false);
 			ResourceGenerator.SetData(Player.Wallet, false);
 
-			if(Player.Model.HP > 0)
+			if(Player.Model.Config.HP > 0)
 			{
-				Health = new Health(Player.Model.HP);
+				Health = new Health(Player.Model.Config.HP);
 			}
 			else
 			{
@@ -76,7 +76,7 @@ namespace Game.Battle
 		public bool HasResourcesForUnits()
 		{
 			int budget = ResourceGenerator.GetBudget();
-			return Player.Model.Units.GetItems(x => budget >= x.BattleUnitConfigData.Cost.Amount).Count > 0;
+			return Player.Units.GetItems(x => budget >= x.BattleUnitConfigData.Cost.Amount).Count > 0;
 		}
 	}
 }

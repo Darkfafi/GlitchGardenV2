@@ -1,21 +1,23 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 
 namespace Game
 {
-	[Serializable]
-	public class PlayerModel
+
+	public class PlayerModel : IDisposable
 	{
-		[field: SerializeField]
-		public int HP
+		public PlayerConfig Config
 		{
 			get; private set;
 		}
 
-		[field: SerializeField]
-		public UnitConfig[] Units
+		public PlayerModel(PlayerConfig config)
 		{
-			get; private set;
+			Config = config;
+		}
+
+		public void Dispose()
+		{
+			Config = null;
 		}
 	}
 }

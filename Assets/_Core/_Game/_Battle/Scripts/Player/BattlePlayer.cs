@@ -8,19 +8,41 @@ namespace Game.Battle
 		public Type PlayerType => Data.Type;
 		public PlayerModel Model => Data.PlayerModel;
 
+		public UnitConfig[] Units => Model.Config.Units;
+
 		public Wallet Wallet
+		{
+			get; private set;
+		}
+
+		public Health Health
 		{
 			get; private set;
 		}
 
 		protected override void OnSetData()
 		{
+			if(Model.Config.HP > 0)
+			{
+				Health = new Health(Model.Config.HP);
+			}
+			else
+			{
+				Health = null;
+			}
+
 			Wallet = new Wallet();
 		}
 
 		protected override void OnClearData()
 		{
 			Wallet.Clear();
+
+			if(Health != null)
+			{
+				Health.Dispose();
+				Health = null;
+			}
 		}
 
 		public Vector3 GetOrientation(Vector3 value)

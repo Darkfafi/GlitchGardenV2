@@ -4,8 +4,8 @@ using static RaFSM.RaGOStateBase;
 
 public abstract class StateSwitcherBase : RaMonoDataHolderBase<RaGOStateBase>
 {
-	public StateEvent SwitcherTrueEvent;
-	public StateEvent SwitcherFalseEvent;
+	public RaGOStateEvent SwitcherTrueEvent;
+	public RaGOStateEvent SwitcherFalseEvent;
 
 	protected override void OnSetData()
 	{
@@ -31,6 +31,6 @@ public abstract class StateSwitcherBase : RaMonoDataHolderBase<RaGOStateBase>
 
 	public void FSM_GoToNextState(RaGOStateBase state)
 	{
-		state.GetDependency<IRaFSMState>().GoToNextState();
+		state.GetDependency<IRaFSMCycler>().GoToNextState();
 	}
 }

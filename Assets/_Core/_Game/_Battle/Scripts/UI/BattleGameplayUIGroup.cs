@@ -17,10 +17,17 @@ namespace Game.Battle.UI
 			get; private set;
 		}
 
+		[field: SerializeField]
+		public HealthIconsDisplay PlayerHealthHUD
+		{
+			get; private set;
+		}
+
 		public void SetData(BattlePlayer player)
 		{
 			UnitsHUD.SetData(player, false);
 			ResourcesHUD.SetData(player.Wallet, false);
+			PlayerHealthHUD.SetData(player.Health);
 		}
 
 		public void ResolveData()

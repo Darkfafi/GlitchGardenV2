@@ -1,10 +1,11 @@
 ﻿using RaDataHolder;
 using UnityEngine;
 using RaFSM;
+using RaModelsSO;
 
 namespace Game.Battle
 {
-	public class BattleGame : MonoBehaviour, IRaFSMState
+	public class BattleGameSceneRoot : MonoBehaviour, IRaFSMCycler
 	{
 		[field: SerializeField]
 		public BattleGameUI GameUI
@@ -39,11 +40,9 @@ namespace Game.Battle
 		[SerializeField]
 		private RaGOFSMState _gameFSM = null;
 
-		[Header("Settings")]
+		[Header("Dependencies")]
 		[SerializeField]
-		private PlayerModel _homePlayerModel = null;
-		[SerializeField]
-		private PlayerModel _awayPlayerModel = null;
+		private RaModelSOCollection _models = null;
 		[SerializeField]
 		private BattleGameGrid.CoreData _gridData = default;
 
@@ -57,17 +56,19 @@ namespace Game.Battle
 
 		protected void Awake()
 		{
+			BattleGameModelSO battleGameModelSO = _models.GetModelSO<BattleGameModelSO>();
+
 			IRaDataSetResolver[] gameBoard = new IRaDataSetResolver[]
 			{
-			// Setting Participants
-			HomePlayerSide.SetData(_homePlayerModel, false),
-			AwayPlayerSide.SetData(_awayPlayerModel, false),
+				// Setting Participants
+				HomePlayerSide.SetData(battleGameModelSO.Player, false),
+				AwayPlayerSide.SetData(battleGameModelSO.Enemy, false),
 
-			// Settings Game Board
-			Grid.SetData(_gridData, false),
+				// Settings Game Board
+				Grid.SetData(_gridData, false),
 
-			// AI Setup
-			AwayPlayerSideAI.SetData(AwayPlayerSide, false),
+				// AI Setup
+				AwayPlayerSideAI.SetData(AwayPlayerSide, false),
 			};
 
 			// Model Accessor
@@ -103,12 +104,12 @@ namespace Game.Battle
 
 			IRaDataClearResolver[] gameBoard = new IRaDataClearResolver[]
 			{
-			// Clearing Game Board
-			Grid.ClearData(false),
+				// Clearing Game Board
+				Grid.ClearData(false),
 
-			// Clearing Participants
-			AwayPlayerSide.ClearData(false),
-			HomePlayerSide.ClearData(false)
+				// Clearing Participants
+				AwayPlayerSide.ClearData(false),
+				HomePlayerSide.ClearData(false)
 			};
 
 			gameBoard.ResolveAll();

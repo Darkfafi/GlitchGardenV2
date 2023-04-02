@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace Game.Battle
 {
-	public class BattleGameplayState : RaGOFSMState<BattleGame>
+	public class BattleGameplayState : RaGOFSMState<BattleGameSceneRoot>
 	{
-		public StateEvent WinEvent;
-		public StateEvent LoseEvent;
+		public RaGOStateEvent WinEvent;
+		public RaGOStateEvent LoseEvent;
 
 		[field: SerializeField]
 		public BattleUnitsMechanicSO UnitsMechanicSO

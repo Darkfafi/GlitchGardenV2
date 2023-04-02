@@ -6,8 +6,8 @@ namespace Game.Battle
 {
 	public class SetTargetBattleUnitState : RaGOStateBase<BattleUnit, TargetBattleUnitData>
 	{
-		public StateEvent ChangedTargetEvent;
-		public StateEvent NoChangeInTargetEvent;
+		public RaGOStateEvent ChangedTargetEvent;
+		public RaGOStateEvent NoChangeInTargetEvent;
 
 		[SerializeField]
 		private int _range = 1;

@@ -6,8 +6,8 @@ namespace Game.Battle
 	public class AttackBattleUnitState : RaGOStateBase<TargetBattleUnitData>
 	{
 		[Header("Events")]
-		public StateEvent AttackedEvents;
-		public StateEvent FailedAttackEvents;
+		public RaGOStateEvent AttackedEvents;
+		public RaGOStateEvent FailedAttackEvents;
 
 		[Header("Options")]
 		[SerializeField]

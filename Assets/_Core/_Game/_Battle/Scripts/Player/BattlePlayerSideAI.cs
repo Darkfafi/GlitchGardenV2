@@ -78,7 +78,7 @@ namespace Game.Battle
 		private void SetNextToSpawn()
 		{
 			int budget = Data.ResourceGenerator.GetBudget();
-			List<UnitConfig> spawnableUnits = Data.Player.Model.Units.GetItems(x => budget >= x.BattleUnitConfigData.Cost.Amount);
+			List<UnitConfig> spawnableUnits = Data.Player.Units.GetItems(x => budget >= x.BattleUnitConfigData.Cost.Amount);
 			_nextToSpawn = spawnableUnits.Count > 0 ? spawnableUnits[Random.Range(0, spawnableUnits.Count)] : null;
 		}
 	}

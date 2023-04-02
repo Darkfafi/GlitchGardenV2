@@ -5,7 +5,7 @@ namespace Game.Battle
 	public class BattleGameReferenceSOController : BehavioursSOControllerBase<BattleGameReferenceSOBase>
 	{
 		[SerializeField]
-		private BattleGame _game;
+		private BattleGameSceneRoot _game;
 
 		protected override void OnInit(BattleGameReferenceSOBase behaviourSO)
 		{

@@ -8,10 +8,10 @@ namespace Game.Battle
 	public class MoveBattleUnitState : RaGOStateBase<BattleUnit>
 	{
 		[Header("Events")]
-		public StateEvent AppliedMoveEvent;
-		public StateEvent StartedMoveVisualEvent;
-		public StateEvent CompletedMoveVisualEvent;
-		public StateEvent FailedMoveEvent;
+		public RaGOStateEvent AppliedMoveEvent;
+		public RaGOStateEvent StartedMoveVisualEvent;
+		public RaGOStateEvent CompletedMoveVisualEvent;
+		public RaGOStateEvent FailedMoveEvent;
 
 		[Header("Options")]
 		[SerializeField]

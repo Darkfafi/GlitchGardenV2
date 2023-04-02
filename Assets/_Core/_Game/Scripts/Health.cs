@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using System;
 
 namespace Game
 {
-	public class Health
+	public class Health : IDisposable
 	{
 		public delegate void HPHandler(Health health, int delta);
 		public event HPHandler HealedEvent;
@@ -28,6 +29,11 @@ namespace Game
 			MaxHP = HP = amount;
 		}
 
+		public bool IsFilled(int index)
+		{
+			return HP > index; 
+		}
+
 		public void Damage(int amount)
 		{
 			int preHP = HP;
@@ -48,6 +54,13 @@ namespace Game
 			int delta = HP - preHP;
 			HealedEvent?.Invoke(this, Mathf.Abs(delta));
 			HealthChangedEvent?.Invoke(this, delta);
+		}
+
+		public void Dispose()
+		{
+			DamagedEvent = null;
+			HealedEvent = null;
+			HealthChangedEvent = null;
 		}
 	}
 }

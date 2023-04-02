@@ -63,6 +63,9 @@ namespace Game.Battle
 			}
 
 			Collider.enabled = false;
+
+			Health.Dispose();
+			Health = null;
 		}
 
 		protected override void OnSetDataResolved()

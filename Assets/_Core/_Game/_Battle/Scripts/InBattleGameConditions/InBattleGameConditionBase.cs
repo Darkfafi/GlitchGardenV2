@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Battle
 {
-	public abstract class InBattleGameConditionBase : RaMonoDataHolderBase<BattleGame>
+	public abstract class InBattleGameConditionBase : RaMonoDataHolderBase<BattleGameSceneRoot>
 	{
 		[SerializeField]
 		private BattlePlayer.Type _playerType = BattlePlayer.Type.Home;

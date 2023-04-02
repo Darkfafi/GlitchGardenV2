@@ -2,7 +2,7 @@ using RaFSM;
 
 namespace Game.Battle
 {
-	public class BattleGameLoseState : RaGOStateBase<BattleGame>
+	public class BattleGameLoseState : RaGOStateBase<BattleGameSceneRoot>
 	{
 		protected override void OnInit()
 		{

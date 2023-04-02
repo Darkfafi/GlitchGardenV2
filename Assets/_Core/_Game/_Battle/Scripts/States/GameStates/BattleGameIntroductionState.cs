@@ -5,9 +5,9 @@ using UnityEngine.Serialization;
 
 namespace Game.Battle
 {
-	public class BattleGameIntroductionState : RaGOStateBase<BattleGame>
+	public class BattleGameIntroductionState : RaGOStateBase<BattleGameSceneRoot>
 	{
-		public StateEvent CompletedIntroductionEvent;
+		public RaGOStateEvent CompletedIntroductionEvent;
 
 		[Header("References")]
 		[SerializeField]

@@ -46,9 +46,9 @@ namespace Game.Battle.UI
 		{
 			_draggingUnitElement.Setup();
 
-			for(int i = 0; i < Data.Model.Units.Length; i++)
+			for(int i = 0; i < Data.Units.Length; i++)
 			{
-				var unitConfig = Data.Model.Units[i];
+				var unitConfig = Data.Units[i];
 				CreateEntry(unitConfig);
 			}
 		}
