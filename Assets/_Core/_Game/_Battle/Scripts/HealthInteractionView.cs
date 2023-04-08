@@ -1,12 +1,17 @@
 ﻿using RaDataHolder;
 using RaTweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.Battle
 {
 	public class HealthInteractionView : RaMonoDataHolderBase<Health>
 	{
+		public UnityEvent DamagedEvent;
+		public UnityEvent HealedEvent;
+		public UnityEvent KilledEvent;
+
 		[Header("Character")]
 		[SerializeField]
 		private SpriteRenderer _renderer = null;
@@ -39,6 +44,11 @@ namespace Game.Battle
 
 		private void OnHealthChangedEvent(Health health, int delta)
 		{
+			if(delta == 0)
+			{
+				return;
+			}
+
 			if(!_displayingHealthBar)
 			{
 				ResetBarVisuals();
@@ -59,7 +69,19 @@ namespace Game.Battle
 				healthHitSequence.Append(_healthBarGroup.TweenAlpha(0f, 0.1f).ToSequenceEntry());
 			}
 
+			if(delta < 0)
+			{
+				DamagedEvent.Invoke();
+			}
+			else
+			{
+				HealedEvent.Invoke();
+			}
 
+			if(!health.IsAlive)
+			{
+				KilledEvent.Invoke();
+			}
 		}
 
 		private void ResetBarVisuals()

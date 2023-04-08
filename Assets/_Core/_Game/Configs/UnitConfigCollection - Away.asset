@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
+--- !u!114 &-4817714393650172992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,14 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 498019cc8d36e6141b328018356fdeaf, type: 3}
-  m_Name: A_Rat
+  m_Name: A_Unit_Rat
   m_EditorClassIdentifier: 
   <Icon>k__BackingField: {fileID: 21300000, guid: b95676a83d819224cb26fafa2e2eae3d, type: 3}
-  <Color>k__BackingField: {r: 0.7075472, g: 0.44437495, b: 0, a: 1}
+  <Color>k__BackingField: {r: 0.7058824, g: 0.4431373, b: 0, a: 1}
   <BattleUnitConfigData>k__BackingField:
     BattleUnitPrefab: {fileID: 1942700688349960158, guid: 1193389a08dc4824bb86151a9507a514, type: 3}
-    HealthPoints: 3
+    HealthPoints: 4
     Cost:
       <Currency>k__BackingField: {fileID: 11400000, guid: efb0da8fcea8def41add063852cccffd, type: 2}
       <Amount>k__BackingField: 2
     FirstColumnUnit: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717b7336e41031647ad8c9089373e687, type: 3}
+  m_Name: UnitConfigCollection - Away
+  m_EditorClassIdentifier: 
+  _nestedSOItems:
+  - {fileID: -4817714393650172992}

@@ -17,7 +17,7 @@ namespace Game
 		private Vector2 _rangeDuration = Vector2Int.one;
 
 		[FormerlySerializedAs("ChangedEvent")]
-		public UnityEvent ChargedEvent;
+		public RaGOStateEvent ChargedEvent;
 
 		public float Time
 		{
@@ -50,7 +50,7 @@ namespace Game
 				Time += UnityEngine.Time.deltaTime;
 				if(Mathf.Approximately(NormalizedTime, 1f))
 				{
-					ChargedEvent.Invoke();
+					ChargedEvent.Invoke(this);
 				}
 			}
 		}

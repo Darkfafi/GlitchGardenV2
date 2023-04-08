@@ -9,18 +9,16 @@ public class CurrentStateAnimationEvent : AnimationEventBase
 
 	public override void FireEvent()
 	{
-		if(_entries == null || _entries.Length == 0)
+		if(_entries != null)
 		{
-			return;
-		}
-
-		for(int i = 0; i < _entries.Length; i++)
-		{
-			Entry entry = _entries[i];
-			if(entry.State != null && entry.State.IsCurrentState)
+			for(int i = 0; i < _entries.Length; i++)
 			{
-				entry.Event.Invoke();
-				break;
+				Entry entry = _entries[i];
+				if(entry.State != null && entry.State.IsCurrentState)
+				{
+					entry.Event.Invoke();
+					return;
+				}
 			}
 		}
 

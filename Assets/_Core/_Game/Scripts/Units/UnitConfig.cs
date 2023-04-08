@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Game
 {
-	[CreateAssetMenu(menuName = "Configs/UnitConfig", fileName = "UnitConfig")]
 	public class UnitConfig : ScriptableObject
 	{
 		[field: SerializeField]
