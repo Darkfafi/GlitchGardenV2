@@ -13,6 +13,7 @@ namespace Game.Battle
 
 		public BattlePlayer.Type PlayerSideType => _playerType;
 		public BattlePlayerSide PlayerSide => Data != null ? Data.GetPlayerSide(_playerType) : null;
+		public BattlePlayer Player => PlayerSide?.Player;
 
 		protected override void OnSetData()
 		{

@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-public class AnimationEvent : MonoBehaviour
+public class AnimationEvent : AnimationEventBase
 {
-	public UnityEvent Event;
+	[SerializeField]
+	[FormerlySerializedAs("Event")]
+	private UnityEvent _event = null;
+
+	public override void FireEvent()
+	{
+		_event.Invoke();
+	}
 }

@@ -2,6 +2,11 @@ using RaFSM;
 
 public class UnityState : RaGOStateBase
 {
+	protected override void OnInit()
+	{
+
+	}
+
 	protected override void OnDeinit()
 	{
 
@@ -15,10 +20,5 @@ public class UnityState : RaGOStateBase
 	protected override void OnExit(bool isSwitch)
 	{
 	
-	}
-
-	protected override void OnInit()
-	{
-
 	}
 }

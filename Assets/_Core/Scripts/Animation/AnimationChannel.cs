@@ -8,7 +8,7 @@ public class AnimationChannel : MonoBehaviour
 	private Transform[] _eventChannels = null;
 
 	private Animator _animator = null;
-	private Dictionary<string, AnimationEvent> _keyToEvent = null;
+	private Dictionary<string, IAnimationEvent> _keyToEvent = null;
 
 	protected void Awake()
 	{
@@ -36,9 +36,9 @@ public class AnimationChannel : MonoBehaviour
 	public void FireEvent(string eventPath)
 	{
 		TryInitialize();
-		if(_keyToEvent.TryGetValue(eventPath, out AnimationEvent e))
+		if(_keyToEvent.TryGetValue(eventPath, out IAnimationEvent e))
 		{
-			e.Event.Invoke();
+			e.FireEvent();
 		}
 		else
 		{
@@ -51,16 +51,16 @@ public class AnimationChannel : MonoBehaviour
 		if(_keyToEvent == null)
 		{
 			_animator = GetComponent<Animator>();
-			_keyToEvent = new Dictionary<string, AnimationEvent>();
+			_keyToEvent = new Dictionary<string, IAnimationEvent>();
 
 			for(int i = 0; i < _eventChannels.Length; i++)
 			{
 				Transform parent = _eventChannels[i];
-				AnimationEvent[] events = parent.GetComponentsInChildren<AnimationEvent>();
+				IAnimationEvent[] events = parent.GetComponentsInChildren<IAnimationEvent>();
 				for(int j = 0; j < events.Length; j++)
 				{
-					AnimationEvent e = events[j];
-					string path = $"{parent.name}/{e.name}";
+					IAnimationEvent e = events[j];
+					string path = $"{parent.name}/{e.AnimationEventName}";
 					_keyToEvent[path] = e;
 				}
 			}

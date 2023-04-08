@@ -4,21 +4,21 @@
 	{
 		protected override void OnStartRunning()
 		{
-			if(PlayerSide.Health != null)
+			if(Player.Health != null)
 			{
-				PlayerSide.Health.HealthChangedEvent += OnHealthChangedEvent;
+				Player.Health.HealthChangedEvent += OnHealthChangedEvent;
 			}
 		}
 
 		protected override void OnStopRunning()
 		{
-			if(PlayerSide.Health != null)
+			if(Player.Health != null)
 			{
-				PlayerSide.Health.HealthChangedEvent -= OnHealthChangedEvent;
+				Player.Health.HealthChangedEvent -= OnHealthChangedEvent;
 			}
 		}
 
-		protected override bool CheckCondition() => PlayerSide.Health != null && PlayerSide.Health.IsAlive;
+		protected override bool CheckCondition() => Player.Health != null && Player.Health.IsAlive;
 
 		private void OnHealthChangedEvent(Health health, int delta)
 		{

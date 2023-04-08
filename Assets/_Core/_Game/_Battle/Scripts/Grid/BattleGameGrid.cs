@@ -57,6 +57,18 @@ namespace Game.Battle
 			return _elements.TryGetValue(position, out element);
 		}
 
+		public int GetPlayerColumn(BattlePlayer.Type playerType)
+		{
+			switch(playerType)
+			{
+				case BattlePlayer.Type.Home:
+					return 0;
+				case BattlePlayer.Type.Away:
+					return GridData.Size.x - 1;
+			}
+			return -1;
+		}
+
 		public ElementBattleUnitSpot GetUnitSpot(BattleUnit unit)
 		{
 			if(TryGetUnitSpot(unit, out ElementBattleUnitSpot spot))

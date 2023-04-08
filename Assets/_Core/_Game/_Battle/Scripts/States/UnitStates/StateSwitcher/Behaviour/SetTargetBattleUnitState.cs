@@ -13,7 +13,7 @@ namespace Game.Battle
 		private int _range = 1;
 
 		[SerializeField]
-		private BattleUnitOwnerDetectionType _detectionType = BattleUnitOwnerDetectionType.Opposite;
+		private BattlePlayerDetectionType _detectionType = BattlePlayerDetectionType.Opposite;
 
 		[Header("References")]
 		[SerializeField]
@@ -48,14 +48,14 @@ namespace Game.Battle
 				Vector2Int targetPos = DependencyA.Position + DependencyA.Owner.GetOrientation(Vector2Int.right * i);
 				if(_gridReferenceSO.Grid.TryGetElement(targetPos, out GameGridElement targetElement))
 				{
-					if(_detectionType.HasFlag(BattleUnitOwnerDetectionType.Same) &&
+					if(_detectionType.HasFlag(BattlePlayerDetectionType.Same) &&
 						targetElement.TryGetUnit(DependencyA.Owner.PlayerType, out unitToSet) &&
 						unitToSet.IsActiveUnit)
 					{
 						break;
 					}
 
-					if(_detectionType.HasFlag(BattleUnitOwnerDetectionType.Opposite) &&
+					if(_detectionType.HasFlag(BattlePlayerDetectionType.Opposite) &&
 						targetElement.TryGetUnit(DependencyA.Owner.GetOppositePlayerType(), out unitToSet) &&
 						unitToSet.IsActiveUnit)
 					{

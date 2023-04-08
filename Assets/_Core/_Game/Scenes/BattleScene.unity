@@ -397,10 +397,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -679,10 +685,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -991,10 +1003,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 663460610}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     EnterStateEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 663460610}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 663460610}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -8254,10 +8308,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -8812,10 +8872,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -11927,10 +11993,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -12120,10 +12192,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2058939862}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     EnterStateEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 2058939862}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2058939862}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -12172,10 +12286,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -12692,10 +12812,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:

@@ -105,22 +105,8 @@ namespace Game.Battle
 
 				if(coreData.BattleUnitConfigData.FirstColumnUnit)
 				{
-					bool valid = true;
-					switch(coreData.Owner.PlayerType)
-					{
-						case BattlePlayer.Type.Home:
-							if(position.x != 0)
-							{
-								valid = false;
-							}
-							break;
-						case BattlePlayer.Type.Away:
-							if(position.x != gridReference.Grid.GridData.Size.x - 1)
-							{
-								valid = false;
-							}
-							break;
-					}
+					int playerColumn = gridReference.Grid.GetPlayerColumn(coreData.Owner.PlayerType);
+					bool valid = position.x == playerColumn;
 
 					if(!valid)
 					{

@@ -14,7 +14,7 @@ namespace Game.Battle
 		private Rigidbody2D _rigidBody = null;
 
 		[SerializeField]
-		private BattleUnitOwnerDetectionType _detectionType = BattleUnitOwnerDetectionType.Opposite;
+		private BattlePlayerDetectionType _detectionType = BattlePlayerDetectionType.Opposite;
 
 		[SerializeField]
 		private BattleProjectileEffectBase _effect = null;
@@ -60,13 +60,13 @@ namespace Game.Battle
 		{
 			if(collision.gameObject.TryGetComponent(out BattleUnit unit))
 			{
-				if(_detectionType.HasFlag(BattleUnitOwnerDetectionType.Same) &&
+				if(_detectionType.HasFlag(BattlePlayerDetectionType.Same) &&
 					_owner.PlayerType == unit.Owner.PlayerType)
 				{
 					_effect.ApplyEffect(this, unit);
 				}
 
-				if(_detectionType.HasFlag(BattleUnitOwnerDetectionType.Opposite) &&
+				if(_detectionType.HasFlag(BattlePlayerDetectionType.Opposite) &&
 					_owner.PlayerType != unit.Owner.PlayerType)
 				{
 					_effect.ApplyEffect(this, unit);

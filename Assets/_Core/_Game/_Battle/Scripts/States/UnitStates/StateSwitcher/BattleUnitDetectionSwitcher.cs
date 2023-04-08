@@ -12,7 +12,7 @@ namespace Game.Battle
 		private BattleGridReferenceSO _gridReferenceSO = null;
 
 		[SerializeField]
-		private BattleUnitOwnerDetectionType _detectionType = BattleUnitOwnerDetectionType.Opposite;
+		private BattlePlayerDetectionType _detectionType = BattlePlayerDetectionType.Opposite;
 
 		protected override bool CheckCondition(RaGOStateBase state)
 		{
@@ -24,12 +24,12 @@ namespace Game.Battle
 
 			if(_gridReferenceSO.Grid.TryGetElement(pos, out GameGridElement targetElement))
 			{
-				if(_detectionType.HasFlag(BattleUnitOwnerDetectionType.Same))
+				if(_detectionType.HasFlag(BattlePlayerDetectionType.Same))
 				{
 					condition |= targetElement.TryGetUnit(unit.Owner.PlayerType, out _);
 				}
 
-				if(_detectionType.HasFlag(BattleUnitOwnerDetectionType.Opposite))
+				if(_detectionType.HasFlag(BattlePlayerDetectionType.Opposite))
 				{
 					condition |= targetElement.TryGetUnit(unit.Owner.GetOppositePlayerType(), out _);
 				}

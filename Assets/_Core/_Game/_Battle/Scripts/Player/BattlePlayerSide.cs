@@ -26,11 +26,6 @@ namespace Game.Battle
 			get; private set;
 		}
 
-		public Health Health
-		{
-			get; private set;
-		}
-
 		public RaFlagsTracker InGameFlags
 		{
 			get; private set;
@@ -42,15 +37,6 @@ namespace Game.Battle
 
 			Player.SetData(new CoreData() { PlayerModel = Data, Type = SideType }, false);
 			ResourceGenerator.SetData(Player.Wallet, false);
-
-			if(Player.Model.Config.HP > 0)
-			{
-				Health = new Health(Player.Model.Config.HP);
-			}
-			else
-			{
-				Health = null;
-			}
 		}
 
 		protected override void OnSetDataResolved()
@@ -69,8 +55,6 @@ namespace Game.Battle
 				InGameFlags.Dispose();
 				InGameFlags = null;
 			}
-
-			Health = null;
 		}
 
 		public bool HasResourcesForUnits()

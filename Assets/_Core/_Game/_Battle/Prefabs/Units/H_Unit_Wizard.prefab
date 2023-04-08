@@ -30,7 +30,6 @@ Transform:
   m_Children:
   - {fileID: 469189626740378095}
   - {fileID: 1446255546423292214}
-  - {fileID: 3662811001865772580}
   m_Father: {fileID: 5738804772202433827}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,10 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -60,6 +65,7 @@ MonoBehaviour:
   - {fileID: 4702217959025246929}
   _wrapFSM: 0
   _autoFillStates: 1
+  _excludeDisabledStates: 1
   GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
@@ -142,8 +148,8 @@ Transform:
   m_Children:
   - {fileID: 7156769048663076597}
   - {fileID: 2434541101351984625}
-  m_Father: {fileID: 142419189719145344}
-  m_RootOrder: 2
+  m_Father: {fileID: 4878009790823141210}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2233400337473908879
 GameObject:
@@ -189,10 +195,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -230,7 +242,7 @@ MonoBehaviour:
         m_CallState: 2
   _range: 5
   _detectionType: 2
-  _gridModelSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
+  _gridReferenceSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
 --- !u!1 &3349382301631403235
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +287,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls:
@@ -305,12 +320,15 @@ MonoBehaviour:
             m_StringArgument: Charging
             m_BoolArgument: 0
           m_CallState: 2
+    DeinitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
   CoreEditorOptions:
     CurrentStateSuffix: ' [CURRENT]'
   _duration: 1
   _useRange: 1
   _rangeDuration: {x: 0.9, y: 1.1}
-  ChangedEvent:
+  ChargedEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4579330770764650828}
@@ -364,7 +382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7156769048663076597}
-  - component: {fileID: 4393598697917175558}
+  - component: {fileID: 1019998347917697887}
   m_Layer: 0
   m_Name: FireEvent
   m_TagString: Untagged
@@ -386,7 +404,7 @@ Transform:
   m_Father: {fileID: 3662811001865772580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4393598697917175558
+--- !u!114 &1019998347917697887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -395,24 +413,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3551095122598259077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ece777f59b0c6c45a4d84fad40d2ba9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a1d07d7d8796a248aed8cc18e5f1c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4702217959025246929}
-        m_TargetAssemblyTypeName: ProjectileFireState, Assembly-CSharp
-        m_MethodName: Fire
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _entries:
+  - State: {fileID: 4702217959025246929}
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4702217959025246929}
+          m_TargetAssemblyTypeName: Game.Battle.BattleProjectileFireState, Assembly-CSharp
+          m_MethodName: Fire
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5550514025416412170
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +560,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls:
@@ -558,6 +581,9 @@ MonoBehaviour:
     ExitStateEvent:
       m_PersistentCalls:
         m_Calls: []
+    DeinitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
   CoreEditorOptions:
     CurrentStateSuffix: ' [CURRENT]'
   _searchHierarchyForDependencies: 1
@@ -567,6 +593,37 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 3674873793638047610, guid: 5bbfefe44897a86469ac54e38dc6bd16, type: 3}
   _projectileOrigin: {fileID: 5822297371234410935}
   _fireOnEnter: 0
+--- !u!1 &6359586814774522261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4878009790823141210}
+  m_Layer: 0
+  m_Name: AnimationEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4878009790823141210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6359586814774522261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3662811001865772580}
+  m_Father: {fileID: 1376318713658577281}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6447363676707780297
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,10 +670,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -626,6 +689,7 @@ MonoBehaviour:
   - {fileID: 9119187529398178986}
   _wrapFSM: 1
   _autoFillStates: 1
+  _excludeDisabledStates: 1
   GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
@@ -692,10 +756,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -703,7 +773,7 @@ MonoBehaviour:
   _duration: 0
   _useRange: 1
   _rangeDuration: {x: 0.5, y: 1}
-  ChangedEvent:
+  ChargedEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9119187529398178986}
@@ -727,7 +797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2434541101351984625}
-  - component: {fileID: 1720260388879410502}
+  - component: {fileID: 945262135631969985}
   m_Layer: 0
   m_Name: EndEvent
   m_TagString: Untagged
@@ -749,7 +819,7 @@ Transform:
   m_Father: {fileID: 3662811001865772580}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1720260388879410502
+--- !u!114 &945262135631969985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -758,24 +828,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 7213161293755735485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ece777f59b0c6c45a4d84fad40d2ba9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a1d07d7d8796a248aed8cc18e5f1c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4702217959025246929}
-        m_TargetAssemblyTypeName: RaFSM.RaGOStateBase, RaFSM
-        m_MethodName: FSM_GoToNextState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _entries:
+  - State: {fileID: 4702217959025246929}
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4702217959025246929}
+          m_TargetAssemblyTypeName: RaFSM.RaGOStateBase, RaFSM
+          m_MethodName: FSM_GoToNextState
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7970289511120046068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,11 +1089,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
---- !u!1 &1376318713255336939 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 78165461734779492, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
-  m_PrefabInstance: {fileID: 1300442434868179343}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1466596368260790529 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 456688894510270606, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
@@ -1051,6 +1118,11 @@ Transform:
 --- !u!4 &1376318713255336936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 78165461734779495, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
+  m_PrefabInstance: {fileID: 1300442434868179343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1376318713255336939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 78165461734779492, guid: c84163414d6d9a14981bf48bc028e022, type: 3}
   m_PrefabInstance: {fileID: 1300442434868179343}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &2682051113515410954

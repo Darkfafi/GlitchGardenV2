@@ -41,12 +41,12 @@ namespace UI
 				RaGOFSMRoot icon = _icons[i];
 				if(Data.IsFilled(i))
 				{
-					icon.SwitchState(FILLED_STATE_INDEX);
+					icon.RunFSM(FILLED_STATE_INDEX);
 					_currentFilledDisplayed++;
 				}
 				else
 				{
-					icon.SwitchState(EMPTY_STATE_INDEX);
+					icon.RunFSM(EMPTY_STATE_INDEX);
 				}
 			}
 
@@ -67,11 +67,28 @@ namespace UI
 		private void OnHealthChangedEvent(Health health, int delta)
 		{
 			int absDelta = Mathf.Abs(delta);
-			int dir = delta / absDelta;
-			for(int i = 0; i < absDelta; i++)
+			if(absDelta > 0)
 			{
-				_currentFilledDisplayed += dir;
-				_icons[_currentFilledDisplayed].SwitchState(Data.IsFilled(_currentFilledDisplayed) ? FILLED_STATE_INDEX : EMPTY_STATE_INDEX);
+				int dir = delta / absDelta;
+				for(int i = 0; i < absDelta; i++)
+				{
+					// Old Heart State
+					RefreshCurrentIcon();
+
+					_currentFilledDisplayed += dir;
+
+					// New Heart State
+					RefreshCurrentIcon();
+				}
+			}
+		}
+
+		private void RefreshCurrentIcon()
+		{
+			int index = _currentFilledDisplayed - 1;
+			if(index >= 0)
+			{
+				_icons[index].SwitchState(Data.IsFilled(index) ? FILLED_STATE_INDEX : EMPTY_STATE_INDEX);
 			}
 		}
 	}
