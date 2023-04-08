@@ -150,7 +150,89 @@ namespace Game.Battle
 
 		#endregion
 
+		#region Replacement
+
+		public MechanicResponse CanReplaceUnit(BattleUnit unitToReplace, UnitConfig newUnitConfig)
+		{
+			return CanReplaceUnit(unitToReplace, newUnitConfig, out _);
+		}
+
+		public MechanicResponse CanReplaceUnit(BattleUnit unitToReplace, UnitConfig newUnitConfig, out ElementBattleUnitSpot unitSpot)
+		{
+			unitSpot = default;
+			Vector2Int position = unitToReplace.Position;
+
+			if(!IsEnabled)
+			{
+				return MechanicResponse.CreateFailedResponse("Mechanic Disabled", null);
+			}
+
+			if(newUnitConfig == null)
+			{
+				return MechanicResponse.CreateFailedResponse($"Unit to replace with is Null");
+			}
+
+			if(!TryGetDependency(out BattleGridReferenceSO gridReference))
+			{
+				return MechanicResponse.CreateFailedResponse("No Grid Reference Found", null);
+			}
+
+			if(!gridReference.Grid.TryGetElement(position, out GameGridElement element))
+			{
+				return MechanicResponse.CreateFailedResponse($"No Element found at {position}", null);
+			}
+
+			if(!element.TryGetElementUnitSpot(unitToReplace.Owner, out unitSpot))
+			{
+				return MechanicResponse.CreateFailedResponse($"No UnitSpot found for {unitToReplace.Owner} on {element}", null);
+			}
+
+			if(element.IsOccupied(out BattleUnit homeUnit, out BattleUnit awayUnit) && homeUnit != unitToReplace && awayUnit != unitToReplace)
+			{
+				return MechanicResponse.CreateFailedResponse($"Element {element} contains does not contain {unitToReplace}. Home Unit: {homeUnit} or Away Unit: {awayUnit}", (nameof(element), element), (nameof(homeUnit), homeUnit), (nameof(awayUnit), awayUnit));
+			}
+
+			return MechanicResponse.CreateSuccessResponse();
+		}
+
+		public MechanicResponse ReplaceUnit(BattleUnit unitToReplace, UnitConfig newUnitConfig)
+		{
+			MechanicResponse response = CanReplaceUnit(unitToReplace, newUnitConfig, out ElementBattleUnitSpot unitSpot);
+			if(response.IsSuccess)
+			{
+				Vector2Int position = unitToReplace.Position;
+				BattlePlayer owner = unitToReplace.Owner;
+
+				// Remove old Unit
+				_units.Remove(unitToReplace);
+				Destroy(unitToReplace.gameObject);
+
+				// Create new Unit
+				BattleUnit unit = Instantiate(newUnitConfig.BattleUnitConfigData.BattleUnitPrefab);
+				unit.SetData(new BattleUnit.CoreData {  Config = newUnitConfig, Owner = owner }, false);
+				{
+					unit.SetPosition(position);
+
+					unitSpot.SetPreview(null);
+					unitSpot.SetUnit(unit);
+				}
+
+				_units.Add(unit);
+				unit.Resolve();
+			}
+
+			return response;
+		}
+
+		public void ReplaceUnitHook(UnitReplacementMechanicParams instruction)
+		{
+			ReplaceUnit(instruction.UnitToReplace, instruction.NewUnitConfig);
+		}
+
+		#endregion
+
 		#region Movement
+
 		public MechanicResponse CanMoveUnit(BattleUnit unit, Vector2Int newPosition)
 		{
 			return CanMoveUnit(unit, newPosition, out _, out _);
