@@ -7,7 +7,7 @@ namespace Game.Campaign
 	public class EncounterBattleConfig : EncounterConfigBase
 	{
 		[field: SerializeField]
-		public PlayerConfig EnemyConfig
+		public PlayerConfig.CoreData EnemyConfigData
 		{
 			get; private set;
 		}
@@ -20,7 +20,7 @@ namespace Game.Campaign
 		{
 			OverworldGameModelSO overworldModel = _models.GetModelSO<OverworldGameModelSO>();
 			BattleGameModelSO battleGameModel = _models.GetModelSO<BattleGameModelSO>();
-			PlayerModel enemy = new PlayerModel(EnemyConfig);
+			PlayerModel enemy = new PlayerModel(EnemyConfigData);
 			battleGameModel.GoToBattleGame(overworldModel.Player, enemy);
 		}
 	}

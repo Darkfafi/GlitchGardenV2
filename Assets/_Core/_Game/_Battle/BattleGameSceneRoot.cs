@@ -1,11 +1,11 @@
 ﻿using RaDataHolder;
-using UnityEngine;
 using RaFSM;
 using RaModelsSO;
+using UnityEngine;
 
 namespace Game.Battle
 {
-	public class BattleGameSceneRoot : MonoBehaviour, IRaFSMCycler
+	public class BattleGameSceneRoot : SceneRootBase, IRaFSMCycler
 	{
 		[field: SerializeField]
 		public BattleGameUI GameUI
@@ -54,7 +54,7 @@ namespace Game.Battle
 
 		private RaGOFiniteStateMachine _fsm = null;
 
-		protected void Awake()
+		protected override void OnSetup()
 		{
 			BattleGameModelSO battleGameModelSO = _models.GetModelSO<BattleGameModelSO>();
 
@@ -87,13 +87,13 @@ namespace Game.Battle
 			_fsm = new RaGOFiniteStateMachine(this, new RaGOStateBase[] { _gameFSM });
 		}
 
-		protected void Start()
+		protected override void OnStart()
 		{
 			// Start
 			_fsm.SwitchState(0);
 		}
 
-		protected void OnDestroy()
+		protected override void OnEnd()
 		{
 			GameUI.ClearData();
 

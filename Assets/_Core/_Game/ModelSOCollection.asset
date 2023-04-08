@@ -27,7 +27,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2821ba28128074e8d0f4627f14772c, type: 3}
   m_Name: OverworldGameModelSO
   m_EditorClassIdentifier: 
-  _defaultCampaignConfig: {fileID: -5566374465968845639, guid: fad18abd05caa664588046b0d67810f1, type: 2}
+  _defaultCampaignConfig: {fileID: 11400000, guid: a53a240dff9d1a54dadd7e416679b327, type: 2}
   _defaultPlayerConfig: {fileID: 3337674464330239763, guid: 0960529f3e80c9b4cbd3fb1fc08c6ca0, type: 2}
 --- !u!114 &6630230918488988084
 MonoBehaviour:
@@ -42,4 +42,9 @@ MonoBehaviour:
   m_Name: BattleGameModelSO
   m_EditorClassIdentifier: 
   _defaultPlayerConfig: {fileID: 3337674464330239763, guid: 0960529f3e80c9b4cbd3fb1fc08c6ca0, type: 2}
-  _defaultEnemyConfig: {fileID: 5299754428121639669, guid: 0960529f3e80c9b4cbd3fb1fc08c6ca0, type: 2}
+  _defaultEnemyConfigData:
+    <HP>k__BackingField: 0
+    <Units>k__BackingField:
+    - {fileID: -4817714393650172992, guid: cbab8ab83b00fdc46b039cf343d8c5d3, type: 2}
+    _hasInfiniteResources: 0
+    _resources: 10

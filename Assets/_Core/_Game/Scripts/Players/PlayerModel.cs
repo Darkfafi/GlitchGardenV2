@@ -2,22 +2,21 @@
 
 namespace Game
 {
-
 	public class PlayerModel : IDisposable
 	{
-		public PlayerConfig Config
+		public PlayerConfig.CoreData ConfigData
 		{
 			get; private set;
 		}
 
-		public PlayerModel(PlayerConfig config)
+		public PlayerModel(PlayerConfig.CoreData config)
 		{
-			Config = config;
+			ConfigData = config;
 		}
 
 		public void Dispose()
 		{
-			Config = null;
+			ConfigData = default;
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace Game.Battle
 			InGameFlags = new RaFlagsTracker();
 
 			Player.SetData(new CoreData() { PlayerModel = Data, Type = SideType }, false);
-			ResourceGenerator.SetData(Player.Wallet, false);
+			ResourceGenerator.SetData(new CurrencyGenerator.CoreData() { Wallet = Player.Wallet, MaxResources = Player.Model.ConfigData.Resources }, false);
 		}
 
 		protected override void OnSetDataResolved()

@@ -16,6 +16,12 @@ namespace Game.Campaign
 			get; private set;
 		}
 
+		[field: SerializeField]
+		public EncounterActionTypeConfig ActionType
+		{
+			get; private set;
+		}
+
 		public abstract void Enter(CampaignEncounter encounter);
 	}
 }

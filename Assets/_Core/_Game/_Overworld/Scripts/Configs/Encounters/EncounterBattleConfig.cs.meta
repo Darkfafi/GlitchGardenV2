@@ -3,7 +3,11 @@ guid: a75b7752ad53d674a80180e81d5be61c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - <DisplaySprite>k__BackingField: {instanceID: 0}
+  - <ActionType>k__BackingField: {fileID: 386853755177690364, guid: 7e46a046a3c2ac1428df2805dfbb14f1, type: 2}
+  - <EnemyConfig>k__BackingField: {instanceID: 0}
+  - _models: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

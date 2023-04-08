@@ -8,7 +8,7 @@ namespace Game.Battle
 		public Type PlayerType => Data.Type;
 		public PlayerModel Model => Data.PlayerModel;
 
-		public UnitConfig[] Units => Model.Config.Units;
+		public UnitConfig[] Units => Model.ConfigData.Units;
 
 		public Wallet Wallet
 		{
@@ -22,9 +22,9 @@ namespace Game.Battle
 
 		protected override void OnSetData()
 		{
-			if(Model.Config.HP > 0)
+			if(Model.ConfigData.HP > 0)
 			{
-				Health = new Health(Model.Config.HP);
+				Health = new Health(Model.ConfigData.HP);
 			}
 			else
 			{

@@ -1,8 +1,10 @@
 ﻿using RaDataHolder;
 using UnityEngine;
 
-public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
+public class CurrencyGenerator : RaMonoDataHolderBase<CurrencyGenerator.CoreData>
 {
+	public const int INFINITE_RESOURCE = -1;
+
 	[SerializeField]
 	private CurrencyValue _amountToGenerate = default;
 
@@ -10,7 +12,7 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 	private float _durationUntilGenerate = 1f;
 
 	[SerializeField]
-	private int _maxResounceAmount = -1;
+	private int _maxResounceAmount = INFINITE_RESOURCE;
 
 	private bool _isRunning = false;
 
@@ -25,7 +27,7 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 
 	public float NormalizedTime => Mathf.Clamp01(Timer / Duration);
 
-	public bool IsRunning => _isRunning && Data != null && HasResourcesRemaining;
+	public bool IsRunning => _isRunning && HasData && Data.Wallet != null && HasResourcesRemaining;
 
 	public int MaxResourceAmount => _maxResounceAmount;
 	
@@ -42,6 +44,12 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 	protected override void OnSetData()
 	{
 		Timer = 0f;
+
+		if(Data.MaxResources.HasValue)
+		{
+			_maxResounceAmount = Data.MaxResources.Value;
+		}
+
 		ResourcesRemaining = _maxResounceAmount;
 	}
 
@@ -69,7 +77,7 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 			if(Mathf.Approximately(NormalizedTime, 1f))
 			{
 				Timer = 0f;
-				Data.Earn(_amountToGenerate);
+				Data.Wallet.Earn(_amountToGenerate);
 				
 				if(HasMaxResourcesEnabled)
 				{
@@ -81,7 +89,7 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 
 	public int GetBudget()
 	{
-		int budget = Data.GetAmount(AmountToGenerate.Currency);
+		int budget = Data.Wallet.GetAmount(AmountToGenerate.Currency);
 
 		if(HasMaxResourcesEnabled)
 		{
@@ -93,5 +101,11 @@ public class CurrencyGenerator : RaMonoDataHolderBase<Wallet>
 		}
 
 		return budget;
+	}
+
+	public struct CoreData
+	{
+		public Wallet Wallet;
+		public int? MaxResources;
 	}
 }

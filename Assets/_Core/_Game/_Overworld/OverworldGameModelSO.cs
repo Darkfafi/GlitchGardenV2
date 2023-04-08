@@ -6,7 +6,7 @@ namespace Game.Campaign
 	public class OverworldGameModelSO : RaModelSOBase
 	{
 		[SerializeField]
-		private CampaignConfig _defaultCampaignConfig = null;
+		private EncounterConfigCollection _defaultCampaignConfig = null;
 
 		[SerializeField]
 		private PlayerConfig _defaultPlayerConfig = null;
@@ -24,7 +24,7 @@ namespace Game.Campaign
 		protected override void OnInit()
 		{
 			Campaign = new CampaignModel(_defaultCampaignConfig);
-			Player = new PlayerModel(_defaultPlayerConfig);
+			Player = new PlayerModel(_defaultPlayerConfig.Data);
 		}
 
 		protected override void OnDeinit()

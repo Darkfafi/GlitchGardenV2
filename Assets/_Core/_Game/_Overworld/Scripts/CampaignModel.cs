@@ -2,12 +2,12 @@ namespace Game.Campaign
 {
 	public class CampaignModel
 	{
-		public CampaignConfig Config
+		public EncounterConfigCollection Config
 		{
 			get; private set;
 		}
 
-		public CampaignModel(CampaignConfig config)
+		public CampaignModel(EncounterConfigCollection config)
 		{
 			Config = config;
 		}

@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8086939036836796274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75b7752ad53d674a80180e81d5be61c, type: 3}
-  m_Name: EncounterBattleConfig
-  m_EditorClassIdentifier: 
-  <EncounterName>k__BackingField: Rats
-  <DisplaySprite>k__BackingField: {fileID: 21300000, guid: b95676a83d819224cb26fafa2e2eae3d, type: 3}
-  <EnemyConfig>k__BackingField: {fileID: 5299754428121639669, guid: 0960529f3e80c9b4cbd3fb1fc08c6ca0, type: 2}
-  _models: {fileID: 11400000, guid: e9a23f060678c7c42bb230317bea874a, type: 2}
---- !u!114 &-5566374465968845639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b34d8d5cd887e6498e10ab743d6afbc, type: 3}
-  m_Name: CampaignConfig
-  m_EditorClassIdentifier: 
-  _nestedSOItems:
-  - {fileID: -8086939036836796274}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,4 +13,36 @@ MonoBehaviour:
   m_Name: CampaignConfigCollection
   m_EditorClassIdentifier: 
   _nestedSOItems:
-  - {fileID: -5566374465968845639}
+  - {fileID: 6487229485577100102}
+--- !u!114 &6487229485577100102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b34d8d5cd887e6498e10ab743d6afbc, type: 3}
+  m_Name: Campaign
+  m_EditorClassIdentifier: 
+  _nestedSOItems:
+  - {fileID: 8837921869918943273}
+--- !u!114 &8837921869918943273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03764bd5f5ea01f4f82800c636df0322, type: 3}
+  m_Name: New CampaignLayerConfig
+  m_EditorClassIdentifier: 
+  <PreferredEncounterAmount>k__BackingField: 5
+  <LayerEncounters>k__BackingField:
+  - <Weight>k__BackingField: 0
+    MinAmount: 0
+    MaxAmount: 10
+    Encounter: {fileID: -7282795540737856087, guid: a53a240dff9d1a54dadd7e416679b327, type: 2}

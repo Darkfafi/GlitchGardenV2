@@ -6,10 +6,10 @@ namespace Game.Battle
 	public class BattleGameModelSO : RaModelSOBase
 	{
 		[SerializeField]
-		private PlayerConfig _defaultPlayerConfig = null;
+		private PlayerConfig _defaultPlayerConfig;
 
 		[SerializeField]
-		private PlayerConfig _defaultEnemyConfig = null;
+		private PlayerConfig.CoreData _defaultEnemyConfigData;
 
 		public PlayerModel Player
 		{
@@ -29,8 +29,8 @@ namespace Game.Battle
 
 		protected override void OnInit()
 		{
-			Player = new PlayerModel(_defaultPlayerConfig);
-			Enemy = new PlayerModel(_defaultEnemyConfig);
+			Player = new PlayerModel(_defaultPlayerConfig.Data);
+			Enemy = new PlayerModel(_defaultEnemyConfigData);
 		}
 
 		protected override void OnDeinit()

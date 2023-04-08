@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1410255222667557667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce3e4fd7a93c254c960977d59631862, type: 3}
+  m_Name: Mutated Rats Enemy
+  m_EditorClassIdentifier: 
+  _data:
+    <HP>k__BackingField: 0
+    <Units>k__BackingField: []
+    _hasInfiniteResources: 0
+    _resources: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10,27 +27,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e5eebd99ed46eb40903986f52e49358, type: 3}
-  m_Name: PlayerConfigCollection
+  m_Name: PlayerConfigCollection - Away
   m_EditorClassIdentifier: 
   _nestedSOItems:
-  - {fileID: 3337674464330239763}
   - {fileID: 5299754428121639669}
---- !u!114 &3337674464330239763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce3e4fd7a93c254c960977d59631862, type: 3}
-  m_Name: Hero Player
-  m_EditorClassIdentifier: 
-  <HP>k__BackingField: 3
-  <Units>k__BackingField:
-  - {fileID: -854604458643660385, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
-  - {fileID: -4282669810564483026, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
+  - {fileID: -1410255222667557667}
 --- !u!114 &5299754428121639669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce3e4fd7a93c254c960977d59631862, type: 3}
   m_Name: Rats Enemy
   m_EditorClassIdentifier: 
-  <HP>k__BackingField: 0
-  <Units>k__BackingField:
-  - {fileID: 7781119423456090511, guid: cbab8ab83b00fdc46b039cf343d8c5d3, type: 2}
+  _data:
+    <HP>k__BackingField: 0
+    <Units>k__BackingField: []
+    _hasInfiniteResources: 0
+    _resources: 0
