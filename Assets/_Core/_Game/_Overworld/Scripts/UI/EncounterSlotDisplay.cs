@@ -7,6 +7,9 @@ namespace Game.Campaign
 {
 	public class EncounterSlotDisplay : RaMonoDataHolderBase<EncounterSlotModel>
 	{
+		public delegate void SlotHandler(EncounterSlotDisplay display);
+		public event SlotHandler SlotActionPressedEvent;
+
 		[Header("Encounter")]
 		[SerializeField]
 		private TMP_Text _titleLabel = null;
@@ -28,7 +31,7 @@ namespace Game.Campaign
 
 		protected override void OnSetData()
 		{
-			
+				
 		}
 
 		protected override void OnSetDataResolved()
@@ -42,6 +45,21 @@ namespace Game.Campaign
 			else
 			{
 				OnCurrentEncounterClearedEvent(Data);
+			}
+		}
+
+		protected override void OnClearData()
+		{
+			OnCurrentEncounterClearedEvent(Data);
+			Data.DataSetEvent -= OnNewEncounterSetEvent;
+			Data.DataClearedEvent -= OnCurrentEncounterClearedEvent;
+		}
+
+		public void Editor_OnActionButtonPressed()
+		{
+			if(HasData && HasEncounter)
+			{
+				SlotActionPressedEvent?.Invoke(this);
 			}
 		}
 
@@ -65,13 +83,6 @@ namespace Game.Campaign
 			_encounterTypeIconImage.sprite = null;
 			_encounterTypeActionLabel.text = null;
 			_encounterTypeActionLabel.color = default;
-		}
-
-		protected override void OnClearData()
-		{
-			OnCurrentEncounterClearedEvent(Data);
-			Data.DataSetEvent -= OnNewEncounterSetEvent;
-			Data.DataClearedEvent -= OnCurrentEncounterClearedEvent;
 		}
 	}
 }

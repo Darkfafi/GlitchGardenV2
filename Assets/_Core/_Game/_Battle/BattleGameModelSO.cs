@@ -1,5 +1,6 @@
 ﻿using RaModelsSO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Battle
 {
@@ -25,6 +26,7 @@ namespace Game.Battle
 		{
 			Player = player;
 			Enemy = enemy;
+			SceneManager.LoadScene("BattleScene");
 		}
 
 		protected override void OnInit()

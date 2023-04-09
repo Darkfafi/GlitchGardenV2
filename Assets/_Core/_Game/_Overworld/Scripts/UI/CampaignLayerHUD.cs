@@ -33,6 +33,10 @@ namespace Game.Campaign
 
 		protected override void OnSetDataResolved()
 		{
+			LeftSlotDisplay.SlotActionPressedEvent += OnLeftSlotActionPressed;
+			CenterSlotDisplay.SlotActionPressedEvent += OnCenterSlotActionPressed;
+			RightSlotDisplay.SlotActionPressedEvent += OnRightSlotActionPressed;
+
 			LeftSlotDisplay.Resolve();
 			CenterSlotDisplay.Resolve();
 			RightSlotDisplay.Resolve();
@@ -43,6 +47,10 @@ namespace Game.Campaign
 			RightSlotDisplay.ClearData();
 			CenterSlotDisplay.ClearData();
 			LeftSlotDisplay.ClearData();
+
+			RightSlotDisplay.SlotActionPressedEvent -= OnRightSlotActionPressed;
+			CenterSlotDisplay.SlotActionPressedEvent -= OnCenterSlotActionPressed;
+			LeftSlotDisplay.SlotActionPressedEvent -= OnLeftSlotActionPressed;
 		}
 
 		public EncounterSlotDisplay GetEncounterSlotDisplay(CampaignLayerModel.SlotType slotType)
@@ -58,6 +66,21 @@ namespace Game.Campaign
 				default:
 					throw new NotImplementedException($"SlotType {slotType} has not been implemented");
 			}
+		}
+
+		private void OnLeftSlotActionPressed(EncounterSlotDisplay display)
+		{
+			Data.TryEnter(CampaignLayerModel.SlotType.Left);
+		}
+
+		private void OnCenterSlotActionPressed(EncounterSlotDisplay display)
+		{
+			Data.TryEnter(CampaignLayerModel.SlotType.Center);
+		}
+
+		private void OnRightSlotActionPressed(EncounterSlotDisplay display)
+		{
+			Data.TryEnter(CampaignLayerModel.SlotType.Right);
 		}
 	}
 }
