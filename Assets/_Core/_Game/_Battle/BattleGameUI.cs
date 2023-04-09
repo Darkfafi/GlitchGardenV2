@@ -37,7 +37,7 @@ namespace Game.Battle
 
 		protected override void OnSetDataResolved()
 		{
-			GameplayUIGroup.ResolveData();
+			GameplayUIGroup.Resolve();
 		}
 	}
 }

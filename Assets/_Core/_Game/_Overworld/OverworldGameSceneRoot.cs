@@ -6,6 +6,12 @@ namespace Game.Campaign
 {
 	public class OverworldGameSceneRoot : SceneRootBase
 	{
+		[field: SerializeField]
+		public OverworldUIGroup OverworldUI
+		{
+			get; private set;
+		}
+
 		private OverworldGameModelSO _overworldGameModelSO = null;
 
 		protected CampaignModel Campaign => _overworldGameModelSO != null ? _overworldGameModelSO.Campaign : null;
@@ -13,6 +19,8 @@ namespace Game.Campaign
 		protected override void OnSetup()
 		{
 			_overworldGameModelSO = Models.GetModelSO<OverworldGameModelSO>();
+
+			OverworldUI.SetData(Campaign, false);
 		}
 
 		protected override void OnStart()
@@ -21,10 +29,16 @@ namespace Game.Campaign
 			{
 				Campaign.TrySetNextLayer();
 			}
+
+			OverworldUI.Resolve();
+			OverworldUI.RegisterUser(this);
 		}
 
 		protected override void OnEnd()
 		{
+			OverworldUI.UnregisterUser(this);
+
+			OverworldUI.ClearData();
 			_overworldGameModelSO = null;
 		}
 	}

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Battle.UI
 {
-	public class BattleGameplayUIGroup : GenericUIGroup
+	public class BattleGameplayUIGroup : GenericUIGroup<BattlePlayer>
 	{
 		[field: SerializeField]
 		public BattleUnitsHUD UnitsHUD
@@ -23,21 +23,23 @@ namespace Game.Battle.UI
 			get; private set;
 		}
 
-		public void SetData(BattlePlayer player)
+		protected override void OnSetData()
 		{
-			UnitsHUD.SetData(player, false);
-			ResourcesHUD.SetData(player.Wallet, false);
-			PlayerHealthHUD.SetData(player.Health);
+			UnitsHUD.SetData(Data, false);
+			ResourcesHUD.SetData(Data.Wallet, false);
+			PlayerHealthHUD.SetData(Data.Health, false);
 		}
 
-		public void ResolveData()
+		protected override void OnResolveData()
 		{
 			UnitsHUD.Resolve();
 			ResourcesHUD.Resolve();
+			PlayerHealthHUD.Resolve();
 		}
 
-		public void ClearData()
+		protected override void OnClearData()
 		{
+			PlayerHealthHUD.ClearData();
 			ResourcesHUD.ClearData();
 			UnitsHUD.ClearData();
 		}

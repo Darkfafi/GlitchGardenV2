@@ -1,4 +1,5 @@
 using RaCollection;
+using System.Linq;
 
 namespace Game.Campaign
 {
@@ -9,8 +10,7 @@ namespace Game.Campaign
 			get; private set;
 		}
 
-		private RaElementCollection<CampaignLayerConfig> _nextLayerConfigs = new RaElementCollection<CampaignLayerConfig>();
-
+		private RaElementCollection<CampaignLayerConfig> _nextLayerConfigs;
 		public CampaignLayerModel LayerModel
 		{
 			get; private set;
@@ -22,13 +22,14 @@ namespace Game.Campaign
 		{
 			Config = config;
 			LayerModel = new CampaignLayerModel();
+			_nextLayerConfigs = new RaElementCollection<CampaignLayerConfig>(Config.GetItems().ToArray());
 		}
 
 		public bool TrySetNextLayer()
 		{
 			if(_nextLayerConfigs.TryDequeue(out CampaignLayerConfig newLayer))
 			{
-				LayerModel.ReplaceData(newLayer);
+				LayerModel.ReplaceData(newLayer, false);
 				return true;
 			}
 			else

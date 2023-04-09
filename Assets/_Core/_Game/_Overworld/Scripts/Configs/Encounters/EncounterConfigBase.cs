@@ -5,13 +5,19 @@ namespace Game.Campaign
 	public abstract class EncounterConfigBase : ScriptableObject
 	{
 		[field: SerializeField]
-		public string EncounterName
+		public string Title
 		{
 			get; private set;
 		}
 
 		[field: SerializeField]
-		public Sprite DisplaySprite
+		public Sprite IconSprite
+		{
+			get; private set;
+		}
+
+		[field: SerializeField, TextArea]
+		public string Description
 		{
 			get; private set;
 		}

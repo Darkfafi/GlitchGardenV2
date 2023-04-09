@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1400435215696456564, guid: 965a042d92fde024a968d468e99de529, type: 3}
       propertyPath: m_Name
-      value: Encounter Slot B
+      value: Encounter Slot Center
       objectReference: {fileID: 0}
     - target: {fileID: 1400435215696456565, guid: 965a042d92fde024a968d468e99de529, type: 3}
       propertyPath: m_Pivot.x
@@ -369,6 +369,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1400435215696456565, guid: 965a042d92fde024a968d468e99de529, type: 3}
   m_PrefabInstance: {fileID: 171271361}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &171271363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6038133079189721137, guid: 965a042d92fde024a968d468e99de529, type: 3}
+  m_PrefabInstance: {fileID: 171271361}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc1d6a85eda32f4f977080f35aec7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &761906292
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,8 +456,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1093046161}
   - component: {fileID: 1093046162}
+  - component: {fileID: 1093046163}
   m_Layer: 5
-  m_Name: EncountersDisplay
+  m_Name: CampaignLayerHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,14 +471,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093046160}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1118936603}
   - {fileID: 171271362}
   - {fileID: 1987581791}
-  m_Father: {fileID: 2002455627}
+  m_Father: {fileID: 1636494224}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -498,6 +510,21 @@ MonoBehaviour:
   m_Spacing: {x: 50, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1093046163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093046160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40ab3df0fab61a488af0390143af77b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <LeftSlotDisplay>k__BackingField: {fileID: 1400435216731436399}
+  <CenterSlotDisplay>k__BackingField: {fileID: 171271363}
+  <RightSlotDisplay>k__BackingField: {fileID: 1987581792}
 --- !u!224 &1118936603 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1400435215696456565, guid: 965a042d92fde024a968d468e99de529, type: 3}
@@ -586,6 +613,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1636494223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636494224}
+  - component: {fileID: 1636494226}
+  - component: {fileID: 1636494225}
+  m_Layer: 5
+  m_Name: OverworldUIGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1636494224
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636494223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1893388574}
+  - {fileID: 1093046161}
+  m_Father: {fileID: 2002455627}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1636494225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636494223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61deacd2f48db624dbe8ed0871bbbc72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _content: {fileID: 1636494226}
+  <CampaignLayerHUD>k__BackingField: {fileID: 1093046163}
+--- !u!225 &1636494226
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636494223}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1893388573
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,11 +703,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893388573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2002455627}
+  m_Father: {fileID: 1636494224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -670,7 +762,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1400435215696456564, guid: 965a042d92fde024a968d468e99de529, type: 3}
       propertyPath: m_Name
-      value: Encounter Slot C
+      value: Encounter Slot Right
       objectReference: {fileID: 0}
     - target: {fileID: 1400435215696456565, guid: 965a042d92fde024a968d468e99de529, type: 3}
       propertyPath: m_Pivot.x
@@ -907,6 +999,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1400435215696456565, guid: 965a042d92fde024a968d468e99de529, type: 3}
   m_PrefabInstance: {fileID: 1987581790}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1987581792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6038133079189721137, guid: 965a042d92fde024a968d468e99de529, type: 3}
+  m_PrefabInstance: {fileID: 1987581790}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc1d6a85eda32f4f977080f35aec7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2002455622
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,8 +1101,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1893388574}
-  - {fileID: 1093046161}
+  - {fileID: 1636494224}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1052,6 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Models>k__BackingField: {fileID: 11400000, guid: e9a23f060678c7c42bb230317bea874a, type: 2}
+  <OverworldUI>k__BackingField: {fileID: 1636494225}
 --- !u!1001 &1400435216731436398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1061,7 +1164,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1400435215696456564, guid: 965a042d92fde024a968d468e99de529, type: 3}
       propertyPath: m_Name
-      value: Encounter Slot A
+      value: Encounter Slot Left
       objectReference: {fileID: 0}
     - target: {fileID: 1400435215696456565, guid: 965a042d92fde024a968d468e99de529, type: 3}
       propertyPath: m_Pivot.x
@@ -1293,6 +1396,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 965a042d92fde024a968d468e99de529, type: 3}
+--- !u!114 &1400435216731436399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6038133079189721137, guid: 965a042d92fde024a968d468e99de529, type: 3}
+  m_PrefabInstance: {fileID: 1400435216731436398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc1d6a85eda32f4f977080f35aec7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7053763483581596861
 PrefabInstance:
   m_ObjectHideFlags: 0
