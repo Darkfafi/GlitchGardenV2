@@ -6,7 +6,7 @@ namespace Game.Campaign
 	public class OverworldGameModelSO : RaModelSOBase
 	{
 		[SerializeField]
-		private EncounterConfigCollection _defaultCampaignConfig = null;
+		private CampaignConfig _defaultCampaignConfig = null;
 
 		[SerializeField]
 		private PlayerConfig _defaultPlayerConfig = null;

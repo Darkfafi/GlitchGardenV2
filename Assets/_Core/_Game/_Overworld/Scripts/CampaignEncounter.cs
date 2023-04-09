@@ -1,6 +1,6 @@
 ﻿namespace Game.Campaign
 {
-	public abstract class CampaignEncounter
+	public class CampaignEncounter
 	{
 		public EncounterConfigBase Config
 		{

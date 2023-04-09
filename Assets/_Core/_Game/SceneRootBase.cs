@@ -1,7 +1,14 @@
+using RaModelsSO;
 using UnityEngine;
 
 public abstract class SceneRootBase : MonoBehaviour
 {
+	[field: SerializeField, Header("Base")]
+	protected RaModelSOCollection Models
+	{
+		get; private set;
+	}
+
 	protected void Awake()
 	{
 		OnSetup();	

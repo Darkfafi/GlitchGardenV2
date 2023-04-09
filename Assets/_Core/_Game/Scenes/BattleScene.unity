@@ -2073,13 +2073,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6882eb699e46da439d8bb005c7e2851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Models>k__BackingField: {fileID: 11400000, guid: e9a23f060678c7c42bb230317bea874a, type: 2}
   <GameUI>k__BackingField: {fileID: 142985692}
   <Grid>k__BackingField: {fileID: 1661390561}
   <HomePlayerSide>k__BackingField: {fileID: 788337951}
   <AwayPlayerSide>k__BackingField: {fileID: 931944520}
   <AwayPlayerSideAI>k__BackingField: {fileID: 267910790}
   _gameFSM: {fileID: 921960441}
-  _models: {fileID: 11400000, guid: e9a23f060678c7c42bb230317bea874a, type: 2}
   _gridData:
     Size: {x: 18, y: 7}
     HomeBuildableColumns: 13

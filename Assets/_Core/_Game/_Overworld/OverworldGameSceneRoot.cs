@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverworldGameSceneRoot : SceneRootBase
+namespace Game.Campaign
 {
-	protected override void OnSetup()
+	public class OverworldGameSceneRoot : SceneRootBase
 	{
-	}
+		private OverworldGameModelSO _overworldGameModelSO = null;
 
-	protected override void OnStart()
-	{
-	}
+		protected CampaignModel Campaign => _overworldGameModelSO != null ? _overworldGameModelSO.Campaign : null;
 
-	protected override void OnEnd()
-	{
+		protected override void OnSetup()
+		{
+			_overworldGameModelSO = Models.GetModelSO<OverworldGameModelSO>();
+		}
+
+		protected override void OnStart()
+		{
+			if(!Campaign.LayerModel.HasData)
+			{
+				Campaign.TrySetNextLayer();
+			}
+		}
+
+		protected override void OnEnd()
+		{
+			_overworldGameModelSO = null;
+		}
 	}
 }

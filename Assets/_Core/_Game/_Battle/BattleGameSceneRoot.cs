@@ -7,7 +7,7 @@ namespace Game.Battle
 {
 	public class BattleGameSceneRoot : SceneRootBase, IRaFSMCycler
 	{
-		[field: SerializeField]
+		[field: SerializeField, Header("Battle Game Scene")]
 		public BattleGameUI GameUI
 		{
 			get; private set;
@@ -42,8 +42,6 @@ namespace Game.Battle
 
 		[Header("Dependencies")]
 		[SerializeField]
-		private RaModelSOCollection _models = null;
-		[SerializeField]
 		private BattleGameGrid.CoreData _gridData = default;
 
 		[Header("Controllers")]
@@ -54,15 +52,17 @@ namespace Game.Battle
 
 		private RaGOFiniteStateMachine _fsm = null;
 
+		private BattleGameModelSO _battleGameModelSO = null;
+
 		protected override void OnSetup()
 		{
-			BattleGameModelSO battleGameModelSO = _models.GetModelSO<BattleGameModelSO>();
+			_battleGameModelSO = Models.GetModelSO<BattleGameModelSO>();
 
 			IRaDataSetResolver[] gameBoard = new IRaDataSetResolver[]
 			{
 				// Setting Participants
-				HomePlayerSide.SetData(battleGameModelSO.Player, false),
-				AwayPlayerSide.SetData(battleGameModelSO.Enemy, false),
+				HomePlayerSide.SetData(_battleGameModelSO.Player, false),
+				AwayPlayerSide.SetData(_battleGameModelSO.Enemy, false),
 
 				// Settings Game Board
 				Grid.SetData(_gridData, false),
@@ -113,6 +113,7 @@ namespace Game.Battle
 			};
 
 			gameBoard.ResolveAll();
+			_battleGameModelSO = null;
 		}
 
 		public BattlePlayerSide GetPlayerSide(BattlePlayer.Type playerType)
