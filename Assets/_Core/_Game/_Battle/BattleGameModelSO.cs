@@ -1,6 +1,6 @@
 ﻿using RaModelsSO;
+using RaScenesSO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game.Battle
 {
@@ -11,6 +11,9 @@ namespace Game.Battle
 
 		[SerializeField]
 		private PlayerConfig.CoreData _defaultEnemyConfigData;
+
+		[SerializeField]
+		private RaSceneSO _battleScene = null;
 
 		public PlayerModel Player
 		{
@@ -26,7 +29,8 @@ namespace Game.Battle
 		{
 			Player = player;
 			Enemy = enemy;
-			SceneManager.LoadScene("BattleScene");
+
+			_battleScene.LoadScene();
 		}
 
 		protected override void OnInit()

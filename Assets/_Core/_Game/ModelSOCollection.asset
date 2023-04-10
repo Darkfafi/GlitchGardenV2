@@ -48,3 +48,4 @@ MonoBehaviour:
     - {fileID: -4817714393650172992, guid: cbab8ab83b00fdc46b039cf343d8c5d3, type: 2}
     _hasInfiniteResources: 0
     _resources: 10
+  _battleScene: {fileID: 39966675783150373, guid: dafb51983e64d0d43978e33122ade075, type: 2}
