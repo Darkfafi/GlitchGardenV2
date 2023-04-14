@@ -129,6 +129,11 @@ namespace Game.Battle
 
 		}
 
+		public void EndGame()
+		{
+			Models.GetModelSO<RaScenesSO.RaSceneModelSO>().LoadScene(_battleGameModelSO.ReturnScene);
+		}
+
 		public void GoToNextState()
 		{
 			if(_fsm != null)

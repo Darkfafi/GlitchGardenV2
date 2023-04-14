@@ -3186,6 +3186,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7640404541644832964, guid: 3a1e5785b20f140468b0e46d9b0c1574, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640404541644832964, guid: 3a1e5785b20f140468b0e46d9b0c1574, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640404541644832964, guid: 3a1e5785b20f140468b0e46d9b0c1574, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1499551650}
+    - target: {fileID: 7640404541644832964, guid: 3a1e5785b20f140468b0e46d9b0c1574, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640404541644832964, guid: 3a1e5785b20f140468b0e46d9b0c1574, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640404541644832964, guid: 3a1e5785b20f140468b0e46d9b0c1574, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Game.Battle.BattleGameSceneRoot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640404541644832964, guid: 3a1e5785b20f140468b0e46d9b0c1574, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a1e5785b20f140468b0e46d9b0c1574, type: 3}
 --- !u!1001 &8393378697891170947
@@ -3195,6 +3223,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 142985691}
     m_Modifications:
+    - target: {fileID: 3267936685469593511, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267936685469593511, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267936685469593511, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267936685469593511, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1499551650}
+    - target: {fileID: 3267936685469593511, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267936685469593511, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267936685469593511, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Game.Battle.BattleGameSceneRoot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267936685469593511, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8393378698665955122, guid: 1b55d8872ec57bc4e8a6cd0f2dab68c3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
