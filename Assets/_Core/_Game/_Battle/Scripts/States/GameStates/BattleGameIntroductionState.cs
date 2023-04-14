@@ -19,7 +19,7 @@ namespace Game.Battle
 
 		protected override void OnInit()
 		{
-
+			
 		}
 
 		protected override void OnEnter()

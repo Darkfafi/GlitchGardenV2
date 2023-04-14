@@ -16,7 +16,14 @@ public abstract class SceneRootBase : MonoBehaviour
 
     protected void Start()
     {
-		OnStart();
+		if(TryGetLoadingScreen(out LoadingScreen loadingScreen))
+		{
+			loadingScreen.LoadingEndedEvent.AddListener(OnStart);
+		}
+		else
+		{
+			OnStart();
+		}
     }
 
 	protected void OnDestroy()
@@ -27,4 +34,10 @@ public abstract class SceneRootBase : MonoBehaviour
 	protected abstract void OnSetup();
 	protected abstract void OnStart();
 	protected abstract void OnEnd();
+
+	private bool TryGetLoadingScreen(out LoadingScreen loadingScreen)
+	{
+		loadingScreen = FindObjectOfType<LoadingScreen>();
+		return loadingScreen != null;
+	}
 }

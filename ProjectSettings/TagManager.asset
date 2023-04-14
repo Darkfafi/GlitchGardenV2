@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Loading
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3308164227
+    locked: 0
+  - name: Loading
+    uniqueID: 2323783793
     locked: 0

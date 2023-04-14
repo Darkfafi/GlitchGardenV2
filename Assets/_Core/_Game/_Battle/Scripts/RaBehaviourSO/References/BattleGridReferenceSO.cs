@@ -25,5 +25,10 @@ namespace Game.Battle
 		{
 			Grid = null;
 		}
+
+		public void Grid_SetActive(bool isActive)
+		{
+			Grid.gameObject.SetActive(isActive);
+		}
 	}
 }

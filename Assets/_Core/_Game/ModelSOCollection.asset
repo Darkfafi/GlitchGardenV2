@@ -15,6 +15,7 @@ MonoBehaviour:
   _nestedSOItems:
   - {fileID: 4156402057145397003}
   - {fileID: 6630230918488988084}
+  - {fileID: 6246506739643321045}
 --- !u!114 &4156402057145397003
 MonoBehaviour:
   m_ObjectHideFlags: 33
@@ -29,6 +30,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultCampaignConfig: {fileID: 6487229485577100102, guid: ea548f5161d7c864fa10e08fc3988214, type: 2}
   _defaultPlayerConfig: {fileID: 3337674464330239763, guid: 0960529f3e80c9b4cbd3fb1fc08c6ca0, type: 2}
+--- !u!114 &6246506739643321045
+MonoBehaviour:
+  m_ObjectHideFlags: 33
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e440e817df61ac48802540b691995f2, type: 3}
+  m_Name: RaSceneModelSO
+  m_EditorClassIdentifier: 
+  _loadingScreenScene: {fileID: 8663597815487771498, guid: dafb51983e64d0d43978e33122ade075, type: 2}
+  _sceneConfigCollection: {fileID: 11400000, guid: dafb51983e64d0d43978e33122ade075, type: 2}
 --- !u!114 &6630230918488988084
 MonoBehaviour:
   m_ObjectHideFlags: 33

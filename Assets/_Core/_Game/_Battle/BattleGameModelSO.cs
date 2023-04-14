@@ -30,7 +30,7 @@ namespace Game.Battle
 			Player = player;
 			Enemy = enemy;
 
-			_battleScene.LoadScene();
+			DataSOCollection.GetModelSO<RaSceneModelSO>().LoadScene(_battleScene);
 		}
 
 		protected override void OnInit()

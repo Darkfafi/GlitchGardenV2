@@ -15,6 +15,7 @@ MonoBehaviour:
   _nestedSOItems:
   - {fileID: 5428367410097201650}
   - {fileID: 39966675783150373}
+  - {fileID: 8663597815487771498}
 --- !u!114 &39966675783150373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,3 +48,19 @@ MonoBehaviour:
   _sceneReference:
     _scenePath: Assets/_Core/_Game/Scenes/OverworldScene.unity
   _sceneName: OverworldScene
+--- !u!114 &8663597815487771498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83c853f960fa6241ac18766dc88fad6, type: 3}
+  m_Name: LoadingScene
+  m_EditorClassIdentifier: 
+  _nickname: Loading
+  _sceneReference:
+    _scenePath: Assets/_Core/_Game/Scenes/LoadingScene.unity
+  _sceneName: LoadingScene
