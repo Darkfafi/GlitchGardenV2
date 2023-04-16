@@ -20,7 +20,7 @@ namespace Game.Campaign
 		{
 			_overworldGameModelSO = Models.GetModelSO<OverworldGameModelSO>();
 
-			OverworldUI.SetData(Campaign, false);
+			OverworldUI.SetData(_overworldGameModelSO, false);
 		}
 
 		protected override void OnStart()

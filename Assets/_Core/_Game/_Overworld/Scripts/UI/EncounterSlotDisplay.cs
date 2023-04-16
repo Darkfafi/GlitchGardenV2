@@ -26,7 +26,7 @@ namespace Game.Campaign
 		[SerializeField]
 		private TMP_Text _encounterTypeActionLabel = null;
 
-		public EncounterConfigBase EncounterConfig => HasEncounter ? Data.Encounter.Config : null;
+		public EncounterConfig EncounterConfig => HasEncounter ? Data.Encounter.Config : null;
 		public bool HasEncounter => Data.Encounter != null;
 
 		protected override void OnSetData()
@@ -69,9 +69,9 @@ namespace Game.Campaign
 			_encounterIconImage.sprite = EncounterConfig.IconSprite;
 			_descriptionLabel.text = EncounterConfig.Description;
 
-			_encounterTypeIconImage.sprite = EncounterConfig.ActionType.IconSprite;
-			_encounterTypeActionLabel.text = EncounterConfig.ActionType.ActionText;
-			_encounterTypeActionLabel.color = EncounterConfig.ActionType.ActionColor;
+			_encounterTypeIconImage.sprite = EncounterConfig.EncounterType.IconSprite;
+			_encounterTypeActionLabel.text = EncounterConfig.EncounterType.ActionText;
+			_encounterTypeActionLabel.color = EncounterConfig.EncounterType.ActionColor;
 		}
 
 		private void OnCurrentEncounterClearedEvent(RaDataHolderBase<CampaignEncounter> holder)

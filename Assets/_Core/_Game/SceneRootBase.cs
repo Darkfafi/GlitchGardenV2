@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class SceneRootBase : MonoBehaviour
 {
 	[field: SerializeField, Header("Base")]
-	protected RaModelSOCollection Models
+	protected RaModelSOLocator Models
 	{
 		get; private set;
 	}

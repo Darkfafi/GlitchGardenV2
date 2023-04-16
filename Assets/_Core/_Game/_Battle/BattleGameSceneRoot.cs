@@ -95,6 +95,7 @@ namespace Game.Battle
 
 		protected override void OnEnd()
 		{
+			// Clear Data
 			GameUI.ClearData();
 
 			_fsm.Dispose();
@@ -131,7 +132,18 @@ namespace Game.Battle
 
 		public void EndGame()
 		{
-			Models.GetModelSO<RaScenesSO.RaSceneModelSO>().LoadScene(_battleGameModelSO.ReturnScene);
+			// Write Player Life back into the Player Models
+			if(HomePlayerSide.Player.Health != null && _battleGameModelSO.Player.Health != null)
+			{
+				_battleGameModelSO.Player.Health.Set(HomePlayerSide.Player.Health.HP);
+			}
+
+			if(AwayPlayerSide.Player.Health != null && _battleGameModelSO.Enemy.Health != null)
+			{
+				_battleGameModelSO.Enemy.Health.Set(AwayPlayerSide.Player.Health.HP);
+			}
+
+			Models.GetModelSO<RaScenesSO.RaSceneModelSO>().LoadScene(_battleGameModelSO.ReturnSceneData.ReturnScene);
 		}
 
 		public void GoToNextState()

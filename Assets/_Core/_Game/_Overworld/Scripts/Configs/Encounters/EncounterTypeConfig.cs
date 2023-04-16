@@ -2,7 +2,7 @@
 
 namespace Game.Campaign
 {
-	public class EncounterActionTypeConfig : ScriptableObject
+	public class EncounterTypeConfig : ScriptableObject
 	{
 		[field: SerializeField]
 		public Sprite IconSprite

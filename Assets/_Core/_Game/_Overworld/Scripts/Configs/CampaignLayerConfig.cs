@@ -17,7 +17,7 @@ namespace Game.Campaign
 			}
 			public int MinAmount;
 			public int MaxAmount;
-			public EncounterConfigBase Encounter;
+			public EncounterConfig Encounter;
 		}
 
 		[Serializable]
@@ -26,9 +26,9 @@ namespace Game.Campaign
 			public int PreferredEncounterAmount;
 			public LayerEncounterData[] LayerEncounters;
 
-			public List<EncounterConfigBase> CreateEncountersConfigList()
+			public List<EncounterConfig> CreateEncountersConfigList()
 			{
-				List<EncounterConfigBase> encountersCreated = new List<EncounterConfigBase>();
+				List<EncounterConfig> encountersCreated = new List<EncounterConfig>();
 
 				List<LayerEncounterData> pool = new List<LayerEncounterData>();
 				Dictionary<LayerEncounterData, int> creationData = new Dictionary<LayerEncounterData, int>();

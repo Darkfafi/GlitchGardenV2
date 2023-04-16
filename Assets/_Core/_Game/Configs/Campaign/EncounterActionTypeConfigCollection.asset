@@ -24,7 +24,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb0636c94e4ce6e4791d8f5b5e131f4b, type: 3}
-  m_Name: EncounterActionTypeConfig
+  m_Name: FightEncounter
   m_EditorClassIdentifier: 
   <IconSprite>k__BackingField: {fileID: 21300000, guid: 6ee65b701083bb14b8855b44d089329d, type: 3}
   <ActionColor>k__BackingField: {r: 0.9150943, g: 0.38416696, b: 0.38416696, a: 1}

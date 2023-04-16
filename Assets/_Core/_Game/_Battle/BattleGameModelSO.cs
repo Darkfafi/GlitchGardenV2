@@ -30,32 +30,42 @@ namespace Game.Battle
 			get; private set;
 		}
 
-		public RaSceneSO ReturnScene
+		public ReturnData ReturnSceneData
 		{
 			get; private set;
 		}
 
-		public void GoToBattleGame(PlayerModel player, PlayerModel enemy, RaSceneSO returnScene)
+		public void GoToBattleGame(PlayerModel player, PlayerModel enemy, ReturnData returnSceneData)
 		{
 			Player = player;
 			Enemy = enemy;
-			ReturnScene = returnScene;
+			ReturnSceneData = returnSceneData;
 
-			DataSOCollection.GetModelSO<RaSceneModelSO>().LoadScene(_battleScene);
+			Locator.GetModelSO<RaSceneModelSO>().LoadScene(_battleScene);
 		}
 
 		protected override void OnInit()
 		{
 			Player = new PlayerModel(_defaultPlayerConfig.Data);
 			Enemy = new PlayerModel(_defaultEnemyConfigData);
-			ReturnScene = _defaultReturnScene;
+			ReturnSceneData = new ReturnData()
+			{
+				Id = (-1).ToString(),
+				ReturnScene = _defaultReturnScene,
+			};
 		}
 
 		protected override void OnDeinit()
 		{
-			ReturnScene = default;
+			ReturnSceneData = default;
 			Enemy = default;
 			Player = default;
+		}
+
+		public struct ReturnData
+		{
+			public string Id;
+			public RaSceneSO ReturnScene;
 		}
 	}
 }

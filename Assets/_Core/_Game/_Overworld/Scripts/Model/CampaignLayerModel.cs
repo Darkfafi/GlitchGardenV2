@@ -8,9 +8,12 @@ namespace Game.Campaign
 	{
 		public readonly int SlotCount = 3;
 
+		private RaElementCollection<CampaignEncounter> _layerEncounters;
 		private RaCollection<CampaignEncounter> _encountersPool = new RaCollection<CampaignEncounter>();
 
 		public CampaignLayerConfig Config => Data;
+
+		public IReadOnlyRaElementCollection<CampaignEncounter> LayerEncounters => _layerEncounters;
 		public IReadOnlyRaCollection<CampaignEncounter> EncountersPool => _encountersPool;
 
 		public EncounterSlotModel LeftSlot
@@ -28,11 +31,19 @@ namespace Game.Campaign
 			get; private set;
 		}
 
+		public SlotType? CurrentSlotType
+		{
+			get; private set;
+		}
+
 		public CampaignLayerModel()
 		{
+			_layerEncounters = new RaElementCollection<CampaignEncounter>(onRemoveItem: (encounter, index) => encounter.Dispose());
+
 			LeftSlot = new EncounterSlotModel();
 			CenterSlot = new EncounterSlotModel();
 			RightSlot = new EncounterSlotModel();
+			CurrentSlotType = null;
 		}
 
 		protected override void OnSetData()
@@ -40,6 +51,7 @@ namespace Game.Campaign
 			Config.Data.CreateEncountersConfigList().ForEach(encounterConfig =>
 			{
 				CampaignEncounter encounter = new CampaignEncounter(encounterConfig);
+				_layerEncounters.Add(encounter);
 				_encountersPool.Add(encounter);
 			});
 			_encountersPool.Shuffle();
@@ -49,9 +61,15 @@ namespace Game.Campaign
 		protected override void OnClearData()
 		{
 			_encountersPool.Clear();
+			_layerEncounters.Clear();
 			LeftSlot = default;
 			CenterSlot = default;
 			RightSlot = default;
+		}
+
+		public void ClearCurrentSlotType()
+		{
+			CurrentSlotType = null;
 		}
 
 		public bool TrySetNextEncounter(SlotType slotType)
@@ -66,11 +84,31 @@ namespace Game.Campaign
 
 		public bool TryEnter(SlotType slotType)
 		{
-			EncounterSlotModel slot = GetEncounterSlot(slotType);
-			if(slot.HasData)
+			if(!CurrentSlotType.HasValue)
 			{
-				slot.Encounter.Enter();
-				return true;
+				EncounterSlotModel slot = GetEncounterSlot(slotType);
+				if(slot.HasData)
+				{
+					CurrentSlotType = slotType;
+					slot.Encounter.Enter();
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private bool TrySetNextEncounter()
+		{
+			if(CurrentSlotType.HasValue)
+			{
+				SlotType slotType = CurrentSlotType.Value;
+				EncounterSlotModel slot = GetEncounterSlot(slotType);
+				if(slot.HasData)
+				{
+					slot.Encounter.Exit();
+					ClearCurrentSlotType();
+					TrySetNextEncounter(slotType);
+				}
 			}
 			return false;
 		}
@@ -87,8 +125,9 @@ namespace Game.Campaign
 
 				case SlotType.Right:
 					return RightSlot;
+
 				default:
-					throw new System.NotImplementedException($"SlotType {slotType} has not been implemented");
+					throw new NotImplementedException($"SlotType {slotType} has not been implemented");
 			}
 		}
 

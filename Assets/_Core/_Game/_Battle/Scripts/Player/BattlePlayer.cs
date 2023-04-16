@@ -22,9 +22,9 @@ namespace Game.Battle
 
 		protected override void OnSetData()
 		{
-			if(Model.ConfigData.HP > 0)
+			if(Model.Health != null)
 			{
-				Health = new Health(Model.ConfigData.HP);
+				Health = new Health(Model.Health.HP);
 			}
 			else
 			{

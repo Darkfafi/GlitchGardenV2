@@ -105,7 +105,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "rasofiagames.nestedsocollection": "1.3.1"
+        "rasofiagames.nestedsocollection": "1.3.3"
       }
     },
     "rasofiagames.rascenesso": {
@@ -114,7 +114,7 @@
       "source": "embedded",
       "dependencies": {
         "rasofiagames.nestedsocollection": "1.3.3",
-        "rasofiagames.ramodelsso": "1.0.0"
+        "rasofiagames.ramodelsso": "1.1.0"
       }
     },
     "com.unity.modules.ai": {

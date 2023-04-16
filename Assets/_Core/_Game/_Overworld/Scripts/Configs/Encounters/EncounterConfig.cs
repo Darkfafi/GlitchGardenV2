@@ -2,7 +2,7 @@
 
 namespace Game.Campaign
 {
-	public abstract class EncounterConfigBase : ScriptableObject
+	public class EncounterConfig : ScriptableObject
 	{
 		[field: SerializeField]
 		public string Title
@@ -23,11 +23,11 @@ namespace Game.Campaign
 		}
 
 		[field: SerializeField]
-		public EncounterActionTypeConfig ActionType
+		public CampaignEncounterRunner RunnerPrefab
 		{
 			get; private set;
 		}
 
-		public abstract void Enter(CampaignEncounter encounter);
+		public EncounterTypeConfig EncounterType => RunnerPrefab.EncounterType;
 	}
 }

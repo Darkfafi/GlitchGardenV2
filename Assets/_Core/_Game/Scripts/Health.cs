@@ -34,6 +34,20 @@ namespace Game
 			return HP > index; 
 		}
 
+		public void Set(int targetHP)
+		{
+			int delta = targetHP - HP;
+			int amountToApply = Mathf.Abs(delta);
+			if(delta > 0)
+			{
+				Heal(amountToApply);
+			}
+			else
+			{
+				Damage(amountToApply);
+			}
+		}
+
 		public void Damage(int amount)
 		{
 			int preHP = HP;
