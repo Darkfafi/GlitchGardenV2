@@ -6,7 +6,7 @@ using RaDataHolder;
 
 namespace Game.Battle.UI
 {
-	public class BattleUnitHUDEntryUIElement : RaMonoDataHolderBase<UnitConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler
+	public class BattleUnitHUDEntryUIElement : RaMonoDataHolderBase<UnitModel>, IBeginDragHandler, IDragHandler, IEndDragHandler
 	{
 		public event Action<BattleUnitHUDEntryUIElement> DragStartedEvent;
 		public event Action<BattleUnitHUDEntryUIElement> DraggingEvent;
@@ -21,14 +21,14 @@ namespace Game.Battle.UI
 		[SerializeField]
 		private CurrencyValueUIElement _costDisplay = null;
 
-		public UnitConfig Config => Data;
-		public BattleUnitConfigData BattleUnitConfigData => Config.BattleUnitConfigData;
+		public UnitModel UnitModel => Data;
+		public BattleUnitConfigData BattleUnitData => UnitModel.BattleUnitData;
 
 		protected override void OnSetData()
 		{
 			SetGrabbed(false);
-			_iconImage.sprite = Data.Icon;
-			_costDisplay.SetData(BattleUnitConfigData, false);
+			_iconImage.sprite = Data.Config.Icon;
+			_costDisplay.SetData(BattleUnitData, false);
 		}
 
 		protected override void OnSetDataResolved()

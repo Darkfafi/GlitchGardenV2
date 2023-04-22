@@ -12,7 +12,7 @@ namespace Game.Battle
 		private BattleUnitsMechanicSO _unitsMechanicSO = null;
 
 		public CurrencyConfig ResourceCurrency => Data.ResourceGenerator.AmountToGenerate.Currency;
-		private UnitConfig _nextToSpawn = null;
+		private UnitModel _nextToSpawn = null;
 		private Coroutine _routine = null;
 
 		protected override void OnSetData()
@@ -47,17 +47,17 @@ namespace Game.Battle
 
 				if(_nextToSpawn != null)
 				{
-					if(!Data.Player.Wallet.CanSpend(_nextToSpawn.BattleUnitConfigData.Cost, out _))
+					if(!Data.Player.Inventory.Wallet.CanSpend(_nextToSpawn.BattleUnitData.Cost, out _))
 					{
 						continue;
 					}
 
-					BattleUnit.CoreData data = new BattleUnit.CoreData() { Owner = Data.Player, Config = _nextToSpawn };
+					BattleUnit.CoreData data = new BattleUnit.CoreData() { Owner = Data.Player, UnitModel = _nextToSpawn };
 					var spawns = _unitsMechanicSO.GetCreateUnitPositions(data);
 
 					if(spawns.Count > 0)
 					{
-						UnitConfig unitToSpawn = _nextToSpawn;
+						UnitModel unitToSpawn = _nextToSpawn;
 						_nextToSpawn = null;
 
 						if(_unitsMechanicSO.CreateUnit(data, spawns[Random.Range(0, spawns.Count)]).IsSuccess)
@@ -78,7 +78,7 @@ namespace Game.Battle
 		private void SetNextToSpawn()
 		{
 			int budget = Data.ResourceGenerator.GetBudget();
-			List<UnitConfig> spawnableUnits = Data.Player.Units.GetItems(x => budget >= x.BattleUnitConfigData.Cost.Amount);
+			List<UnitModel> spawnableUnits = Data.Player.GetUnits(x => budget >= x.BattleUnitData.Cost.Amount);
 			_nextToSpawn = spawnableUnits.Count > 0 ? spawnableUnits[Random.Range(0, spawnableUnits.Count)] : null;
 		}
 	}

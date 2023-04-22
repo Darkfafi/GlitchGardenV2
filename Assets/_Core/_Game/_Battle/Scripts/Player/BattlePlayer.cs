@@ -1,4 +1,6 @@
 using RaDataHolder;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Battle
@@ -8,9 +10,7 @@ namespace Game.Battle
 		public Type PlayerType => Data.Type;
 		public PlayerModel Model => Data.PlayerModel;
 
-		public UnitConfig[] Units => Model.ConfigData.Units;
-
-		public Wallet Wallet
+		public Inventory Inventory
 		{
 			get; private set;
 		}
@@ -31,18 +31,23 @@ namespace Game.Battle
 				Health = null;
 			}
 
-			Wallet = new Wallet();
+			Inventory = new Inventory(Model.Inventory);
 		}
 
 		protected override void OnClearData()
 		{
-			Wallet.Clear();
+			Inventory.Clear();
 
 			if(Health != null)
 			{
 				Health.Dispose();
 				Health = null;
 			}
+		}
+
+		public List<UnitModel> GetUnits(Predicate<UnitModel> predicate = null)
+		{
+			return Inventory.Items.GetItems<UnitModel>(predicate);
 		}
 
 		public Vector3 GetOrientation(Vector3 value)

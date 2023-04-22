@@ -62,7 +62,7 @@ namespace Game.Battle
 		[FormerlySerializedAs("_playersModelSO")]
 		private BattlePlayerSidesReferenceSO _playersReferenceSO = null;
 
-		private UnitConfig _unitBuildabilityPreview = null;
+		private UnitModel _unitBuildabilityPreview = null;
 
 		protected override void OnSetData()
 		{
@@ -115,9 +115,9 @@ namespace Game.Battle
 			DirtyEvent = null;
 		}
 
-		public void SetUnitBuildabilityPreview(UnitConfig config)
+		public void SetUnitBuildabilityPreview(UnitModel unitModel)
 		{
-			_unitBuildabilityPreview = config;
+			_unitBuildabilityPreview = unitModel;
 			MarkDirty();
 		}
 
@@ -193,13 +193,13 @@ namespace Game.Battle
 		{
 			bool isBuildable = false;
 
-			if(_unitsMechanicSO.IsInitialized && _unitBuildabilityPreview)
+			if(_unitsMechanicSO.IsInitialized && _unitBuildabilityPreview != null)
 			{
 				isBuildable = _unitsMechanicSO.CanCreateUnit(
 					new BattleUnit.CoreData()
 					{
 						Owner = _playersReferenceSO.GetPlayer(_playerType),
-						Config = _unitBuildabilityPreview
+						UnitModel = _unitBuildabilityPreview
 					}, Position, includeCost: false).IsSuccess;
 			}
 			else if(TryGetElementUnitSpot(_playerType, out var unitSpot))

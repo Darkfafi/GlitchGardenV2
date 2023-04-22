@@ -1,4 +1,5 @@
 ﻿using System;
+using RaCollection;
 
 namespace Game
 {
@@ -14,17 +15,29 @@ namespace Game
 			get; private set;
 		}
 
-		public PlayerModel(PlayerConfig.CoreData config)
+		public Inventory Inventory
 		{
-			ConfigData = config;
+			get; private set;
+		}
 
-			if(config.HP > 0)
+		public PlayerModel(PlayerConfig.CoreData coreData)
+		{
+			Inventory = new Inventory();
+
+			ConfigData = coreData;
+
+			if(coreData.HP > 0)
 			{
-				Health = new Health(config.HP);
+				Health = new Health(coreData.HP);
 			}
 			else
 			{
 				Health = null;
+			}
+
+			if(coreData.Units != null)
+			{
+				coreData.Units.ForEach(unitConfig => Inventory.Items.Add(new UnitModel(unitConfig)));
 			}
 		}
 
@@ -34,6 +47,12 @@ namespace Game
 			{
 				Health.Dispose();
 				Health = default;
+			}
+
+			if(Inventory != null)
+			{
+				Inventory.Clear();
+				Inventory = null;
 			}
 
 			ConfigData = default;

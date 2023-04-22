@@ -26,7 +26,7 @@ namespace Game.Battle.UI
 		protected override void OnSetData()
 		{
 			UnitsHUD.SetData(Data, false);
-			ResourcesHUD.SetData(Data.Wallet, false);
+			ResourcesHUD.SetData(Data.Inventory.Wallet, false);
 			PlayerHealthHUD.SetData(Data.Health, false);
 		}
 

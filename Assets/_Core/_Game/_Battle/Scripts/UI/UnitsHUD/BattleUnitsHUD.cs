@@ -23,7 +23,7 @@ namespace Game.Battle.UI
 		[SerializeField]
 		private DraggingBattleUnitElement _draggingUnitElement;
 
-		private Dictionary<UnitConfig, BattleUnitHUDEntryUIElement> _unitHUDEntryMap = new Dictionary<UnitConfig, BattleUnitHUDEntryUIElement>();
+		private Dictionary<UnitModel, BattleUnitHUDEntryUIElement> _unitHUDEntryMap = new Dictionary<UnitModel, BattleUnitHUDEntryUIElement>();
 
 		private BattleUnitHUDEntryUIElement _currentDraggingHUDEntry = null;
 
@@ -46,16 +46,17 @@ namespace Game.Battle.UI
 		{
 			_draggingUnitElement.Setup();
 
-			for(int i = 0; i < Data.Units.Length; i++)
+			List<UnitModel> units = Data.GetUnits();
+			for(int i = 0; i < units.Count; i++)
 			{
-				var unitConfig = Data.Units[i];
-				CreateEntry(unitConfig);
+				var unitModel = units[i];
+				CreateEntry(unitModel);
 			}
 		}
 
 		protected override void OnClearData()
 		{
-			UnitConfig[] keys = _unitHUDEntryMap.Keys.ToArray();
+			UnitModel[] keys = _unitHUDEntryMap.Keys.ToArray();
 			for(int i = keys.Length - 1; i >= 0; i--)
 			{
 				RemoveEntry(keys[i]);
@@ -69,7 +70,7 @@ namespace Game.Battle.UI
 			SetInteractable(false);
 		}
 
-		private void CreateEntry(UnitConfig item)
+		private void CreateEntry(UnitModel item)
 		{
 			if(_unitHUDEntryMap.ContainsKey(item))
 			{
@@ -89,7 +90,7 @@ namespace Game.Battle.UI
 			resolver.Resolve();
 		}
 
-		private void RemoveEntry(UnitConfig item)
+		private void RemoveEntry(UnitModel item)
 		{
 			if(_unitHUDEntryMap.TryGetValue(item, out BattleUnitHUDEntryUIElement itemView))
 			{
@@ -115,8 +116,8 @@ namespace Game.Battle.UI
 				_currentDraggingHUDEntry = view;
 				_gridReferenceSO.Grid.DirtyEvent += OnGridDirtyEvent;
 				view.SetGrabbed(true);
-				_draggingUnitElement.SetData(new DraggingBattleUnitElement.CoreData { Player = Data, UnitConfig = view.Config }, true);
-				_gridReferenceSO.Grid.ShowUnitBuildabilityGrid(view.Config);
+				_draggingUnitElement.SetData(new DraggingBattleUnitElement.CoreData { Player = Data, UnitModel = view.UnitModel }, true);
+				_gridReferenceSO.Grid.ShowUnitBuildabilityGrid(view.UnitModel);
 			}
 		}
 

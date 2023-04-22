@@ -97,13 +97,13 @@ namespace Game.Battle
 			{
 				if(includeCost)
 				{
-					if(!coreData.Owner.Wallet.CanSpend(coreData.BattleUnitConfigData.Cost, out var notEnoughCurrencyData))
+					if(!coreData.Owner.Inventory.Wallet.CanSpend(coreData.BattleUnitData.Cost, out var notEnoughCurrencyData))
 					{
-						return MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.BattleUnitConfigData.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
+						return MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.BattleUnitData.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
 					}
 				}
 
-				if(coreData.BattleUnitConfigData.FirstColumnUnit)
+				if(coreData.BattleUnitData.FirstColumnUnit)
 				{
 					int playerColumn = gridReference.Grid.GetPlayerColumn(coreData.Owner.PlayerType);
 					bool valid = position.x == playerColumn;
@@ -123,9 +123,9 @@ namespace Game.Battle
 			MechanicResponse response = CanCreateUnit(coreData, position, out ElementBattleUnitSpot unitSpot);
 			if(response.IsSuccess)
 			{
-				if(coreData.Owner.Wallet.Spend(coreData.BattleUnitConfigData.Cost, out var notEnoughCurrencyData))
+				if(coreData.Owner.Inventory.Wallet.Spend(coreData.BattleUnitData.Cost, out var notEnoughCurrencyData))
 				{
-					BattleUnit unit = Instantiate(coreData.BattleUnitConfigData.BattleUnitPrefab);
+					BattleUnit unit = Instantiate(coreData.BattleUnitData.BattleUnitPrefab);
 					unit.SetData(coreData, false);
 					{
 						unit.SetPosition(position);
@@ -141,7 +141,7 @@ namespace Game.Battle
 				}
 				else
 				{
-					response = MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.BattleUnitConfigData.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
+					response = MechanicResponse.CreateFailedResponse($"Not enough Resources to buy {coreData.BattleUnitData.Cost}", (nameof(notEnoughCurrencyData), notEnoughCurrencyData));
 				}
 			}
 
@@ -152,12 +152,12 @@ namespace Game.Battle
 
 		#region Replacement
 
-		public MechanicResponse CanReplaceUnit(BattleUnit unitToReplace, UnitConfig newUnitConfig)
+		public MechanicResponse CanReplaceUnit(BattleUnit unitToReplace, UnitModel newUnit)
 		{
-			return CanReplaceUnit(unitToReplace, newUnitConfig, out _);
+			return CanReplaceUnit(unitToReplace, newUnit, out _);
 		}
 
-		public MechanicResponse CanReplaceUnit(BattleUnit unitToReplace, UnitConfig newUnitConfig, out ElementBattleUnitSpot unitSpot)
+		public MechanicResponse CanReplaceUnit(BattleUnit unitToReplace, UnitModel newUnit, out ElementBattleUnitSpot unitSpot)
 		{
 			unitSpot = default;
 			Vector2Int position = unitToReplace.Position;
@@ -167,7 +167,7 @@ namespace Game.Battle
 				return MechanicResponse.CreateFailedResponse("Mechanic Disabled", null);
 			}
 
-			if(newUnitConfig == null)
+			if(newUnit == null)
 			{
 				return MechanicResponse.CreateFailedResponse($"Unit to replace with is Null");
 			}
@@ -195,9 +195,9 @@ namespace Game.Battle
 			return MechanicResponse.CreateSuccessResponse();
 		}
 
-		public MechanicResponse ReplaceUnit(BattleUnit unitToReplace, UnitConfig newUnitConfig)
+		public MechanicResponse ReplaceUnit(BattleUnit unitToReplace, UnitModel newUnit)
 		{
-			MechanicResponse response = CanReplaceUnit(unitToReplace, newUnitConfig, out ElementBattleUnitSpot unitSpot);
+			MechanicResponse response = CanReplaceUnit(unitToReplace, newUnit, out ElementBattleUnitSpot unitSpot);
 			if(response.IsSuccess)
 			{
 				Vector2Int position = unitToReplace.Position;
@@ -208,8 +208,8 @@ namespace Game.Battle
 				Destroy(unitToReplace.gameObject);
 
 				// Create new Unit
-				BattleUnit unit = Instantiate(newUnitConfig.BattleUnitConfigData.BattleUnitPrefab);
-				unit.SetData(new BattleUnit.CoreData {  Config = newUnitConfig, Owner = owner }, false);
+				BattleUnit unit = Instantiate(newUnit.BattleUnitData.BattleUnitPrefab);
+				unit.SetData(new BattleUnit.CoreData {  UnitModel = newUnit, Owner = owner }, false);
 				{
 					unit.SetPosition(position);
 
@@ -226,7 +226,7 @@ namespace Game.Battle
 
 		public void ReplaceUnitHook(UnitReplacementMechanicParams instruction)
 		{
-			ReplaceUnit(instruction.UnitToReplace, instruction.NewUnitConfig);
+			ReplaceUnit(instruction.UnitToReplace, instruction.CreateUnitModel());
 		}
 
 		#endregion

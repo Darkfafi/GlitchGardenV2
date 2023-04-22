@@ -1,4 +1,5 @@
-﻿using RaCollection;
+﻿using Game.Battle;
+using RaCollection;
 
 public class Wallet
 {
@@ -9,6 +10,16 @@ public class Wallet
 	public event CurrencyHandler ValueChangedEvent;
 
 	private RaElementCollection<WalletEntry> _entries = new RaElementCollection<WalletEntry>();
+
+	public Wallet()
+	{
+
+	}
+
+	public Wallet(Wallet copyFrom)
+	{
+		copyFrom._entries.ForEach(x => _entries.Add(new WalletEntry(x.CurrencyValue)));
+	}
 
 	public int GetAmount(CurrencyConfig currency)
 	{

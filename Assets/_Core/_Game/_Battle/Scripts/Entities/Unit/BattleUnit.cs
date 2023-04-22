@@ -45,7 +45,7 @@ namespace Game.Battle
 		protected override void OnSetData()
 		{
 			Owner = Data.Owner;
-			Health = new Health(Data.BattleUnitConfigData.HealthPoints);
+			Health = new Health(Data.BattleUnitData.HealthPoints);
 
 			RaGOStateBase[] states = RaGOFiniteStateMachine.GetGOStates(_statesContainer);
 			_fsm = new RaGOFiniteStateMachine(this, states);
@@ -94,8 +94,9 @@ namespace Game.Battle
 		public struct CoreData
 		{
 			public BattlePlayer Owner;
-			public UnitConfig Config;
-			public BattleUnitConfigData BattleUnitConfigData => Config.BattleUnitConfigData;
+			public UnitModel UnitModel;
+			public UnitConfig Config => UnitModel.Config;
+			public BattleUnitConfigData BattleUnitData => UnitModel.BattleUnitData;
 		}
 
 		public enum State

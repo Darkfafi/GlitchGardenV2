@@ -9,5 +9,10 @@ namespace Game.Battle
 
 		[field: SerializeField]
 		public UnitConfig NewUnitConfig;
+
+		public UnitModel CreateUnitModel()
+		{
+			return new UnitModel(NewUnitConfig);
+		}
 	}
 }

@@ -25,13 +25,13 @@ namespace Game.Battle
 
 		public SpriteRenderer GridHighlightRenderer => _gridHighlightRenderer;
 
-		public void ShowUnitBuildabilityGrid(UnitConfig config)
+		public void ShowUnitBuildabilityGrid(UnitModel unitModel)
 		{
 			RaTweenBase.StopGroup(_gridHighlightRenderer);
 			_gridHighlightRenderer.TweenColorA(0.4f, 0.25f)
 				.SetGroup(_gridHighlightRenderer);
 
-			ForEach((pos, element) => element.SetUnitBuildabilityPreview(config));
+			ForEach((pos, element) => element.SetUnitBuildabilityPreview(unitModel));
 		}
 
 		public void ClearUnitBuildabilityGrid()

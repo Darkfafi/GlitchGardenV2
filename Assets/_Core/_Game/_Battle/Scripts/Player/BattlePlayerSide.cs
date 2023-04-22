@@ -36,7 +36,7 @@ namespace Game.Battle
 			InGameFlags = new RaFlagsTracker();
 
 			Player.SetData(new CoreData() { PlayerModel = Data, Type = SideType }, false);
-			ResourceGenerator.SetData(new CurrencyGenerator.CoreData() { Wallet = Player.Wallet, MaxResources = Player.Model.ConfigData.Resources }, false);
+			ResourceGenerator.SetData(new CurrencyGenerator.CoreData() { Wallet = Player.Inventory.Wallet, MaxResources = Player.Model.ConfigData.Resources }, false);
 		}
 
 		protected override void OnSetDataResolved()
@@ -60,7 +60,7 @@ namespace Game.Battle
 		public bool HasResourcesForUnits()
 		{
 			int budget = ResourceGenerator.GetBudget();
-			return Player.Units.GetItems(x => budget >= x.BattleUnitConfigData.Cost.Amount).Count > 0;
+			return Player.GetUnits(x => budget >= x.BattleUnitData.Cost.Amount).Count > 0;
 		}
 	}
 }

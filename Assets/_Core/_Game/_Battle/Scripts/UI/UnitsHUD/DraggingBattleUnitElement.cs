@@ -27,15 +27,15 @@ namespace Game.Battle.UI
 		protected override void OnSetData()
 		{
 			gameObject.SetActive(true);
-			_iconRenderer.sprite = Data.UnitConfig.Icon;
-			SetTrailColor(Data.UnitConfig.Color);
+			_iconRenderer.sprite = Data.UnitModel.Config.Icon;
+			SetTrailColor(Data.UnitModel.Config.Color);
 
-			Data.Player.Wallet.ValueChangedEvent += OnWalletChangedEvent;
+			Data.Player.Inventory.Wallet.ValueChangedEvent += OnWalletChangedEvent;
 		}
 
 		protected override void OnClearData()
 		{
-			Data.Player.Wallet.ValueChangedEvent -= OnWalletChangedEvent;
+			Data.Player.Inventory.Wallet.ValueChangedEvent -= OnWalletChangedEvent;
 
 			gameObject.SetActive(false);
 			_iconRenderer.sprite = null;
@@ -53,7 +53,7 @@ namespace Game.Battle.UI
 		{
 			if(TryGetPlacementTarget(out ElementBattleUnitSpot spot))
 			{
-				return _unitsMechanic.CreateUnit(new BattleUnit.CoreData() { Owner = Data.Player, Config = Data.UnitConfig }, spot.Element.Position).IsSuccess;
+				return _unitsMechanic.CreateUnit(new BattleUnit.CoreData() { Owner = Data.Player, UnitModel = Data.UnitModel }, spot.Element.Position).IsSuccess;
 			}
 			return false;
 		}
@@ -69,7 +69,7 @@ namespace Game.Battle.UI
 				if(currentDistance < itemDistance)
 				{
 					var response = _unitsMechanic.CanCreateUnit(
-						new BattleUnit.CoreData { Owner = Data.Player, Config = Data.UnitConfig }, 
+						new BattleUnit.CoreData { Owner = Data.Player, UnitModel = Data.UnitModel }, 
 						element.Position, 
 						out ElementBattleUnitSpot currentItem);
 
@@ -92,7 +92,7 @@ namespace Game.Battle.UI
 
 				if(_previewTarget != null)
 				{
-					_previewTarget.SetPreview(Data.UnitConfig);
+					_previewTarget.SetPreview(Data.UnitModel.Config);
 				}
 			}
 		}
@@ -130,7 +130,7 @@ namespace Game.Battle.UI
 
 		private void OnWalletChangedEvent(CurrencyConfig currency, int newValue, int oldValue)
 		{
-			if(currency == Data.BattleUnitConfigData.Cost.Currency)
+			if(currency == Data.BattleUnitData.Cost.Currency)
 			{
 				RefreshPreviewTarget();
 			}
@@ -139,10 +139,10 @@ namespace Game.Battle.UI
 		[System.Serializable]
 		public struct CoreData
 		{
-			public UnitConfig UnitConfig;
+			public UnitModel UnitModel;
 			public BattlePlayer Player;
 
-			public BattleUnitConfigData BattleUnitConfigData => UnitConfig.BattleUnitConfigData;
+			public BattleUnitConfigData BattleUnitData => UnitModel.BattleUnitData;
 		}
 	}
 }
