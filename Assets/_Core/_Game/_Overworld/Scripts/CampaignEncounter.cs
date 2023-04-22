@@ -6,6 +6,15 @@ namespace Game.Campaign
 {
 	public class CampaignEncounter : IDisposable, IRaCollectionElement
 	{
+		public delegate void EncounterHandler(CampaignEncounter encounter);
+		
+		public event EncounterHandler EnteredEncounterEvent;
+		public event EncounterHandler ExitedEncounterEvent;
+
+		public event EncounterHandler StartedEncounterEvent;
+		public event EncounterHandler ProgressedEncounterEvent;
+		public event EncounterHandler EndedEncounterEvent;
+
 		public string Id
 		{
 			get; private set;
@@ -21,6 +30,11 @@ namespace Game.Campaign
 			get; private set;
 		}
 
+		public bool IsEncounterRunning
+		{
+			get; private set;
+		}
+
 		public CampaignEncounter(EncounterConfig config)
 		{
 			Id = Guid.NewGuid().ToString();
@@ -31,19 +45,35 @@ namespace Game.Campaign
 		{
 			Exit();
 
+			IsEncounterRunning = true;
 			CurrentRunner = GameObject.Instantiate(Config.RunnerPrefab);
 			GameObject.DontDestroyOnLoad(CurrentRunner);
 			CurrentRunner.name = $"Encounter ({Id})";
 			CurrentRunner.SetData(this);
+
+			CurrentRunner.EncounterEndedEvent += OnEncounterEndedEvent;
+			CurrentRunner.EncounterProgressedEvent += OnEncounterProgressedEvent;
+			CurrentRunner.EncounterStartedEvent += OnEncounterStartedEvent;
+
+			EnteredEncounterEvent?.Invoke(this);
 		}
 
 		public void Exit()
 		{
-			if(CurrentRunner != null)
+			if(IsEncounterRunning)
 			{
-				CurrentRunner.ClearData();
-				GameObject.Destroy(CurrentRunner.gameObject);
-				CurrentRunner = null;
+				IsEncounterRunning = false;
+				if(CurrentRunner != null)
+				{
+					CurrentRunner.EncounterEndedEvent -= OnEncounterEndedEvent;
+					CurrentRunner.EncounterProgressedEvent -= OnEncounterProgressedEvent;
+					CurrentRunner.EncounterStartedEvent -= OnEncounterStartedEvent;
+
+					CurrentRunner.ClearData();
+					GameObject.Destroy(CurrentRunner.gameObject);
+					CurrentRunner = null;
+				}
+				ExitedEncounterEvent?.Invoke(this);
 			}
 		}
 
@@ -55,6 +85,22 @@ namespace Game.Campaign
 				GameObject.Destroy(CurrentRunner.gameObject);
 				CurrentRunner = null;
 			}
+			IsEncounterRunning = false;
+		}
+
+		private void OnEncounterStartedEvent(CampaignEncounterRunner runner)
+		{
+			StartedEncounterEvent?.Invoke(this);
+		}
+
+		private void OnEncounterProgressedEvent(CampaignEncounterRunner runner)
+		{
+			ProgressedEncounterEvent?.Invoke(this);
+		}
+
+		private void OnEncounterEndedEvent(CampaignEncounterRunner runner)
+		{
+			EndedEncounterEvent?.Invoke(this);
 		}
 	}
 }

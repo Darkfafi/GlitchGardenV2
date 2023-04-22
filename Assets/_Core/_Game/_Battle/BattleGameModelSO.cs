@@ -44,6 +44,11 @@ namespace Game.Battle
 			Locator.GetModelSO<RaSceneModelSO>().LoadScene(_battleScene);
 		}
 
+		public void EndBattleGame()
+		{
+			Locator.GetModelSO<RaSceneModelSO>().LoadScene(ReturnSceneData.ReturnScene);
+		}
+
 		protected override void OnInit()
 		{
 			Player = new PlayerModel(_defaultPlayerConfig.Data);

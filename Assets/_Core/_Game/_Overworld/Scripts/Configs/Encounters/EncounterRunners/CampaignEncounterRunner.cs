@@ -44,6 +44,21 @@ namespace Game.Campaign
 			}
 		}
 
+		public bool TryGetCurrentState<T>(out T state)
+			where T : RaGOStateBase
+		{
+			if(IsRunning)
+			{
+				if(_fsm.TryGetCurrentState(out var rawState) && rawState is T castedState)
+				{
+					state = castedState;
+					return true;
+				}
+			}
+			state = default;
+			return false;
+		}
+
 		public void GoToNextState()
 		{
 			if(IsRunning)

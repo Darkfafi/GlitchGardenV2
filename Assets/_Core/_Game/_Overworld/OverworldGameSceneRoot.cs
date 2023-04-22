@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,10 +33,37 @@ namespace Game.Campaign
 
 			OverworldUI.Resolve();
 			OverworldUI.RegisterUser(this);
+
+			Campaign.LayerModel.ForEachSlot((slot) => 
+			{
+				slot.EndedEncounterEvent += OnEndedEncounterEvent;
+			});
+
+			if(Campaign.LayerModel.TryGetCurrentEncounterSlot(out EncounterSlotModel encounterSlotModel))
+			{
+				// Reward Display
+				if(encounterSlotModel.TryGetCurrentState(out EncounterRewardReadyState encounterReward))
+				{
+					encounterReward.ClaimReward();
+				}
+			}	
+		}
+
+		private void OnEndedEncounterEvent(EncounterSlotModel encounterSlot)
+		{
+			if(Campaign.LayerModel.TryGetCurrentEncounterSlot(out EncounterSlotModel currentEncounterSlot) && currentEncounterSlot == encounterSlot)
+			{
+				Campaign.LayerModel.TrySetNextEncounter();
+			}
 		}
 
 		protected override void OnEnd()
 		{
+			Campaign.LayerModel.ForEachSlot(x =>
+			{
+				x.EndedEncounterEvent -= OnEndedEncounterEvent;
+			});
+
 			OverworldUI.UnregisterUser(this);
 
 			OverworldUI.ClearData();

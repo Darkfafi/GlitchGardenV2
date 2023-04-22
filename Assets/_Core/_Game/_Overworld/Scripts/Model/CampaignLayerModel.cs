@@ -72,14 +72,11 @@ namespace Game.Campaign
 			CurrentSlotType = null;
 		}
 
-		public bool TrySetNextEncounter(SlotType slotType)
+		private bool TrySetNextEncounter(SlotType slotType)
 		{
-			if(_encountersPool.TryDequeue(out CampaignEncounter newEncounter))
-			{
-				GetEncounterSlot(slotType).ReplaceData(newEncounter);
-				return true;
-			}
-			return false;
+			bool success = _encountersPool.TryDequeue(out CampaignEncounter newEncounter);
+			GetEncounterSlot(slotType).ReplaceData(newEncounter);
+			return success;
 		}
 
 		public bool TryEnter(SlotType slotType)
@@ -97,18 +94,26 @@ namespace Game.Campaign
 			return false;
 		}
 
-		private bool TrySetNextEncounter()
+		public bool TryGetCurrentEncounterSlot(out EncounterSlotModel slot)
 		{
 			if(CurrentSlotType.HasValue)
 			{
 				SlotType slotType = CurrentSlotType.Value;
-				EncounterSlotModel slot = GetEncounterSlot(slotType);
-				if(slot.HasData)
-				{
-					slot.Encounter.Exit();
-					ClearCurrentSlotType();
-					TrySetNextEncounter(slotType);
-				}
+				slot = GetEncounterSlot(slotType);
+				return slot.HasData;
+			}
+			slot = default;
+			return false;
+		}
+
+		public bool TrySetNextEncounter()
+		{
+			if(TryGetCurrentEncounterSlot(out EncounterSlotModel currentEncounterSlot))
+			{
+				SlotType slotType = CurrentSlotType.Value;
+				currentEncounterSlot.Encounter.Exit();
+				ClearCurrentSlotType();
+				return TrySetNextEncounter(slotType);
 			}
 			return false;
 		}

@@ -143,7 +143,7 @@ namespace Game.Battle
 				_battleGameModelSO.Enemy.Health.Set(AwayPlayerSide.Player.Health.HP);
 			}
 
-			Models.GetModelSO<RaScenesSO.RaSceneModelSO>().LoadScene(_battleGameModelSO.ReturnSceneData.ReturnScene);
+			_battleGameModelSO.EndBattleGame();
 		}
 
 		public void GoToNextState()
