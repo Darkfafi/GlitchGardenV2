@@ -57,3 +57,25 @@ MonoBehaviour:
   _nestedSOItems:
   - {fileID: -854604458643660385}
   - {fileID: -4282669810564483026}
+  - {fileID: 2007254731682887929}
+--- !u!114 &2007254731682887929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 498019cc8d36e6141b328018356fdeaf, type: 3}
+  m_Name: H_Unit_Sword
+  m_EditorClassIdentifier: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 748fac0500901f34ca193212ebe9df8f, type: 3}
+  <Color>k__BackingField: {r: 0.7411765, g: 0.8117648, b: 0.9058824, a: 1}
+  <BattleUnitConfigData>k__BackingField:
+    BattleUnitPrefab: {fileID: 1376318713658577310, guid: 68c641b618b0d3946ae40de297b9d51c, type: 3}
+    HealthPoints: 5
+    Cost:
+      <Currency>k__BackingField: {fileID: -3437268240515994694, guid: fd9ecc3698073b54e8c2a7110d14c39d, type: 2}
+      <Amount>k__BackingField: 4
+    FirstColumnUnit: 0

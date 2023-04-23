@@ -44,10 +44,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -55,6 +61,7 @@ MonoBehaviour:
   _states: []
   _wrapFSM: 1
   _autoFillStates: 1
+  _excludeDisabledStates: 1
   GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
@@ -351,6 +358,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls:
@@ -369,8 +379,12 @@ MonoBehaviour:
     ExitStateEvent:
       m_PersistentCalls:
         m_Calls: []
+    DeinitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
   CoreEditorOptions:
     CurrentStateSuffix: ' [CURRENT]'
+  _disableOnInactiveState: 0
 --- !u!1 &2635614553364382166
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +581,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: -986803069
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &3241944228521518440
 MonoBehaviour:
@@ -705,16 +719,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
       m_PersistentCalls:
         m_Calls: []
+    DeinitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
   CoreEditorOptions:
     CurrentStateSuffix: ' [CURRENT]'
   _searchHierarchyForDependencies: 1
-  _gridModelSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
+  _gridReferenceSO: {fileID: 11400000, guid: 1cc17c2377e70154197aa06b6189e47c, type: 2}
 --- !u!1 &6395675484520977204
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,10 +915,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoreEvents:
+    InitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
     EnterStateEvent:
       m_PersistentCalls:
         m_Calls: []
     ExitStateEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DeinitStateEvent:
       m_PersistentCalls:
         m_Calls: []
   CoreEditorOptions:
@@ -907,6 +933,7 @@ MonoBehaviour:
   - {fileID: 2146234548817100119}
   _wrapFSM: 0
   _autoFillStates: 1
+  _excludeDisabledStates: 1
   GoFSMStateEvents:
     SetStateEvent:
       m_PersistentCalls:
@@ -960,6 +987,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825fec6fc50a0f64ebbca3d5d9530be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  HealedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  KilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _renderer: {fileID: 78165462496174326}
   _healthBarGroup: {fileID: 8804021972794003788}
   _healthBarFill: {fileID: 6656808306970086620}

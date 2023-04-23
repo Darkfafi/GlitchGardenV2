@@ -26,10 +26,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce3e4fd7a93c254c960977d59631862, type: 3}
   m_Name: Hero Player
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: 4a01b84b-4500-48bf-8b7f-3313d3c128ad
   _data:
     <HP>k__BackingField: 3
     <Units>k__BackingField:
     - {fileID: -854604458643660385, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
     - {fileID: -4282669810564483026, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
+    - {fileID: 2007254731682887929, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
+    - {fileID: -1521217903124314325, guid: cbab8ab83b00fdc46b039cf343d8c5d3, type: 2}
     _hasInfiniteResources: 1
     _resources: 0
