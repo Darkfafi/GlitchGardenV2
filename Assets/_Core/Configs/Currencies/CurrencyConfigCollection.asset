@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7099917357964164898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff0efd9119957f49a99d11a4272b77c, type: 3}
+  m_Name: Coins
+  m_EditorClassIdentifier: 
+  _id: 4dcc59e7-e6c4-4e2f-ae9f-a25af546a6c3
+  <Icon>k__BackingField: {fileID: 21300000, guid: d81b1416965d20447b9e0c5998e291c1, type: 3}
+--- !u!114 &-3437268240515994694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff0efd9119957f49a99d11a4272b77c, type: 3}
+  m_Name: Energy
+  m_EditorClassIdentifier: 
+  _id: 497a536f-f8d3-41f1-80d2-400a65872a45
+  <Icon>k__BackingField: {fileID: 21300000, guid: 6b98395ba39dc31498be9e8073e141a1, type: 3}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 211d9b710beeb9c44897e7561b7c3244, type: 3}
+  m_Name: CurrencyConfigCollection
+  m_EditorClassIdentifier: 
+  _nestedSOItems:
+  - {fileID: -3437268240515994694}
+  - {fileID: -7099917357964164898}

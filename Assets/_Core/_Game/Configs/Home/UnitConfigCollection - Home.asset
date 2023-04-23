@@ -18,7 +18,7 @@ MonoBehaviour:
     BattleUnitPrefab: {fileID: 1376318713658577310, guid: 9ee5e2d1cb2401548b5e47bc2c9b396a, type: 3}
     HealthPoints: 8
     Cost:
-      <Currency>k__BackingField: {fileID: 11400000, guid: efb0da8fcea8def41add063852cccffd, type: 2}
+      <Currency>k__BackingField: {fileID: -3437268240515994694, guid: fd9ecc3698073b54e8c2a7110d14c39d, type: 2}
       <Amount>k__BackingField: 4
     FirstColumnUnit: 0
 --- !u!114 &-854604458643660385
@@ -39,7 +39,7 @@ MonoBehaviour:
     BattleUnitPrefab: {fileID: 1376318713658577310, guid: e07ea2db2d93e2444b6db039e1707cd5, type: 3}
     HealthPoints: 2
     Cost:
-      <Currency>k__BackingField: {fileID: 11400000, guid: efb0da8fcea8def41add063852cccffd, type: 2}
+      <Currency>k__BackingField: {fileID: -3437268240515994694, guid: fd9ecc3698073b54e8c2a7110d14c39d, type: 2}
       <Amount>k__BackingField: 5
     FirstColumnUnit: 0
 --- !u!114 &11400000

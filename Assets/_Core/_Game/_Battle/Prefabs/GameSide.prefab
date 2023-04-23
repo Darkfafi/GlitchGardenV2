@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _amountToGenerate:
-    <Currency>k__BackingField: {fileID: 11400000, guid: efb0da8fcea8def41add063852cccffd, type: 2}
+    <Currency>k__BackingField: {fileID: -3437268240515994694, guid: fd9ecc3698073b54e8c2a7110d14c39d, type: 2}
     <Amount>k__BackingField: 1
   _durationUntilGenerate: 1
   _maxResounceAmount: -1

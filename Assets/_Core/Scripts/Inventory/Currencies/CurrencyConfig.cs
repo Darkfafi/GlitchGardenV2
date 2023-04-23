@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-[CreateAssetMenu(menuName = "Configs/CurrencyConfig", fileName = "CurrencyConfig")]
 public class CurrencyConfig : ScriptableObject
 {
 	[SerializeField, HideInInspector]
