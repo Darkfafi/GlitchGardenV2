@@ -21,6 +21,27 @@ MonoBehaviour:
       <Currency>k__BackingField: {fileID: 11400000, guid: efb0da8fcea8def41add063852cccffd, type: 2}
       <Amount>k__BackingField: 2
     FirstColumnUnit: 1
+--- !u!114 &-1521217903124314325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 498019cc8d36e6141b328018356fdeaf, type: 3}
+  m_Name: A_Unit_Crab
+  m_EditorClassIdentifier: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8446b6ae7438d3f4e9f71b15d97e304e, type: 3}
+  <Color>k__BackingField: {r: 0.9058824, g: 0.27058825, b: 0.22352943, a: 1}
+  <BattleUnitConfigData>k__BackingField:
+    BattleUnitPrefab: {fileID: 1942700688349960158, guid: 10330eae5aa76d444ae86814d16d362b, type: 3}
+    HealthPoints: 8
+    Cost:
+      <Currency>k__BackingField: {fileID: 11400000, guid: efb0da8fcea8def41add063852cccffd, type: 2}
+      <Amount>k__BackingField: 4
+    FirstColumnUnit: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,6 +57,7 @@ MonoBehaviour:
   _nestedSOItems:
   - {fileID: -4817714393650172992}
   - {fileID: 7781119423456090511}
+  - {fileID: -1521217903124314325}
 --- !u!114 &7781119423456090511
 MonoBehaviour:
   m_ObjectHideFlags: 0

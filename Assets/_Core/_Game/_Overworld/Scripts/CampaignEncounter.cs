@@ -48,7 +48,7 @@ namespace Game.Campaign
 			IsEncounterRunning = true;
 			CurrentRunner = GameObject.Instantiate(Config.RunnerPrefab);
 			GameObject.DontDestroyOnLoad(CurrentRunner);
-			CurrentRunner.name = $"Encounter ({Id})";
+			CurrentRunner.name = $"{Config.RunnerPrefab.name} - ({Id})";
 			CurrentRunner.SetData(this);
 
 			CurrentRunner.EncounterEndedEvent += OnEncounterEndedEvent;

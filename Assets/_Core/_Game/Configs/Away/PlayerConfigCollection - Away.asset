@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce3e4fd7a93c254c960977d59631862, type: 3}
   m_Name: Mutated Rats Enemy
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 143e3f53-2f40-4ed0-ac9c-a7e103ab2205
+  <Id>k__BackingField: 8fc3e22d-de07-43ef-9165-2f8fe8369d12
   _data:
     <HP>k__BackingField: 0
     <Units>k__BackingField: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce3e4fd7a93c254c960977d59631862, type: 3}
   m_Name: Rats Enemy
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 75363b3f-ca25-4a75-a634-80e904adff9d
+  <Id>k__BackingField: 3f2038e5-4875-47f1-8c6d-a901a732403d
   _data:
     <HP>k__BackingField: 0
     <Units>k__BackingField: []

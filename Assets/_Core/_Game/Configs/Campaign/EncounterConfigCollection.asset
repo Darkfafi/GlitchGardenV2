@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nestedSOItems:
   - {fileID: 1468311244520681127}
+  - {fileID: 4511721870076298911}
 --- !u!114 &1468311244520681127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,3 +31,19 @@ MonoBehaviour:
   <IconSprite>k__BackingField: {fileID: 21300000, guid: b95676a83d819224cb26fafa2e2eae3d, type: 3}
   <Description>k__BackingField: The Rats have escaped!
   <RunnerPrefab>k__BackingField: {fileID: 4138115633805617337, guid: 9ab93cdd76b7cae46b46d12f7cab3b8d, type: 3}
+--- !u!114 &4511721870076298911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d53db0b748652d46a2b266881c10ad4, type: 3}
+  m_Name: Crabs Encounter
+  m_EditorClassIdentifier: 
+  <Title>k__BackingField: Crabs!
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: 8446b6ae7438d3f4e9f71b15d97e304e, type: 3}
+  <Description>k__BackingField: The beach is not far from here..
+  <RunnerPrefab>k__BackingField: {fileID: 6029640723963713830, guid: 1cd378c51debbf843b2a71efc7eecc80, type: 3}

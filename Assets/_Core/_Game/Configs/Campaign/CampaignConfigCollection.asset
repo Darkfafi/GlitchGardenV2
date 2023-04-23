@@ -42,9 +42,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 172576bf-9846-47db-abba-030096dd2d1e
   _data:
-    PreferredEncounterAmount: 3
+    PreferredEncounterAmount: 4
     LayerEncounters:
     - <RaItemWeight>k__BackingField: 5
-      MinAmount: 3
+      MinAmount: 0
       MaxAmount: 0
       Encounter: {fileID: 1468311244520681127, guid: a53a240dff9d1a54dadd7e416679b327, type: 2}
+    - <RaItemWeight>k__BackingField: 5
+      MinAmount: 0
+      MaxAmount: 0
+      Encounter: {fileID: 4511721870076298911, guid: a53a240dff9d1a54dadd7e416679b327, type: 2}
