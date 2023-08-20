@@ -20,13 +20,25 @@ namespace Game.Battle
 		protected override void OnSetData()
 		{
 			UnitRenderer.sprite = Data.UnitData.Config.Icon;
-			OrientationTransform.localScale = Data.Owner.GetOrientation(OrientationTransform.localScale);
+			SetOrientationToAlignment();
 			HealthVisualizer.SetData(Data.Health, false);
 		}
 
 		protected override void OnSetDataResolved()
 		{
 			HealthVisualizer.Resolve();
+		}
+
+		public void SetOrientationToDirection(int direction)
+		{
+			Vector3 scale = OrientationTransform.localScale;
+			scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
+			OrientationTransform.localScale = scale;
+		}
+
+		public void SetOrientationToAlignment()
+		{
+			OrientationTransform.localScale = Data.Owner.GetOrientation(OrientationTransform.localScale);
 		}
 
 		protected override void OnClearData()

@@ -79,6 +79,22 @@ namespace Game.Battle
 			return Owner != null && Owner.PlayerType == playerType;
 		}
 
+		public void SetStateToDeath()
+		{
+			if(_fsm.CurrentStateIndex != (int)State.Death)
+			{
+				SetState(State.Death);
+			}
+		}
+
+		public void SetStateToBehaviour()
+		{
+			if(_fsm.CurrentStateIndex != (int)State.Behaviour)
+			{
+				SetState(State.Behaviour);
+			}
+		}
+
 		public void SetState(State state)
 		{
 			_fsm.SwitchState((int)state);

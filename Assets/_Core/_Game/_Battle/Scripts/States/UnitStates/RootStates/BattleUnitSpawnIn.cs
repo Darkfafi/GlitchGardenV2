@@ -5,8 +5,16 @@ using UnityEngine.Serialization;
 
 namespace Game.Battle
 {
-	public class BattleUnitSpawnStateRoot : RaGOStateBase<BattleUnit>
+
+	public class BattleUnitSpawnIn : RaGOStateBase<BattleUnit>
 	{
+		[Header("Events")]
+		public RaGOStateEvent OnSpawnEndedEvent;
+
+		[Header("Options")]
+		[SerializeField]
+		private bool _spawnInFirstColumnOfPosition = false;
+
 		[Header("References")]
 		[SerializeField]
 		[FormerlySerializedAs("_gridModelSO")]
@@ -21,7 +29,14 @@ namespace Game.Battle
 
 		protected override void OnEnter()
 		{
-			if(_gridReferenceSO.Grid.TryGetUnitSpot(Dependency, out ElementBattleUnitSpot unitSpot))
+			Vector2Int positionToSpawnAt = Dependency.Position;
+
+			if(_spawnInFirstColumnOfPosition)
+			{
+				positionToSpawnAt.x = _gridReferenceSO.Grid.GetPlayerColumn(Dependency.Owner.PlayerType);
+			}
+
+			if(_gridReferenceSO.Grid.TryGetUnitSpot(positionToSpawnAt, Dependency.Owner, out ElementBattleUnitSpot unitSpot))
 			{
 				UnitVisuals.VisualsContainer.gameObject.SetActive(false);
 				Dependency.transform.TweenScale(0f, 0.5f)
@@ -33,7 +48,7 @@ namespace Game.Battle
 					})
 					.OnComplete(() =>
 					{
-						Dependency.SetState(BattleUnit.State.Behaviour);
+						OnSpawnEndedEvent.Invoke(this);
 					});
 			}
 		}

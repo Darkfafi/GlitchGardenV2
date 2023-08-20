@@ -33,6 +33,6 @@ MonoBehaviour:
     - {fileID: -854604458643660385, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
     - {fileID: -4282669810564483026, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
     - {fileID: 2007254731682887929, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
-    - {fileID: -1521217903124314325, guid: cbab8ab83b00fdc46b039cf343d8c5d3, type: 2}
+    - {fileID: 3300955295869333002, guid: 04346ef47d44b1349a5a8c9602473eda, type: 2}
     _hasInfiniteResources: 1
     _resources: 0

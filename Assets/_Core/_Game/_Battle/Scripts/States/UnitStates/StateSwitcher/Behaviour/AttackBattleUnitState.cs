@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Game.Battle
 {
+
 	public class AttackBattleUnitState : RaGOStateBase<TargetBattleUnitData>
 	{
 		[Header("Events")]

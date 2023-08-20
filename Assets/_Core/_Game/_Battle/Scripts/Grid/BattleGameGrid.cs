@@ -43,6 +43,20 @@ namespace Game.Battle
 			ForEach((pos, element) => element.SetUnitBuildabilityPreview(null));
 		}
 
+		public Vector2Int ToGridPos(Vector3 worldPosition)
+		{
+			Vector3 localWorldPosition = worldPosition - transform.position;
+			return new Vector2Int(Mathf.FloorToInt(localWorldPosition.x), Mathf.FloorToInt(localWorldPosition.y));
+		}
+
+		public Vector3 ToWorldPos(Vector2Int position)
+		{
+			Vector3 returnValue = transform.position;
+			returnValue.x += position.x;
+			returnValue.y += position.y;
+			return returnValue;
+		}
+
 		public GameGridElement GetElement(Vector2Int position)
 		{
 			if(TryGetElement(position, out GameGridElement element))
@@ -131,7 +145,7 @@ namespace Game.Battle
 				}, false);
 
 				_elements[element.Position] = element;
-				element.transform.localPosition = new Vector3(position.x, position.y, 0);
+				element.transform.position = ToWorldPos(position);
 			});
 		}
 

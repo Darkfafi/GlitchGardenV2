@@ -2,6 +2,7 @@
 
 namespace Game.Battle
 {
+
 	public class HasTargetBattlePlayerSwitcher : StateSwitcherBase
 	{
 		protected override bool CheckCondition(RaGOStateBase state)
